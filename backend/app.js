@@ -8,7 +8,8 @@ const csurf = require('csurf');
 require('./models/User');
 require('./models/Tweet');
 require('./models/Group');
-require('./models/Figure');
+require('./models/Figure'); 
+require('./models/Article');
 
 /* ------------------------------------------------------------- */
 require('./config/passport'); // Need to import to configure passport module
@@ -48,11 +49,13 @@ app.use(
 // app.get("/", (req, res) => res.send("Hello World!!"));
 
 // Attach Express routers
+const articlesRouter = require('./routes/api/articles');
 const figuresRouter = require('./routes/api/figures');
 const groupsRouter = require('./routes/api/groups');
 const tweetsRouter = require('./routes/api/tweets');
 const usersRouter = require('./routes/api/users');
 const csrfRouter = require('./routes/api/csrf');
+app.use('/api/articles', articlesRouter);
 app.use('/api/figures', figuresRouter);
 app.use('/api/groups', groupsRouter);
 app.use('/api/tweets', tweetsRouter);
