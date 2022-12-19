@@ -5,6 +5,7 @@ const User = mongoose.model('User');
 const Tweet = mongoose.model('Tweet');
 
 const Figure = mongoose.model('Figure');
+const Group = mongoose.model('Group');
 
 const { requireUser } = require('../../config/passport');
 
@@ -12,31 +13,9 @@ const validateTweetInput = require('../../validation/tweets');
 
 router.get('/', async (req, res) => {
     try {
-        const tweets = await Tweet.find()
-            .populate("author", "_id, username")
+        const figures = await Figure.find()
             .sort({ createdAt: -1 });
-        return res.json(tweets);
-    }
-    catch (err) {
-        return res.json([]);
-    }
-})
-
-router.get('/user/:userId', async (req, res, next) => {
-    let user;
-    try {
-        user = await User.findById(req.params.userId);
-    } catch (err) {
-        const error = new Error('User not found');
-        error.statusCode = 404;
-        error.errors = { message: "No user found with that id" };
-        return next(error);
-    }
-    try {
-        const tweets = await Tweet.find({ author: user._id })
-            .sort({ createdAt: -1 })
-            .populate("author", "_id, username");
-        return res.json(tweets);
+        return res.json(figures);
     }
     catch (err) {
         return res.json([]);
@@ -45,36 +24,60 @@ router.get('/user/:userId', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
     try {
-        const tweet = await Tweet.findById(req.params.id)
-            .populate("author", "id, username");
-        return res.json(tweet);
+        const figure = await Figure.findById(req.params.id);
+        // .populate("figures");
+        return res.json(figure);
     }
     catch (err) {
-        const error = new Error('Tweet not found');
+        const error = new Error('Figure not found');
         error.statusCode = 404;
-        error.errors = { message: "No tweet found with that id" };
+        error.errors = { message: "No figure found with that id" };
         return next(error);
     }
 })
 
-// Attach requireUser as a middleware before the route handler to gain access
-// to req.user. (requireUser will return an error response if there is no 
-// current user.) Also attach validateTweetInput as a middleware before the 
-// route handler.
-router.post('/', requireUser, validateTweetInput, async (req, res, next) => {
+router.get('/group/:groupId', async (req, res, next) => {
+    let group;
     try {
-        const newTweet = new Tweet({
-            text: req.body.text,
-            author: req.user._id
-        });
-
-        let tweet = await newTweet.save();
-        tweet = await tweet.populate('author', '_id, username');
-        return res.json(tweet);
+        group = await Group.findById(req.params.groupId)
+            .sort({ createdAt: -1 })
+            .populate("figures");
+    } catch (err) {
+        const error = new Error('Group not found');
+        error.statusCode = 404;
+        error.errors = { message: "No Group found with that id" };
+        return next(error);
+    }
+    try {
+        // const figures = group.figures.map(figure => Figure.findById(figure));
+        const figures = group.figures;
+        // group.figures.map(figure => await Figure.findById(figure)).sort({ createdAt: -1 })
+        return res.json(figures);
     }
     catch (err) {
-        next(err);
+        return res.json([]);
     }
-});
+})
+
+router.get('/user/:userId', async (req, res, next) => {
+    try {
+        const groups = await Group.find({ user: req.params.userId })
+                        .populate("figures");
+
+        let figures = [];
+        groups.forEach(group => {
+            for(let i = 0; i < group.figures.length; i++) {
+                figures.push(group.figures[i]);
+            }
+        })
+        return res.json(figures);
+    }
+    catch (err) {
+        const error = new Error('User not found');
+        error.statusCode = 404;
+        error.errors = { message: "No User found with that id" };
+        return next(error);
+    }
+})
 
 module.exports = router;
