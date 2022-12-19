@@ -2,11 +2,14 @@ const mongoose = require("mongoose");
 const { mongoURI: db } = require('../config/keys.js');
 const User = require('../models/User');
 const Tweet = require('../models/Tweet');
+const Group = require('../models/Group');
+const Figure = require('../models/Figure');
 const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
 
 const NUM_SEED_USERS = 10;
 const NUM_SEED_TWEETS = 30;
+const NUM_SEED_GROUPS = 1;
 
 // Create users
 const users = [];
@@ -42,6 +45,80 @@ for (let i = 0; i < NUM_SEED_TWEETS; i++) {
     })
   )
 }
+
+// Create figures
+const figures = [];
+
+figures.push(
+  new Figure({
+    name: "Elon Musk"
+  })
+)
+
+figures.push(
+  new Figure({
+    name: "Kanye West"
+  })
+)
+
+figures.push(
+  new Figure({
+    name: "Jeff Bezos"
+  })
+)
+
+figures.push(
+  new Figure({
+    name: "Lionel Messi"
+  })
+)
+
+figures.push(
+  new Figure({
+    name: "Michael Jordan"
+  })
+)
+
+// Create groups
+const groups = [];
+
+// for (let i = 0; i < NUM_SEED_GROUPS; i++) {
+//   groups.push(
+//     new Group({
+//       user: users[0]._id,
+//       name: "business",
+//       figures: [],
+//       shared: true
+//     })
+//   )
+// }
+
+groups.push(
+  new Group({
+    user: users[0]._id,
+    name: "business",
+    figures: [figures[0]._id, figures[2]._id],
+    shared: true
+  })
+)
+
+groups.push(
+  new Group({
+    user: users[0]._id,
+    name: "sports",
+    figures: [figures[3]._id, figures[4]._id],
+    shared: true
+  })
+)
+
+groups.push(
+  new Group({
+    user: users[1]._id,
+    name: "politics",
+    figures: [figures[1]._id],
+    shared: true
+  })
+)
     
 // Connect to database
 mongoose
@@ -61,8 +138,12 @@ const insertSeeds = () => {
 
   User.collection.drop()
                  .then(() => Tweet.collection.drop())
+                 .then(() => Group.collection.drop())
+                 .then(() => Figure.collection.drop())
                  .then(() => User.insertMany(users))
                  .then(() => Tweet.insertMany(tweets))
+                 .then(() => Figure.insertMany(figures))
+                 .then(() => Group.insertMany(groups))
                  .then(() => {
                    console.log("Done!");
                    mongoose.disconnect();
