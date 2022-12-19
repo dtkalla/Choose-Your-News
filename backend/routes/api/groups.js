@@ -11,7 +11,8 @@ const validateTweetInput = require('../../validation/tweets');
 router.get('/', async (req, res) => {
     try {
         const groups = await Group.find()
-            .sort({ createdAt: -1 });
+            .sort({ createdAt: -1 })
+            .populate("figures");
         return res.json(groups);
     }
     catch (err) {
@@ -22,6 +23,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res, next) => {
     try {
         const group = await Group.findById(req.params.id)
+            .sort({ createdAt: -1 })
             .populate("figures");
         return res.json(group);
     }
@@ -35,10 +37,9 @@ router.get('/:id', async (req, res, next) => {
 
 router.get('/user/:userId', async (req, res, next) => {
     try {
-        const userId = req.params.userId;
-        const groups = await Group.find({ user: userId })
-            .sort({ createdAt: -1 });
-        // .populate("figures");
+        const groups = await Group.find({ user: req.params.userId })
+            .sort({ createdAt: -1 })
+            .populate("figures");
         return res.json(groups);
     }
     catch (err) {
@@ -46,4 +47,4 @@ router.get('/user/:userId', async (req, res, next) => {
     }
 })
 
-module.exports = router;
+module.exports = router;    

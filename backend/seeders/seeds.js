@@ -4,47 +4,14 @@ const User = require('../models/User');
 const Tweet = require('../models/Tweet');
 const Group = require('../models/Group');
 const Figure = require('../models/Figure');
+const Article = require("../models/Article.js");
+
 const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
 
 const NUM_SEED_USERS = 10;
 const NUM_SEED_TWEETS = 30;
 const NUM_SEED_GROUPS = 1;
-
-// Create users
-const users = [];
-
-users.push(
-  new User ({
-    username: 'demo-user',
-    email: 'demo-user@appacademy.io',
-    hashedPassword: bcrypt.hashSync('starwars', 10)
-  })
-)
-
-for (let i = 1; i < NUM_SEED_USERS; i++) {
-  const firstName = faker.name.firstName();
-  const lastName = faker.name.lastName();
-  users.push(
-    new User ({
-      username: faker.internet.userName(firstName, lastName),
-      email: faker.internet.email(firstName, lastName),
-      hashedPassword: bcrypt.hashSync(faker.internet.password(), 10)
-    })
-  )
-}
-  
-// Create tweets
-const tweets = [];
-
-for (let i = 0; i < NUM_SEED_TWEETS; i++) {
-  tweets.push(
-    new Tweet ({
-      text: faker.hacker.phrase(),
-      author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id
-    })
-  )
-}
 
 // Create figures
 const figures = [];
@@ -78,6 +45,86 @@ figures.push(
     name: "Michael Jordan"
   })
 )
+
+//Create articles
+const articles = []
+
+articles.push(
+  new Article({
+    headline: "Example",
+    summary: "Summary",
+    publishedDate: "2022-12-16 15:00:59",
+    url: "http://www.nairaland.com/7483666/elon-musk-disables-twitter-spaces",
+    figure: figures[0].id
+  })
+)
+
+articles.push(
+  new Article({
+    headline: "Example1",
+    summary: "Summary1",
+    publishedDate: "2022-12-15 15:00:59",
+    url: "http://www.nairaland.com/7483666/elon-musk-disables-twitter-spaces",
+    figure: figures[0].id
+  })
+)
+
+articles.push(
+  new Article({
+    headline: "Example2",
+    summary: "Summary2",
+    publishedDate: "2022-12-14 15:00:59",
+    url: "http://www.nairaland.com/7483666/elon-musk-disables-twitter-spaces",
+    figure: figures[1].id
+  })
+)
+
+articles.push(
+  new Article({
+    headline: "Example3",
+    summary: "Summary3",
+    publishedDate: "2022-12-13 15:00:59",
+    url: "http://www.nairaland.com/7483666/elon-musk-disables-twitter-spaces",
+    figure: figures[2].id
+  })
+)
+
+// Create users
+const users = [];
+
+users.push(
+  new User ({
+    username: 'demo-user',
+    email: 'demo-user@appacademy.io',
+    hashedPassword: bcrypt.hashSync('starwars', 10),
+    savedArticles: [articles[0]._id, articles[1]._id, articles[2]._id]
+  })
+)
+
+for (let i = 1; i < NUM_SEED_USERS; i++) {
+  const firstName = faker.name.firstName();
+  const lastName = faker.name.lastName();
+  users.push(
+    new User ({
+      username: faker.internet.userName(firstName, lastName),
+      email: faker.internet.email(firstName, lastName),
+      hashedPassword: bcrypt.hashSync(faker.internet.password(), 10),
+      savedArticles: [articles[3]._id]
+    })
+  )
+}
+  
+// Create tweets
+const tweets = [];
+
+for (let i = 0; i < NUM_SEED_TWEETS; i++) {
+  tweets.push(
+    new Tweet ({
+      text: faker.hacker.phrase(),
+      author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id
+    })
+  )
+}
 
 // Create groups
 const groups = [];
@@ -119,7 +166,7 @@ groups.push(
     shared: true
   })
 )
-    
+
 // Connect to database
 mongoose
   .connect(db, { useNewUrlParser: true })
@@ -137,9 +184,11 @@ const insertSeeds = () => {
   console.log("Resetting db and seeding users and tweets...");
 
   User.collection.drop()
+                 .then(() => Article.collection.drop())
                  .then(() => Tweet.collection.drop())
                  .then(() => Group.collection.drop())
                  .then(() => Figure.collection.drop())
+                 .then(() => Article.insertMany(articles))
                  .then(() => User.insertMany(users))
                  .then(() => Tweet.insertMany(tweets))
                  .then(() => Figure.insertMany(figures))
