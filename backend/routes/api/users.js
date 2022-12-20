@@ -11,6 +11,9 @@ const validateLoginInput = require('../../validation/login');
 
 const { isProduction } = require('../../config/keys');
 
+const { requireUser } = require('../../config/passport');
+const Group = require("../../models/Group");
+
 // Attach restoreUser as a middleware before the route handler to gain access
 // to req.user. (restoreUser will NOT return an error response if there is no
 // current user.)
@@ -90,5 +93,35 @@ router.post('/login', validateLoginInput, async (req, res, next) => {
     return res.json(await loginUser(user));
   })(req, res, next);
 });
+
+
+router.get('/:id', async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id)
+      .sort({ createdAt: -1 });
+
+    const groups = await Group.find({ user: user._id })
+      .sort({ createdAt: -1 });
+
+    const figures = [];
+    groups.forEach(group => {
+      for (let i = 0; i < group.figures.length; i++) {
+        figures.push(group.figures[i]);
+      }
+    });
+
+    const obj = {
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+      figures: figures,
+      groups: groups,
+    }
+
+    return res.json(obj);
+  } catch (err) {
+    return res.json(null);
+  }
+})
 
 module.exports = router;
