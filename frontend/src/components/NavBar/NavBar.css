@@ -1,4 +1,4 @@
-.NavBar {
+/* .NavBar {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -18,9 +18,8 @@
     width: 100px;
     display: flex;
     justify-content: space-between;
-}
+} */
 
-/* --------------------------------------------- */
 /* Nav Bar */
 
 .nav-bar-container {

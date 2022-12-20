@@ -54,15 +54,11 @@ function Dropdown () {
   return (
     <>
       <button className="dropdown-button" onClick={openMenu}>
-        {/* {loggedIn.username} */}
           user
       </button>
     
       {showMenu && (
         <ul className="dropdown-menu">
-          <li className="dropdown-options">
-            Figures
-          </li>
           <li className="dropdown-options">
             Figures
           </li>

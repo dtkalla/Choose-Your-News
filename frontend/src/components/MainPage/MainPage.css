@@ -1,0 +1,47 @@
+/* MainPage */
+
+.index-container {
+    display: flex;
+    margin: 0 5%;
+    margin-top: 20px;
+}
+
+/* --------------------------------------------- */
+/* NewsIndex */
+
+.news-index-container {
+    border: 1px solid black;
+    width: 70%
+}
+
+.news-index-title {
+    padding: 22px;
+    margin: 0 20px;
+}
+
+.news-feed-container {
+    border: 1px solid black;
+    padding: 12px;
+    max-height: 600px;
+    overflow: auto;
+}
+
+.news-feed-container::-webkit-scrollbar {
+    display: none;
+}
+
+.news-feed {
+    padding: 10px;
+    margin: 0 20px;
+}
+
+
+/* --------------------------------------------- */
+/* IndexSidebar */
+
+.index-sidebar-container {
+    border: 1px solid black;
+    width: 30%;
+    padding: 12px;
+
+}
