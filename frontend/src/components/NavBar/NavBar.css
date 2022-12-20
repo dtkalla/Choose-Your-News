@@ -19,3 +19,49 @@
     display: flex;
     justify-content: space-between;
 }
+
+/* --------------------------------------------- */
+/* Nav Bar */
+
+.nav-bar-container {
+    height: 80px;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    margin: 0 5%;
+}
+
+.logo {
+    width: 1000px;
+}
+
+/* --------------------------------------------- */
+/* Dropdown */
+
+.dropdown-button {
+    margin-left: 75px;
+}
+
+.dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #DDDDDD;
+    margin-top: 10px;
+}
+
+.dropdown-options {
+    text-decoration: none;
+    padding: 12px 12px;
+}
+
+.dropdown-options:hover {
+    cursor: pointer;
+    background-color: #F7F7F7;
+}

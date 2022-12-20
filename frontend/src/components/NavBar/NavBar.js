@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import './NavBar.css';
 import { logout } from '../../store/session';
+import Dropdown from './Dropdown'
 
 function NavBar () {
   const loggedIn = useSelector(state => !!state.session.user);
@@ -33,10 +34,16 @@ function NavBar () {
   }
 
   return (
-    <>
-      <h1>Chirper</h1>
-      { getLinks() }
-    </>
+    <nav className="nav-bar-container">
+      <div className="nav-bar">
+        <div className="left-nav">
+          <h1 className="logo">Choose Your News</h1>
+        </div>
+        <div classname="right-nav">
+          <Dropdown />
+        </div>
+      </div>
+    </nav>
   );
 }
 
