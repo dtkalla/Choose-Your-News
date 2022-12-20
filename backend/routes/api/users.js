@@ -103,18 +103,10 @@ router.get('/:id', async (req, res) => {
     const groups = await Group.find({ user: user._id })
       .sort({ createdAt: -1 });
 
-    const figures = [];
-    groups.forEach(group => {
-      for (let i = 0; i < group.figures.length; i++) {
-        figures.push(group.figures[i]);
-      }
-    });
-
     const obj = {
       _id: user._id,
       username: user.username,
       email: user.email,
-      figures: figures,
       groups: groups,
     }
 
