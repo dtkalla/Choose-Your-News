@@ -10,6 +10,10 @@ const articleSchema = Schema({
         type: String,
         required: true
     },
+    source: {
+        type: String,
+        required: true
+    },
     publishedDate: {
         type: Date,
         required: true

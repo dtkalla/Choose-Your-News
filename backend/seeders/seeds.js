@@ -11,86 +11,47 @@ const { faker } = require('@faker-js/faker');
 
 const NUM_SEED_USERS = 10;
 const NUM_SEED_TWEETS = 30;
-const NUM_SEED_GROUPS = 1;
 
 // Create figures
+const figureNames = [
+  "Elon Musk", 
+  "Jeff Bezos", 
+
+  "Lionel Messi", 
+  "Michael Jordan",
+
+  "Joe Biden",
+  "Donald Trump"
+];
+
 const figures = [];
-
-figures.push(
-  new Figure({
-    name: "Elon Musk"
-  })
-)
-
-figures.push(
-  new Figure({
-    name: "Kanye West"
-  })
-)
-
-figures.push(
-  new Figure({
-    name: "Jeff Bezos"
-  })
-)
-
-figures.push(
-  new Figure({
-    name: "Lionel Messi"
-  })
-)
-
-figures.push(
-  new Figure({
-    name: "Michael Jordan"
-  })
-)
+figureNames.forEach(name => {
+  figures.push(
+    new Figure({
+      name: name
+    })
+  )
+});
 
 //Create articles
 const articles = []
-
-articles.push(
-  new Article({
-    headline: "Example",
-    summary: "Summary",
-    publishedDate: "2022-12-16 15:00:59",
-    url: "http://www.nairaland.com/7483666/elon-musk-disables-twitter-spaces",
-    figure: figures[0].id
-  })
-)
-
-articles.push(
-  new Article({
-    headline: "Example1",
-    summary: "Summary1",
-    publishedDate: "2022-12-15 15:00:59",
-    url: "http://www.nairaland.com/7483666/elon-musk-disables-twitter-spaces",
-    figure: figures[0].id
-  })
-)
-
-articles.push(
-  new Article({
-    headline: "Example2",
-    summary: "Summary2",
-    publishedDate: "2022-12-14 15:00:59",
-    url: "http://www.nairaland.com/7483666/elon-musk-disables-twitter-spaces",
-    figure: figures[1].id
-  })
-)
-
-articles.push(
-  new Article({
-    headline: "Example3",
-    summary: "Summary3",
-    publishedDate: "2022-12-13 15:00:59",
-    url: "http://www.nairaland.com/7483666/elon-musk-disables-twitter-spaces",
-    figure: figures[2].id
-  })
-)
+for(let i = 0; i < 18; i++){
+  articles.push(
+    new Article({
+      headline: `Example${i}`,
+      summary: `Summary${i}`,
+      source: `nairaland`,
+      publishedDate: "2022-12-16 15:00:59",
+      url: `http://www.nairaland.com/7483666/elon-musk-disables-twitter-spaces`,
+      figure: figures[i % 6].id
+    })
+  )
+}
 
 // Create users
 const users = [];
+// Create groups
+const groups = [];
 
 users.push(
   new User ({
@@ -100,6 +61,11 @@ users.push(
     savedArticles: [articles[0]._id, articles[1]._id, articles[2]._id]
   })
 )
+groups.push(new Group({
+  user: users[0]._id,
+  figures: [],
+  name: "No group"
+}))
 
 for (let i = 1; i < NUM_SEED_USERS; i++) {
   const firstName = faker.name.firstName();
@@ -112,8 +78,24 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
       savedArticles: [articles[3]._id]
     })
   )
+  groups.push(new Group({
+    user: users[users.length - 1]._id,
+    figures: [],
+    name: "No group"
+  }))
 }
-  
+
+const groupNames = ["business", "sports", "politcs"];
+for (let i = 0; i < groupNames.length; i++) {
+  groups.push(
+    new Group({
+      user: users[i]._id,
+      name: groupNames[i],
+      figures: [figures[i * 2]._id, figures[i * 2 + 1]._id]
+    })
+  )
+}
+
 // Create tweets
 const tweets = [];
 
@@ -125,47 +107,6 @@ for (let i = 0; i < NUM_SEED_TWEETS; i++) {
     })
   )
 }
-
-// Create groups
-const groups = [];
-
-// for (let i = 0; i < NUM_SEED_GROUPS; i++) {
-//   groups.push(
-//     new Group({
-//       user: users[0]._id,
-//       name: "business",
-//       figures: [],
-//       shared: true
-//     })
-//   )
-// }
-
-groups.push(
-  new Group({
-    user: users[0]._id,
-    name: "business",
-    figures: [figures[0]._id, figures[2]._id],
-    shared: true
-  })
-)
-
-groups.push(
-  new Group({
-    user: users[0]._id,
-    name: "sports",
-    figures: [figures[3]._id, figures[4]._id],
-    shared: true
-  })
-)
-
-groups.push(
-  new Group({
-    user: users[1]._id,
-    name: "politics",
-    figures: [figures[1]._id],
-    shared: true
-  })
-)
 
 // Connect to database
 mongoose

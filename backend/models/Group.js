@@ -16,7 +16,7 @@ const groupSchema = Schema({
     }],
     shared: {
         type: Boolean,
-        default: true,
+        default: false,
         required: true
     }
 }, {

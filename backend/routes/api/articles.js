@@ -37,7 +37,7 @@ router.get('/figure/:figureId', async (req, res) => {
     try {
         const articles = await Article.find({ figure: req.params.figureId })
             .sort({ createdAt: -1 });
-            
+
         return res.json(articles);
     } catch (err) {
         return res.json([]);
@@ -101,8 +101,5 @@ router.get('/user/:userId', async (req, res) => {
 //         next(err);
 //     }
 // });
-
-
-
 
 module.exports = router;
