@@ -12,6 +12,7 @@ const validateLoginInput = require('../../validation/login');
 const { isProduction } = require('../../config/keys');
 
 const { requireUser } = require('../../config/passport');
+
 const Group = require("../../models/Group");
 
 // Attach restoreUser as a middleware before the route handler to gain access
@@ -69,6 +70,14 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
       try {
         newUser.hashedPassword = hashedPassword;
         const user = await newUser.save();
+
+        let noGroup = new Group({
+          user: user._id,
+          figures: [],
+          name: "No group"
+        });
+        noGroup = await noGroup.save();
+        
         // Generate the JWT
         return res.json(await loginUser(user));
       }
