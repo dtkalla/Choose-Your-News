@@ -1,21 +1,42 @@
-.NavBar {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.nav-bar-container {
+    height: 80px;
+    border-bottom: 1px solid #DDDDDD;
 }
 
-.NavBar button {
-    height: 20px;
-}
-
-.links-nav {
-    width: 400px;
+.nav-bar {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    margin: 0 8%;
 }
 
-.links-auth {
-    width: 100px;
+.logo {
+    width: 1000px;
+}
+
+/* --------------------------------------------- */
+/* Dropdown */
+
+.dropdown-button {
+    margin-left: 75px;
+}
+
+.dropdown-menu {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #DDDDDD;
+    margin-top: 10px;
+}
+
+.dropdown-options {
+    text-decoration: none;
+    padding: 12px 12px;
+}
+
+.dropdown-options:hover {
+    cursor: pointer;
+    background-color: #F7F7F7;
 }
