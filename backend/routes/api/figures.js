@@ -6,12 +6,11 @@ const Figure = mongoose.model('Figure');
 const Group = mongoose.model('Group');
 const User = mongoose.model('User');
 
+const { requireUser } = require('../../config/passport');
+
+
 const axios = require("axios").default;
 const { newyorktimesApiKey } = require('../../config/keys');
-
-const { requireUser } = require('../../config/passport');
-// potential future use
-// const validateTweetInput = require('../../validation/tweets');
 
 const fetchArticlesFromNewyorktime = async (query) => {
     const newyorktimesUrl = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?';
@@ -43,7 +42,7 @@ const fetchArticlesFromNewyorktime = async (query) => {
     return articles;
 }
 
-//for testing
+//ONLY FOR TESTING
 router.get('/', async (req, res) => {
     try {
         const figures = await Figure.find()
@@ -56,6 +55,31 @@ router.get('/', async (req, res) => {
     }
 })
 
+//CREATE A FIGURE
+router.post('/', requireUser, async (req, res) => {
+    try {
+        const userId = req.user._id;
+
+        const newFigure = new Figure({
+            name: req.body.name
+        });
+
+        let figure = await newFigure.save();
+
+        let noGroup = await Group.find({ user: userId, name: "No group" });
+        noGroup = noGroup[0];
+
+        noGroup.figures.push(figure._id);
+        noGroup = await noGroup.save();
+
+        return res.json(`Successfully added ${figure.name}`);
+    }
+    catch (err) {
+        return res.json(null);
+    }
+});
+
+//READ A FIGURE
 router.get('/:id', async (req, res) => {
     try {
         const figure = await Figure.findById(req.params.id)
@@ -73,6 +97,7 @@ router.get('/:id', async (req, res) => {
     }
 })
 
+//READ A GROUP'S FIGURES
 router.get('/group/:groupId', async (req, res) => {
     try {
         const group = await Group.findById(req.params.groupId)
@@ -93,6 +118,7 @@ router.get('/group/:groupId', async (req, res) => {
     }
 })
 
+//READ A USER'S FIGURES
 router.get('/user/:userId', async (req, res) => {
     try {
         const user = await User.findById(req.params.userId)
@@ -126,21 +152,28 @@ router.get('/user/:userId', async (req, res) => {
     }
 })
 
-router.post('/', requireUser, async (req, res) => {
+//DELETE A FIGURE
+router.delete('/:id', requireUser, async (req, res) => {
     try {
         const userId = req.user._id;
+        
+        const groups = await Group.find({ user: userId });
 
-        const newFigure = new Figure({
-            name: req.body.name
-        });
+        const figureId = req.params.id;
 
-        let figure = await newFigure.save();
+        for(let i = 0; i < groups.length; i++){
+            const idx = groups[i].figures.indexOf(figureId);
+            if (idx !== -1){
+                groups[i].figures = groups[i].figures.slice(0, idx)
+                    .concat(groups[i].figures.slice(idx+1));
+                groups[i].save();
+                break;
+            }
+        }
 
-        let noGroup = await Group.find({ user: userId, name: "No group" });
-        noGroup.figures.push(figure._id);
-        noGroup = await noGroup.save();
+        await Figure.findByIdAndRemove(figureId);
 
-        return res.json(noGroup.populate("figures"));
+        return res.json(`Successfully deleted.`);
     }
     catch (err) {
         return res.json(null);
