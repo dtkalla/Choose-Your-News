@@ -1,27 +1,3 @@
-/* .NavBar {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.NavBar button {
-    height: 20px;
-}
-
-.links-nav {
-    width: 400px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.links-auth {
-    width: 100px;
-    display: flex;
-    justify-content: space-between;
-} */
-
-/* Nav Bar */
-
 .nav-bar-container {
     height: 80px;
     border-bottom: 1px solid #DDDDDD;
@@ -32,7 +8,7 @@
     justify-content: space-between;
     align-items: center;
     height: 100%;
-    margin: 0 5%;
+    margin: 0 8%;
 }
 
 .logo {

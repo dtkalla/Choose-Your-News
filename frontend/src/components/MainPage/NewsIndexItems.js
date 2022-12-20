@@ -1,14 +1,14 @@
 
 import './MainPage.css'
 
-
 function NewsIndexItems() {
+
     return (
         <>
-        
+                
         </>
     );
-  }
+}
   
-  export default NewsIndexItems;
+export default NewsIndexItems;
   

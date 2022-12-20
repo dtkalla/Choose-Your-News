@@ -68,7 +68,7 @@ function Dropdown () {
           <li className="dropdown-options">
             Saved Articles
           </li>
-          <li className="dropdown-options">
+          <li className="dropdown-options" onClick={logoutUser}>
             Logout
           </li>
         </ul>

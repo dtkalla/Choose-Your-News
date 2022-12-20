@@ -2,7 +2,7 @@
 
 .index-container {
     display: flex;
-    margin: 0 5%;
+    margin: 0 8%;
     margin-top: 20px;
 }
 
@@ -15,8 +15,10 @@
 }
 
 .news-index-title {
-    padding: 22px;
-    margin: 0 20px;
+    font-size: 22px;
+    padding: 28px;
+    /* margin: 0 20px; */
+    border: 1px solid black;
 }
 
 .news-feed-container {
@@ -31,8 +33,13 @@
 }
 
 .news-feed {
+    cursor: pointer;
+    border: 1px solid black;
+    overflow-wrap: break-word;
     padding: 10px;
-    margin: 0 20px;
+    margin: 0 20px 10px;
+    border-radius: 8px;
+
 }
 
 
@@ -42,6 +49,25 @@
 .index-sidebar-container {
     border: 1px solid black;
     width: 30%;
-    padding: 12px;
+    /* padding: 12px; */
+}
 
+.index-sidebar-title {
+    font-size: 22px;
+    padding: 28px;
+    border: 1px solid black;
+}
+
+.index-sidebar-groups {
+    cursor: pointer;
+    border: 1px solid black;
+    padding: 14px 24px;
+    border-radius: 8px;
+    /* width: 50%; */
+    margin: 20px 20px;
+
+}
+
+.index-sidebar-footer {
+    padding: 22px;
 }

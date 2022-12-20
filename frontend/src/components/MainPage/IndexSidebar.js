@@ -5,7 +5,7 @@ import './MainPage.css'
 function IndexSidebar() {
     return (
       <div className="index-sidebar-container">
-        hello
+        <h1 className="index-sidebar-title">Groups</h1>
         <div className="index-sidebar-groups-container">
           <div className="index-sidebar-groups">
             Group 1
@@ -14,10 +14,10 @@ function IndexSidebar() {
             Group 2
           </div>
           <div className="index-sidebar-groups">
-            Group 3
+            Add a group
           </div>
           <div className="index-sidebar-groups">
-            Group 4
+            Add a group
           </div>
         </div>
 
