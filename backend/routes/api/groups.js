@@ -2,17 +2,17 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 
-const User = mongoose.model('User');
 const Group = mongoose.model('Group');
 
+const User = mongoose.model('User');
 const { requireUser } = require('../../config/passport');
 const validateTweetInput = require('../../validation/tweets');
 
 router.get('/', async (req, res) => {
     try {
         const groups = await Group.find()
-            .sort({ createdAt: -1 })
-            .populate("figures");
+            .sort({ createdAt: -1 });
+
         return res.json(groups);
     }
     catch (err) {
@@ -20,26 +20,26 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', async (req, res) => {
     try {
         const group = await Group.findById(req.params.id)
             .sort({ createdAt: -1 })
             .populate("figures");
+        
         return res.json(group);
     }
     catch (err) {
-        const error = new Error('Group not found');
-        error.statusCode = 404;
-        error.errors = { message: "No group found with that id" };
-        return next(error);
+        return res.json(null);
     }
 })
 
-router.get('/user/:userId', async (req, res, next) => {
+//Better build up figures at the frontend with groups instead of using api/figures/user/:userId
+router.get('/user/:userId', async (req, res) => {
     try {
         const groups = await Group.find({ user: req.params.userId })
             .sort({ createdAt: -1 })
             .populate("figures");
+
         return res.json(groups);
     }
     catch (err) {

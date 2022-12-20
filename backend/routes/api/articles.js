@@ -1,16 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+
 const User = mongoose.model('User');
 const Article = mongoose.model('Article');
+
 const { requireUser } = require('../../config/passport');
 // const validateArticleInput = require('../../validation/articles');
 
 router.get('/', async (req, res) => {
     try {
         const articles = await Article.find()
-            .sort({ createdAt: -1 })
-            .populate("figure");
+            .sort({ createdAt: -1 });
+
         return res.json(articles);
     }
     catch (err) {
@@ -18,33 +20,31 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', async (req, res) => {
     try {
         const article = await Article.findById(req.params.id)
             .sort({ createdAt: -1 })
             .populate("figure");
+
         return res.json(article);
     }
     catch (err) {
-        const error = new Error('Article not found');
-        error.statusCode = 404;
-        error.errors = { message: "No article found with that id" };
-        return next(error);
+        return null;
     }
 })
 
-router.get('/figure/:figureId', async (req, res, next) => {
+router.get('/figure/:figureId', async (req, res) => {
     try {
         const articles = await Article.find({ figure: req.params.figureId })
-            .sort({ createdAt: -1 })
-            .populate("figure");
+            .sort({ createdAt: -1 });
+            
         return res.json(articles);
     } catch (err) {
         return res.json([]);
     }
 })
 
-router.get('/user/:userId', async (req, res, next) => {
+router.get('/user/:userId', async (req, res) => {
     try {
         const user = await User.findById(req.params.userId)
             .sort({ createdAt: -1 })
