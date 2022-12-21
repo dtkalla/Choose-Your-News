@@ -6,7 +6,9 @@ const User = mongoose.model('User');
 const Article = mongoose.model('Article');
 
 const { requireUser } = require('../../config/passport');
-// const validateArticleInput = require('../../validation/articles');
+
+//future use
+//const validateArticleInput = require('../../validation/articles');
 
 router.get('/', async (req, res) => {
     try {
@@ -35,8 +37,7 @@ router.get('/:id', async (req, res) => {
 
 router.get('/figure/:figureId', async (req, res) => {
     try {
-        const articles = await Article.find({ figure: req.params.figureId })
-            .sort({ createdAt: -1 });
+        const articles = await Article.find({ figure: req.params.figureId });
 
         return res.json(articles);
     } catch (err) {
@@ -47,7 +48,6 @@ router.get('/figure/:figureId', async (req, res) => {
 router.get('/user/:userId', async (req, res) => {
     try {
         const user = await User.findById(req.params.userId)
-            .sort({ createdAt: -1 })
             .populate("savedArticles");
         return res.json(user.savedArticles);
     } catch (err) {
