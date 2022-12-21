@@ -7,6 +7,7 @@ import NavBar from './components/NavBar/NavBar';
 
 import MainPage from './components/MainPage/MainPage';
 import Groups from './components/Groups/Groups';
+import Articles from './components/Articles/Articles';
 import LoginForm from './components/SessionForms/LoginForm';
 import SignupForm from './components/SessionForms/SignupForm';
 import Tweets from './components/Tweets/Tweets';
@@ -33,6 +34,7 @@ function App() {
 
         <ProtectedRoute exact path="/index" component={MainPage} />
         <ProtectedRoute exact path="/groups" component={Groups} />
+        <ProtectedRoute exact path="/articles" component={Articles} />
         <ProtectedRoute exact path="/tweets" component={Tweets} />
         <ProtectedRoute exact path="/profile" component={Profile} />
         <ProtectedRoute exact path="/tweets/new" component={TweetCompose} />

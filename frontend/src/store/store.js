@@ -1,12 +1,14 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import groups from './groups';
+import articles from './articles';
 import session from './session';
 import errors from './errors';
 import tweets from './tweets';
 
 const rootReducer = combineReducers({
   groups,
+  articles,
   tweets,
   session,
   errors

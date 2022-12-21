@@ -62,12 +62,12 @@ function Dropdown () {
           <li className="dropdown-options">
             Figures
           </li>
-          <li className="dropdown-options">
-            Groups
-          </li>
-          <li className="dropdown-options">
-            Saved Articles
-          </li>
+          <Link className="dropdown-options" to="/groups/">
+              Groups
+          </Link>
+          <Link className="dropdown-options" to="/articles/">
+              Saved Articles
+          </Link>
           <li className="dropdown-options" onClick={logoutUser}>
             Logout
           </li>

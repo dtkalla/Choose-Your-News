@@ -30,10 +30,10 @@ function Groups() {
         <GroupsIndex groups={userGroups}/>
 
 
-        <p>A Twitter Clone</p>
+        {/* <p>A Twitter Clone</p>
         <footer>
             Copyright &copy; 2022 Chirper
-        </footer>
+        </footer> */}
     </div>
   );
 }
