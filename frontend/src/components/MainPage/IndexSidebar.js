@@ -4,11 +4,13 @@ import './MainPage.css'
 function IndexSidebar({ groups }) {
 
   const groupItems = groups.map((group) => {
-    return (
-      <div key={group.id} className="index-sidebar-groups">
-        {group.name}
-      </div>
-    )
+    if (group.name !== "No group") {
+      return (
+        <div key={group.id} className="index-sidebar-groups">
+          {group.name}
+        </div>
+      )
+    }
   })
 
 

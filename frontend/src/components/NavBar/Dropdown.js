@@ -31,26 +31,6 @@ function Dropdown () {
     dispatch(logout());
   }
 
-//   const getLinks = () => {
-//     if (loggedIn) {
-//       return (
-//         <div className="links-nav">
-//           <Link to={'/tweets'}>All Tweets</Link>
-//           <Link to={'/profile'}>Profile</Link>
-//           <Link to={'/tweets/new'}>Write a Tweet</Link>
-//           <button onClick={logoutUser}>Logout</button>
-//         </div>
-//       );
-//     } else {
-//       return (
-//         <div className="links-auth">
-//           <Link to={'/signup'}>Signup</Link>
-//           <Link to={'/login'}>Login</Link>
-//         </div>
-//       );
-//     }
-//   }
-
   return (
     <>
       <button className="dropdown-button" onClick={openMenu}>

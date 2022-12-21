@@ -22,12 +22,14 @@ function Articles() {
 
   return (
     <div className="articles-container">
-        <div className="articles-user-title">Saved Articles</div>
+        <div className="articles-user-title">
+          Saved Articles
+        </div>
         <ArticlesIndex articles={userArticles}/>
-        {/* <p>A Twitter Clone</p>
+        <p>A Twitter Clone</p>
         <footer>
             Copyright &copy; 2022 Chirper
-        </footer> */}
+        </footer>
     </div>
   );
 }
