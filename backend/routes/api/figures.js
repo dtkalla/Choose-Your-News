@@ -91,16 +91,6 @@ router.get('/:id', requireUser, async (req, res) => {
     }
 })
 
-router.get('/figure/:figureId', async (req, res) => {
-    try {
-        const articles = await Article.find({ figure: req.params.figureId });
-
-        return res.json(articles);
-    } catch (err) {
-        return res.json([]);
-    }
-})
-
 //DELETE A FIGURE
 router.delete('/:id', requireUser, async (req, res) => {
     try {
