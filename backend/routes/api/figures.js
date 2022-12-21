@@ -20,23 +20,45 @@ router.get('/', async (req, res) => {
     }
 })
 
+const hasFigure = (groups, figureId) => {
+    for(let i = 0; i < groups.length; i++) {
+        const idx = groups[i].figures.indexOf(figureId);
+        if (idx !== -1) {
+            return true;
+        }
+    }
+    return false;
+}
+
 //CREATE A FIGURE
 router.post('/', requireUser, async (req, res) => {
     try {
-        const newFigure = new Figure({
-            name: req.body.name
-        });
-
-        const figure = await newFigure.save();
+        let figure = await Figure.findOne({ name: req.body.name });
+        if (!figure) {
+            const newFigure = new Figure({
+                name: req.body.name
+            });
+            figure = await newFigure.save();
+        }
 
         const userId = req.user._id;
 
-        const noGroup = await Group.find({ user: userId, name: "No group" });
-        
-        noGroup[0].figures.push(figure._id);
-        await noGroup[0].save();
+        const figureId = figure._id;
 
-        return res.json(`Successfully added ${figure.name}`);
+        const groups = await Group.find({ user: userId });
+
+        if (!hasFigure(groups, figureId)) {
+            const noGroup = groups.find(group => group.name === "No group");
+
+            noGroup.figures.push(figure._id);
+
+            await noGroup.save();
+
+            return res.json(`Successfully added ${figure.name}`);
+        }
+        else {
+            return res.json(`${figure.name} already created`);
+        }
     }
     catch (err) {
         return res.json(null);
@@ -44,21 +66,38 @@ router.post('/', requireUser, async (req, res) => {
 });
 
 //READ A FIGURE
-router.get('/:id', async (req, res) => {
+router.get('/:id', requireUser, async (req, res) => {
     try {
+        const user = await req.user.populate("savedArticles");
+
         const figureId = req.params.id;
 
         const figure = await Figure.findById(figureId);
 
+        const savedArticles = user.savedArticles
+            .filter(savedArticle => 
+                savedArticle.figure.toString() === figure._id.toString());
+        
         const obj = {
             ...figure._doc,
-            articles: await fetchArticlesFromNewYorkTimes(`"${figure.name}"`)
+            savedArticles: savedArticles,
+            fetchedArticles: await fetchArticlesFromNewYorkTimes(`"${figure.name}"`)
         };
 
         return res.json(obj);
     }
     catch (err) {
         return res.json(null);
+    }
+})
+
+router.get('/figure/:figureId', async (req, res) => {
+    try {
+        const articles = await Article.find({ figure: req.params.figureId });
+
+        return res.json(articles);
+    } catch (err) {
+        return res.json([]);
     }
 })
 
@@ -69,9 +108,11 @@ router.delete('/:id', requireUser, async (req, res) => {
         
         const figureId = req.params.id;
 
-        const groups = await Group.find({ user: userId });
+        const allGroups = await Group.find();
 
-
+        const groups = allGroups.filter(group => 
+            group.user.toString() === userId.toString());
+        
         for(let i = 0; i < groups.length; i++){
             const idx = groups[i].figures.indexOf(figureId);
             if (idx !== -1){
@@ -81,7 +122,9 @@ router.delete('/:id', requireUser, async (req, res) => {
             }
         }
 
-        await Figure.findByIdAndRemove(figureId);
+        if (!hasFigure(allGroups, figureId)) {
+            await Figure.findByIdAndRemove(figureId);
+        }
 
         return res.json(`Successfully deleted.`);
     }

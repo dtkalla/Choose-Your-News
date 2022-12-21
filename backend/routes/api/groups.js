@@ -53,7 +53,7 @@ router.get('/:id', async (req, res) => {
 
         const obj = {
             ...group._doc,
-            articles: searchTerms.length === 0 ? [] :
+            fetchedArticles: searchTerms.length === 0 ? [] :
                 await fetchArticlesFromNewYorkTimes(searchTerms.join(" OR "))
         };
         
@@ -158,10 +158,49 @@ router.patch('/:id/figure/:figureId', requireUser, async (req, res) => {
     }
 });
 
-//DELETE A GROUP
+const hasFigure = (groups, excludedGroupId, figureId) => {
+    for (let i = 0; i < groups.length; i++) {
+        if (groups[i]._id.toString() !== excludedGroupId) {
+            const idx = groups[i].figures.indexOf(figureId);
+            if (idx !== -1) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+//DELETE A GROUP, needs to add figure back to no group
 router.delete('/:id', requireUser, async (req, res) => {
     try {
         const groupId = req.params.id;
+
+        const userId = req.user._id;
+
+        const groups = await Group.find({ user: userId });
+
+        let group;
+        let noGroup;
+
+        for (let i = 0; i < groups.length; i++) {
+            if (groups[i]._id.toString() === groupId){
+                group = groups[i];
+            }
+            if (groups[i].name === "No group") {
+                noGroup = groups[i];
+            }
+        }
+
+        const figures = group.figures;
+        
+        for (let i = 0; i < figures.length; i++){
+            const figureId = figures[i]._id;
+            if (!hasFigure(groups, groupId, figureId)) {
+                noGroup.figures.push(figureId);
+            }
+        }
+
+        await noGroup.save();
 
         await Group.findByIdAndRemove(groupId);
 

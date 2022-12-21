@@ -106,7 +106,7 @@ router.get('/current', restoreUser, async (req, res) => {
   }
 
   try {
-    const user = req.user;
+    const user = await req.user.populate("savedArticles");
 
     const groups = await Group.find({ user: user._id }).populate("figures");
 
@@ -117,14 +117,20 @@ router.get('/current', restoreUser, async (req, res) => {
       }
     });
 
+    const savedArticles = [];
+    user.savedArticles.forEach(async (savedArticle) => {
+      savedArticles.push(await savedArticle.populate("figure"));
+    });
+
     const searchTerms = figures.map(figure => `"${figure.name}"`);
 
     const obj = {
       _id: user._id,
       username: user.username,
       email: user.email,
+      savedArticles: savedArticles,
       groups: groups,
-      articles: searchTerms.length === 0 ? [] :
+      fetchedArticles: searchTerms.length === 0 ? [] :
         await fetchArticlesFromNewYorkTimes(searchTerms.join(" OR "))
     };
 
@@ -153,7 +159,7 @@ router.get('/:id', async (req, res) => {
   try {
     const userId = req.params.id;
 
-    const user = await User.findById(userId);
+    const user = await User.findById(userId).populate("savedArticles");
 
     const groups = await Group.find({ user: user._id }).populate("figures");
 
@@ -170,8 +176,9 @@ router.get('/:id', async (req, res) => {
       _id: user._id,
       username: user.username,
       email: user.email,
+      savedArticles: user.savedArticles,
       groups: groups,
-      articles: searchTerms.length === 0 ? [] : 
+      fetchedArticles: searchTerms.length === 0 ? [] :
         await fetchArticlesFromNewYorkTimes(searchTerms.join(" OR "))
     };
 

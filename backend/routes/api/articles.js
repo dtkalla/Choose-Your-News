@@ -10,10 +10,10 @@ const { requireUser } = require('../../config/passport');
 //future use
 //const validateArticleInput = require('../../validation/articles');
 
+//ONLY FOR TESTING
 router.get('/', async (req, res) => {
     try {
-        const articles = await Article.find()
-            .sort({ createdAt: -1 });
+        const articles = await Article.find();
 
         return res.json(articles);
     }
@@ -22,36 +22,17 @@ router.get('/', async (req, res) => {
     }
 })
 
+//ONLY FOR TESTING
 router.get('/:id', async (req, res) => {
     try {
-        const article = await Article.findById(req.params.id)
-            .sort({ createdAt: -1 })
-            .populate("figure");
+        const articleId = req.params.id;
+
+        const article = await Article.findById(articleId).populate("figure");
 
         return res.json(article);
     }
     catch (err) {
         return null;
-    }
-})
-
-router.get('/figure/:figureId', async (req, res) => {
-    try {
-        const articles = await Article.find({ figure: req.params.figureId });
-
-        return res.json(articles);
-    } catch (err) {
-        return res.json([]);
-    }
-})
-
-router.get('/user/:userId', async (req, res) => {
-    try {
-        const user = await User.findById(req.params.userId)
-            .populate("savedArticles");
-        return res.json(user.savedArticles);
-    } catch (err) {
-        return res.json([]);
     }
 })
 
