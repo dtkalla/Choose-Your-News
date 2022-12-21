@@ -1,40 +1,36 @@
 const express = require("express");
 const router = express.Router();
+const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
-const mongoose = require('mongoose');
+
 const User = mongoose.model('User');
-const { loginUser, restoreUser } = require('../../config/passport');
+const Group = mongoose.model('Group');
 
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
 
+const { loginUser, restoreUser, requireUser } = require('../../config/passport');
 const { isProduction } = require('../../config/keys');
+const { fetchArticlesFromNewYorkTimes } = require('../../config/api');
 
-const { requireUser } = require('../../config/passport');
 
-const Group = require("../../models/Group");
+router.post('/login', validateLoginInput, async (req, res, next) => {
+  passport.authenticate('local', async function (err, user) {
+    if (err) return next(err);
+    if (!user) {
+      const err = new Error('Invalid credentials');
+      err.statusCode = 400;
+      err.errors = { email: "Invalid credentials" };
+      return next(err);
+    }
+    // Generate the JWT
+    return res.json(await loginUser(user));
+  })(req, res, next);
+});
 
-// Attach restoreUser as a middleware before the route handler to gain access
-// to req.user. (restoreUser will NOT return an error response if there is no
-// current user.)
-router.get('/current', restoreUser, (req, res) => {
-  if (!isProduction) {
-    // In development, allow React server to gain access to the CSRF token
-    // whenever the current user information is first loaded into the
-    // React application
-    const csrfToken = req.csrfToken();
-    res.cookie("CSRF-TOKEN", csrfToken);
-  }
-  if (!req.user) return res.json(null);
-  res.json({
-    _id: req.user._id,
-    username: req.user.username,
-    email: req.user.email
-  });
-})
 
-// Attach validateRegisterInput as a middleware before the route handler
+//CREATE A USER
 router.post('/register', validateRegisterInput, async (req, res, next) => {
   // Check to make sure nobody has already registered with a duplicate email or
   // username
@@ -71,13 +67,14 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
         newUser.hashedPassword = hashedPassword;
         const user = await newUser.save();
 
-        let noGroup = new Group({
+        const noGroup = new Group({
           user: user._id,
           figures: [],
           name: "No group"
         });
-        noGroup = await noGroup.save();
-        
+
+        await noGroup.save();
+
         // Generate the JWT
         return res.json(await loginUser(user));
       }
@@ -88,39 +85,106 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
   });
 });
 
-// Attach validateLoginInput as a middleware before the route handler
-router.post('/login', validateLoginInput, async (req, res, next) => {
-  passport.authenticate('local', async function(err, user) {
-    if (err) return next(err);
-    if (!user) {
-      const err = new Error('Invalid credentials');
-      err.statusCode = 400;
-      err.errors = { email: "Invalid credentials" };
-      return next(err);
-    }
-    // Generate the JWT
-    return res.json(await loginUser(user));
-  })(req, res, next);
-});
 
+// Attach restoreUser as a middleware before the route handler to gain access
+// to req.user. (restoreUser will NOT return an error response if there is no
+// current user.)
 
-router.get('/:id', async (req, res) => {
+//READ CURRENT USER
+router.get('/current', restoreUser, async (req, res) => {
+  if (!isProduction) {
+    // In development, allow React server to gain access to the CSRF token
+    // whenever the current user information is first loaded into the
+    // React application
+    const csrfToken = req.csrfToken();
+
+    res.cookie("CSRF-TOKEN", csrfToken);
+  }
+
+  if (!req.user) {
+    return res.json(null);
+  }
+
   try {
-    const user = await User.findById(req.params.id)
-      .sort({ createdAt: -1 });
+    const user = await req.user.populate("savedArticles");
 
-    const groups = await Group.find({ user: user._id })
-      .sort({ createdAt: -1 });
+    const groups = await Group.find({ user: user._id }).populate("figures");
+
+    const figures = [];
+    groups.forEach(group => {
+      for (let i = 0; i < group.figures.length; i++) {
+        figures.push(group.figures[i]);
+      }
+    });
+
+    const savedArticles = [];
+    user.savedArticles.forEach(async (savedArticle) => {
+      savedArticles.push(await savedArticle.populate("figure"));
+    });
+
+    const searchTerms = figures.map(figure => `"${figure.name}"`);
 
     const obj = {
       _id: user._id,
       username: user.username,
       email: user.email,
+      savedArticles: savedArticles,
       groups: groups,
-    }
+      fetchedArticles: searchTerms.length === 0 ? [] :
+        await fetchArticlesFromNewYorkTimes(searchTerms.join(" OR "))
+    };
 
     return res.json(obj);
-  } catch (err) {
+  }
+  catch (err) {
+    return res.json(null);
+  }
+})
+
+
+//ONLY FOR TESTING
+router.get('/', async (req, res) => {
+  try {
+    const users = await User.find();
+
+    return res.json(users);
+  }
+  catch (err) {
+    return res.json([]);
+  }
+})
+
+//ONLY FOR TESTING
+router.get('/:id', async (req, res) => {
+  try {
+    const userId = req.params.id;
+
+    const user = await User.findById(userId).populate("savedArticles");
+
+    const groups = await Group.find({ user: user._id }).populate("figures");
+
+    const figures = [];
+    groups.forEach(group => {
+      for (let i = 0; i < group.figures.length; i++) {
+        figures.push(group.figures[i]);
+      }
+    });
+
+    const searchTerms = figures.map(figure => `"${figure.name}"`);
+
+    const obj = {
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+      savedArticles: user.savedArticles,
+      groups: groups,
+      fetchedArticles: searchTerms.length === 0 ? [] :
+        await fetchArticlesFromNewYorkTimes(searchTerms.join(" OR "))
+    };
+
+    return res.json(obj);
+  } 
+  catch (err) {
     return res.json(null);
   }
 })
