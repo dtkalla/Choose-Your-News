@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 
 const User = mongoose.model('User');
+const Group = mongoose.model('Group');
 const Article = mongoose.model('Article');
 
 const { requireUser } = require('../../config/passport');
@@ -37,61 +38,100 @@ const hasArticle = (user, url, figureId) => {
     const savedArticles = user.savedArticles;
     return savedArticles.some(savedArticle => {
         return savedArticle.url === url &&
-            savedArticle.figure._id.toString() === figureId.toString();
+            savedArticle.figure.toString() === figureId.toString();
     });
+}
+
+const hasFigure = (groups, figureId) => {
+    for (let i = 0; i < groups.length; i++) {
+        const idx = groups[i].figures.indexOf(figureId);
+        if (idx !== -1) {
+            return true;
+        }
+    }
+    return false;
 }
 
 //SAVE AN ARTICLE
 router.post('/', requireUser, async (req, res, next) => {
-  try {
-    const url = req.body.url;
-    
-    const figureId = req.body.figureId;
+    try {
+        const headline      = req.body.headline;
+        const summary       = req.body.summary;
+        const source        = req.body.source;
+        const publishedDate = req.body.publishedDate;
+        const url           = req.body.url;
+        const figureId      = req.body.figure;
 
-    let article = Article.find({
-        url: url,
-        figure: figureId
-    });
+        const groups = await Group.find({ user: req.user._id });
+        if (!hasFigure(groups, figureId)) {
+            return res.json("Must follow figure to save article");
+        }
 
-    if (!article) {
-        article = new Article({
-            headline:       req.body.headline,
-            summary:        req.body.summary,
-            publishedDate:  req.body.publishDate,
-            url:            req.body.url,
-            figure:         req.body.figureId
+        const user = await req.user.populate("savedArticles");
+
+        let article = await Article.findOne({
+            url,
+            figure: figureId
         });
+        if (!article) {
+            article = new Article({
+                headline,
+                summary,
+                source,
+                publishedDate,
+                url,
+                figure: figureId
+            });
+        }
+        
+        if (!hasArticle(user, url, figureId)) {
+            article = await article.save();
+            user.savedArticles.push(article._id);
+            await user.save();
+            return res.json("Article successfully saved");
+        }
+        else {
+            return res.json("Article already saved");
+        }
     }
-      
-    const user = req.user.populate("savedArticles");
-
-    hasArticle(user, req.body.url)
-    await article.save();
-
-    // req.user.savedArticles.push(article._id); //Test this; if it doesn't work, find user by req.user._id
-    // article = await article.populate('author', '_id, username');
-    return res.json(article);
-  }
-  catch(err) {
-    next(err);
-  }
+    catch(err) {
+        return res.json(null);
+    }
 });
 
+//UNSAVE AN ARTICLE
+router.delete('/:id', requireUser, async (req, res, next) => {
+    try {
+        const user = req.user;
 
-// router.delete('/:id', requireUser, validateArticleInput, async (req, res, next) => {
-//     try {
-//         const article = await Article.findById(req.params.id)
-//         article.userIds.delete(req.user._id)
+        const articleId = req.params.id;
 
-//         if (article.userIds == []) article.delete()
+        const idx = user.savedArticles.indexOf(articleId);
+        if (idx !== -1) {
+            user.savedArticles = user.savedArticles.slice(0, idx)
+                .concat(user.savedArticles.slice(idx + 1));
+            await user.save();
+        }
 
-//       // req.user.savedArticles.push(article._id); // Test this; if it doesn't work, find user by req.user._id
-//       // article = await article.populate('author', '_id, username');
-//         // return res.json(article);
-//     }
-//     catch(err) {
-//         next(err);
-//     }
-// });
+        let hasArticle = false;
+        const users = await User.find();
+        for (let i = 0; i < users.length; i++) {
+            const idx = users[i].savedArticles.indexOf(articleId);
+            if (idx !== -1) {
+                hasArticle = true;
+                break;
+            }
+        }
+
+        if (!hasArticle) {
+            await Article.findByIdAndRemove(articleId);
+        }
+
+        return res.json("Article successfully unsaved");
+    }
+    catch(err) {
+        next(err);
+    }
+});
 
 module.exports = router;
