@@ -30,13 +30,7 @@ function LoginForm () {
   const loginDemo = () => {
     setEmail('demo-user@appacademy.io');
     setPassword('starwars')
-    // const demoUser = {
 
-    //   email: 'demo-user@appacademy.io',
-    //   password: "password"
-    // };
-    // console.log('email below')
-    // console.log(demoUser.password)
     if(email && password)
       dispatch(login(email,password)); 
   };

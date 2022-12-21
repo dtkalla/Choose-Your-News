@@ -39,7 +39,7 @@ function NavBar () {
         <div className="left-nav">
           <Link className="logo" to="/index">Choose Your News</Link>
         </div>
-        <div classname="right-nav">
+        <div className="right-nav">
           <Dropdown />
         </div>
       </div>

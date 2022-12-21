@@ -22,8 +22,13 @@ function MainPage() {
   return (
     <>
       <div className="index-container">
-        <NewsIndex />
-        <IndexSidebar groups={user.groups}/>
+        {user.fetchedArticles &&
+          <NewsIndex newsFeed={user.fetchedArticles}/>
+        }
+
+        {user.groups &&
+          <IndexSidebar groups={user.groups}/>
+        }
       </div>
 
       <p>A Twitter Clone</p>

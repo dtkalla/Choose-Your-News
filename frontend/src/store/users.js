@@ -42,7 +42,6 @@ export const fetchUsers = () => async dispatch => {
   try {
     const res = await jwtFetch ('/api/users/');
     const users = await res.json();
-    console.log(users)
     dispatch(receiveUsers(users));
   } catch (err) {
     const resBody = await err.json();
@@ -55,9 +54,7 @@ export const fetchUsers = () => async dispatch => {
 export const fetchUser = () => async dispatch => {
     try {
       const res = await jwtFetch(`/api/users/current`);
-      console.log(res)
       const user = await res.json();
-      console.log(user)
       dispatch(receiveUser(user));
     } catch(err) {
       const resBody = await err.json();
