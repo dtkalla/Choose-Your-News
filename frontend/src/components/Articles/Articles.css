@@ -1,0 +1,57 @@
+/* Articles */
+
+.articles-container {
+    margin: 0 8%;
+    margin-top: 20px;
+    border: 1px solid black;
+}
+
+.articles-user-title {
+    font-size: 22px;
+    padding: 28px;
+    /* margin: 0 20px; */
+    border: 1px solid black;
+}
+
+/* --------------------------------------------- */
+/* ArticlesIndex */
+
+.articles-index-container {
+    border: 1px solid black;
+    padding: 12px;
+    max-height: 600px;
+    overflow: auto;
+}
+
+.articles-index-container::-webkit-scrollbar {
+    display: none;
+}
+
+.articles-index-items-container {
+    cursor: pointer;
+    border: 1px solid black;
+    overflow-wrap: break-word;
+    padding: 10px;
+    margin: 0 20px 10px;
+    border-radius: 8px;
+}
+
+.articles-index-items-link {
+    color: black;
+    text-decoration: none;
+    line-height: 24px;
+}
+
+.articles-index-items-headline {
+    font-size: 22px;
+}
+
+.articles-index-items-summary {
+    font-size: 16px;
+    color: rgb(131, 131, 131)
+}
+
+.articles-index-items-date {
+    font-size: 16px;
+    color: black;
+}

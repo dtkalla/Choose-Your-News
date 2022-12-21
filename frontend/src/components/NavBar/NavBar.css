@@ -12,7 +12,10 @@
 }
 
 .logo {
-    width: 1000px;
+    font-family: "Trirong", serif;
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
 }
 
 /* --------------------------------------------- */
@@ -20,6 +23,12 @@
 
 .dropdown-button {
     margin-left: 75px;
+    border: none;
+    background: none;
+}
+
+.dropdown-button:hover{
+    cursor: pointer;
 }
 
 .dropdown-menu {
@@ -32,6 +41,7 @@
 }
 
 .dropdown-options {
+    color: black;
     text-decoration: none;
     padding: 12px 12px;
 }
@@ -39,4 +49,8 @@
 .dropdown-options:hover {
     cursor: pointer;
     background-color: #F7F7F7;
+}
+
+#profile-link{
+    font-size:36px;  
 }
