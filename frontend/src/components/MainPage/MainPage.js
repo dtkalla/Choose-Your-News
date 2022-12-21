@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearGroupErrors, fetchUserGroups } from '../../store/groups';
+import { fetchUser, clearUserErrors } from '../../store/users';
 import './MainPage.css'
 import NewsIndex from './NewsIndex'
 import IndexSidebar from './IndexSidebar'
@@ -8,14 +8,14 @@ import IndexSidebar from './IndexSidebar'
 function MainPage() {
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.session.user);
-  const userGroups = useSelector(state => state.groups.user);
+  const user = useSelector(state => state.users.user);
 
   useEffect(() => {
-    dispatch(fetchUserGroups(currentUser._id));
-    return () => dispatch(clearGroupErrors());
+    dispatch(fetchUser());
+    return () => dispatch(clearUserErrors());
   }, [dispatch])
 
-  if (!(userGroups.length > 0)) {
+  if (!user) {
     return null
   }
 
@@ -23,7 +23,7 @@ function MainPage() {
     <>
       <div className="index-container">
         <NewsIndex />
-        <IndexSidebar groups={userGroups}/>
+        <IndexSidebar groups={user.groups}/>
       </div>
 
       <p>A Twitter Clone</p>

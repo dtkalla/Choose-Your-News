@@ -1,20 +1,20 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearGroupErrors, fetchUserGroups } from '../../store/groups';
+import { fetchUser, clearUserErrors } from '../../store/users';
 import GroupsIndex from './GroupsIndex'
 import './Groups.css'
 
 function Groups() {
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.session.user);
-  const userGroups = useSelector(state => state.groups.user);
+  const user = useSelector(state => state.users.user);
 
   useEffect(() => {
-    dispatch(fetchUserGroups(currentUser._id));
-    return () => dispatch(clearGroupErrors());
+    dispatch(fetchUser());
+    return () => dispatch(clearUserErrors());
   }, [dispatch])
 
-  if (!(userGroups.length > 0)) {
+  if (!user) {
     return null
   }
 
@@ -27,7 +27,7 @@ function Groups() {
         </div>
 
 
-        <GroupsIndex groups={userGroups}/>
+        <GroupsIndex groups={user.groups}/>
 
 
         <p>A Twitter Clone</p>
