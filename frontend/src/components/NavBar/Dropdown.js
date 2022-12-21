@@ -34,7 +34,7 @@ function Dropdown () {
   return (
     <>
       <button className="dropdown-button" onClick={openMenu}>
-          user
+        <i className='fas fa-user-circle' id='profile-link'></i>
       </button>
     
       {showMenu && (
