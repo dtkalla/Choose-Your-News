@@ -7,9 +7,6 @@ const Article = mongoose.model('Article');
 
 const { requireUser } = require('../../config/passport');
 
-//future use
-//const validateArticleInput = require('../../validation/articles');
-
 //ONLY FOR TESTING
 router.get('/', async (req, res) => {
     try {
@@ -36,35 +33,49 @@ router.get('/:id', async (req, res) => {
     }
 })
 
-// Attach requireUser as a middleware before the route handler to gain access
-// to req.user. (requireUser will return an error response if there is no 
-// current user.) Also attach validateArticleInput as a middleware before the 
-// route handler.
-// router.post('/', requireUser, validateArticleInput, async (req, res, next) => {
-//   try {
-//     let article = Article.find({ url : req.body.url })
-//     if (!article) {
-//         const newArticle = new Article({
-//             headline: req.body.headline,
-//             summary: req.body.summary,
-//             publishedDate: req.body.publishDate,
-//             url: req.body.url,
-//             userIds: [req.user._id],
-//         });
+const hasArticle = (user, url, figureId) => {
+    const savedArticles = user.savedArticles;
+    return savedArticles.some(savedArticle => {
+        return savedArticle.url === url &&
+            savedArticle.figure._id.toString() === figureId.toString();
+    });
+}
 
-//         article = await newArticle.save()
-//     } else {
-//         article.userIds.push(req.user._id)
-//     }
+//SAVE AN ARTICLE
+router.post('/', requireUser, async (req, res, next) => {
+  try {
+    const url = req.body.url;
+    
+    const figureId = req.body.figureId;
 
-//     // req.user.savedArticles.push(article._id); //Test this; if it doesn't work, find user by req.user._id
-//     // article = await article.populate('author', '_id, username');
-//     return res.json(article);
-//   }
-//   catch(err) {
-//     next(err);
-//   }
-// });
+    let article = Article.find({
+        url: url,
+        figure: figureId
+    });
+
+    if (!article) {
+        article = new Article({
+            headline:       req.body.headline,
+            summary:        req.body.summary,
+            publishedDate:  req.body.publishDate,
+            url:            req.body.url,
+            figure:         req.body.figureId
+        });
+    }
+      
+    const user = req.user.populate("savedArticles");
+
+    hasArticle(user, req.body.url)
+    await article.save();
+
+    // req.user.savedArticles.push(article._id); //Test this; if it doesn't work, find user by req.user._id
+    // article = await article.populate('author', '_id, username');
+    return res.json(article);
+  }
+  catch(err) {
+    next(err);
+  }
+});
 
 
 // router.delete('/:id', requireUser, validateArticleInput, async (req, res, next) => {
