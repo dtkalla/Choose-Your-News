@@ -1,32 +1,33 @@
-
 import './MainPage.css'
 
 
-function IndexSidebar() {
-    return (
-      <div className="index-sidebar-container">
-        <h1 className="index-sidebar-title">Groups</h1>
-        <div className="index-sidebar-groups-container">
-          <div className="index-sidebar-groups">
-            Group 1
-          </div>
-          <div className="index-sidebar-groups">
-            Group 2
-          </div>
-          <div className="index-sidebar-groups">
-            Add a group
-          </div>
-          <div className="index-sidebar-groups">
-            Add a group
-          </div>
-        </div>
+function IndexSidebar({ groups }) {
 
-        <div className="index-sidebar-footer">
-          See more groups
+  const groupItems = groups.map((group) => {
+    return (
+      <div key={group.id} className="index-sidebar-groups">
+        {group.name}
+      </div>
+    )
+  })
+
+
+  return (
+    <div className="index-sidebar-container">
+      <h1 className="index-sidebar-title">Groups</h1>
+      <div className="index-sidebar-groups-container">
+        {groupItems}
+        <div className="index-sidebar-groups">
+          Add a group
         </div>
       </div>
-    );
-  }
-  
-  export default IndexSidebar;
+
+      <div className="index-sidebar-footer">
+        See more groups
+      </div>
+    </div>
+  );
+}
+
+export default IndexSidebar;
   
