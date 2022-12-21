@@ -7,9 +7,6 @@ const Group = mongoose.model('Group');
 const { requireUser } = require('../../config/passport');
 const { fetchArticlesFromNewYorkTimes } = require('../../config/api');
 
-//future use
-//const validateTweetInput = require('../../validation/tweets');
-
 //ONLY FOR TESTING
 router.get('/', async (req, res) => {
     try {
