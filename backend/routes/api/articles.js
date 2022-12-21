@@ -52,7 +52,7 @@ const hasFigure = (groups, figureId) => {
     return false;
 }
 
-//SAVE AN ARTICLE
+//CREATE - SAVE AN ARTICLE
 router.post('/', requireUser, async (req, res, next) => {
     try {
         const headline      = req.body.headline;
@@ -99,7 +99,7 @@ router.post('/', requireUser, async (req, res, next) => {
     }
 });
 
-//UNSAVE AN ARTICLE
+//DELETE - UNSAVE AN ARTICLE
 router.delete('/:id', requireUser, async (req, res, next) => {
     try {
         const user = req.user;
