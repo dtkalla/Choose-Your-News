@@ -7,6 +7,7 @@ const Group = mongoose.model('Group');
 const Article = mongoose.model('Article');
 
 const { requireUser } = require('../../config/passport');
+const { fetchArticlesFromNewYorkTimes } = require('../../config/api');
 
 //ONLY FOR TESTING
 router.get('/', async (req, res) => {
@@ -98,6 +99,65 @@ router.post('/', requireUser, async (req, res, next) => {
         return res.json(null);
     }
 });
+
+//READ CURRENT USER'S FETCHED ARTICLES
+router.get('/user/current/fetched', requireUser, async (req, res) => {
+    try {
+        const userId = req.user._id;
+
+        const groups = await Group.find({ user: userId }).populate("figures");
+
+        const searchTerms = [];
+        groups.forEach(group => {
+            group.figures.forEach(figure => searchTerms.push(figure.name));
+        });
+
+        const fetchedArticles = searchTerms.length === 0 ? [] :
+            await fetchArticlesFromNewYorkTimes(searchTerms.join(" OR "))
+
+        return res.json(fetchedArticles);
+    }
+    catch (err) {
+        return res.json([]);
+    }
+})
+
+//READ CURRENT USER'S SAVED ARTICLES
+router.get('/user/current/saved', requireUser, async (req, res) => {
+    try {
+        const userId = req.user._id;
+        const user = await User.findById(userId).populate("savedArticles");
+
+        const savedArticles = [];
+        for(let i = 0; i < user.savedArticles.length; i++){
+            savedArticles.push(await user.savedArticles[i].populate("figure"));
+        }
+
+        return res.json(savedArticles);
+    }
+    catch (err) {
+        return res.json([]);
+    }
+})
+
+//READ GROUP'S FETCHED ARTICLES
+router.get('/group/:groupId/fetched', requireUser, async (req, res) => {
+    try {
+        const groupId = req.params.groupId;
+
+        const group = await Group.findById(groupId).populate("figures");
+
+        const searchTerms = group.figures.map(figure => `"${figure.name}"`);
+
+        const fetchedArticles = searchTerms.length === 0 ? [] :
+            await fetchArticlesFromNewYorkTimes(searchTerms.join(" OR "));
+
+        return res.json(fetchedArticles);
+    }
+    catch (err) {
+        return res.json([]);
+    }
+})
 
 //DELETE - UNSAVE AN ARTICLE
 router.delete('/:id', requireUser, async (req, res, next) => {

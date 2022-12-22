@@ -4,6 +4,7 @@ import { Switch } from 'react-router-dom';
 
 import { AuthRoute, ProtectedRoute } from './components/Routes/Routes';
 import NavBar from './components/NavBar/NavBar';
+import Footer from './components/Footer/Footer';
 
 import MainPage from './components/MainPage/MainPage';
 import Groups from './components/Groups/Groups';
@@ -11,9 +12,6 @@ import GroupShow from './components/Groups/GroupShow';
 import Articles from './components/Articles/Articles';
 import LoginForm from './components/SessionForms/LoginForm';
 import SignupForm from './components/SessionForms/SignupForm';
-import Tweets from './components/Tweets/Tweets';
-import Profile from './components/Profile/Profile';
-import TweetCompose from './components/Tweets/TweetCompose';
 
 import { getCurrentUser } from './store/session';
 import AboutUs from './components/AboutUs/AboutUs';
@@ -36,13 +34,12 @@ function App() {
 
         <ProtectedRoute exact path="/index" component={MainPage} />
         <ProtectedRoute exact path="/groups" component={Groups} />
-        {/* <ProtectedRoute path="/groups/:id" component={GroupShow} /> */}
+        <ProtectedRoute path="/groups/:id" component={GroupShow} />
         <ProtectedRoute exact path="/articles" component={Articles} />
         <ProtectedRoute exact path="/about" component={AboutUs} />
-        {/* <ProtectedRoute exact path="/tweets" component={Tweets} /> */}
-        <ProtectedRoute exact path="/profile" component={Profile} />
-        {/* <ProtectedRoute exact path="/tweets/new" component={TweetCompose} /> */}
+
       </Switch>
+      <Footer />
     </>
   );
 }
