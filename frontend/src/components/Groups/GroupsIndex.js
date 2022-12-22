@@ -1,8 +1,9 @@
+import GroupCreate from './GroupCreate'
 import './Groups.css'
 
-function GroupsIndex({groups}) {
+function GroupsIndex({user}) {
 
-    const groupItems = groups.map((group) => {
+    const groupItems = user.groups.map((group) => {
         return (
           <div key={group._id} className="groups-index-items-container">
             <img className="groups-index-items-icon" src="https://www.iconpacks.net/icons/2/free-folder-icon-1437-thumb.png"></img>
@@ -21,6 +22,7 @@ function GroupsIndex({groups}) {
     return (
         <div className="groups-index-container">
             {groupItems}
+            <GroupCreate user={user}/>
         </div>
     );
 }

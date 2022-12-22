@@ -27,6 +27,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+  background: transparent;
 }
 
 
@@ -41,6 +42,7 @@
   padding-top: 15%;
   padding-right: 10%;
   margin-top: 2%;
+  
 }
 
 /* body{
@@ -104,7 +106,7 @@ input[type="text" i], input[type="password" i]{
   border-style: solid;
   border-radius: 0px;
   box-shadow: 0px 0px 5px rgba(66,66,66,.75);
-  text-shadow: 0px 0px 5px rgba(66,66,66,.75);
+  /* text-shadow: 0px 0px 5px rgba(66,66,66,.75); */
 }
 
 input[type="text" i]:focus, input[type="password" i]:focus{
@@ -114,14 +116,14 @@ input[type="text" i]:focus, input[type="password" i]:focus{
 .field{
   color: black;
   font-size: 20px;
-  font-family: "Trirong", serif;
+  /* font-family: "Trirong", serif; */
   font-weight: bold;
 
 }
 
 .title{
   font-size: 70px;
-  font-family: 'Rye';
+  /* font-family: ''; */
   font-weight: bold;
   color: #000000;
   position: absolute;
@@ -129,7 +131,7 @@ input[type="text" i]:focus, input[type="password" i]:focus{
   display: flex;
   flex-direction: column;
   padding-top: 15%;
-  
+  background: transparent;
 }
 
 .title > h1{
@@ -145,4 +147,28 @@ input[type="text" i]:focus, input[type="password" i]:focus{
   margin-top: 15px;
   margin-right: 50px;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.line-tail{
+  position: absolute;
+width: 0px;
+height: 0px;
+margin-top: 20%;
+margin-right:70%
+}
+
+.line-mid{
+  position: absolute;
+  width: 0px;
+height: 0px;
+margin-top: 20%;
+margin-left: 38%;
+}
+
+.line-end{
+  position: absolute;
+  width: 0px;
+height: 0px;
+margin-top: 20%;
+margin-left: 91%;
 }

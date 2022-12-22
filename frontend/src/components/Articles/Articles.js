@@ -1,31 +1,32 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearArticleErrors, fetchUserArticles } from '../../store/articles';
+import { fetchUser, clearUserErrors } from '../../store/users';
 import ArticlesIndex from './ArticlesIndex'
 import './Articles.css'
 
 function Articles() {
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.session.user);
-  const userArticles = useSelector(state => state.articles.user);
+  const user = useSelector(state => state.users.user);
+
 
   useEffect(() => {
-    dispatch(fetchUserArticles(currentUser._id));
-    return () => dispatch(clearArticleErrors());
+    dispatch(fetchUser());
+    return () => dispatch(clearUserErrors());
   }, [dispatch])
 
-  if (!(userArticles.length > 0)) {
+  if (!user) {
     return null
   }
-
-  console.log(userArticles)
 
   return (
     <div className="articles-container">
         <div className="articles-user-title">
           Saved Articles
         </div>
-        <ArticlesIndex articles={userArticles}/>
+        {user.savedArticles && 
+        <ArticlesIndex articles={user.savedArticles}/>
+        }
         <p>A Twitter Clone</p>
         <footer>
             Copyright &copy; 2022 Chirper
