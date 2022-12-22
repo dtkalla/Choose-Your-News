@@ -16,10 +16,11 @@ exports.fetchArticlesFromNewYorkTimes = async (query) => {
         }
     }
    
-    const url = `${newyorktimesUrl}${filterQueryString}api-key=${newyorktimesApiKey}`;
     
 
     const url = `${newyorktimesUrl}sort=newest&${filterQueryString}&api-key=${newyorktimesApiKey}`;
+
+    
     const response = await axios.get(url);
     const data = response.data.response.docs;
     const articles = data.map(datum => {
