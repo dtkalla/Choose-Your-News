@@ -1,13 +1,13 @@
 {
-  "name": "chirper-backend",
+  "name": "choose-your-news-backend",
   "version": "1.0.0",
-  "description": "Backend for a Twitter clone built with the MERN stack",
+  "description": "Backend for a news app that lets you follow figures of interest",
   "main": "bin/www",
   "scripts": {
     "start": "node ./bin/www",
     "dev": "dotenv nodemon ./bin/www"
   },
-  "author": "App Academy",
+  "author": "Qiao Ishtahad Daniel Jeffrey",
   "license": "MIT",
   "dependencies": {
     "@faker-js/faker": "^7.6.0",
