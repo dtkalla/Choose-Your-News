@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import './NavBar.css';
 import { logout } from '../../store/session';
+import profile from './profile.png'
 
 function Dropdown () {
   // const loggedIn = useSelector(state => !!state.session.user);
@@ -34,7 +35,7 @@ function Dropdown () {
   return (
     <>
       <button className="dropdown-button" onClick={openMenu}>
-        <i className='fas fa-user-circle' id='profile-link'></i>
+        <div id='profile-link'><img src={profile}></img></div>
       </button>
     
       {showMenu && (
