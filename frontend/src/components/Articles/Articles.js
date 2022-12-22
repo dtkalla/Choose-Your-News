@@ -27,9 +27,9 @@ function Articles() {
         {user.savedArticles && 
         <ArticlesIndex articles={user.savedArticles}/>
         }
-        <p>Choose Your News</p>
+        {/* <p>Choose Your News</p> */}
         <footer>
-          Copyright &copy; 2022 Choose Your News
+          {/* Copyright &copy; 2022 Choose Your News */}
         </footer>
     </div>
   );
