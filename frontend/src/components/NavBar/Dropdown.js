@@ -48,6 +48,9 @@ function Dropdown () {
           <Link className="dropdown-options" to="/articles/">
               Saved Articles
           </Link>
+          <Link className="dropdown-options" to="/about/">
+              About Us
+          </Link>
           <li className="dropdown-options" onClick={logoutUser}>
             Logout
           </li>
