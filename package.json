@@ -1,7 +1,7 @@
 {
-  "name": "chirper",
+  "name": "choose-your-news",
   "version": "1.0.0",
-  "description": "A Twitter clone built with the MERN stack",
+  "description": "A news app that lets you follow figures of interest",
   "engines": {
     "node": "18.x"
   },
@@ -14,6 +14,15 @@
     "build": "npm run backend-install && npm run frontend-install && npm run frontend-build"
   },
   "keywords": [],
-  "author": "App Academy",
-  "license": "ISC"
+  "author": "Qiao, Ishtahad, Daniel, Jeffrey",
+  "license": "ISC",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dtkalla/Choose-Your-News.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dtkalla/Choose-Your-News/issues"
+  },
+  "homepage": "https://github.com/dtkalla/Choose-Your-News#readme"
 }

@@ -7,9 +7,6 @@ const Group = mongoose.model('Group');
 const { requireUser } = require('../../config/passport');
 const { fetchArticlesFromNewYorkTimes } = require('../../config/api');
 
-//future use
-//const validateTweetInput = require('../../validation/tweets');
-
 //ONLY FOR TESTING
 router.get('/', async (req, res) => {
     try {
@@ -169,6 +166,26 @@ const hasFigure = (groups, excludedGroupId, figureId) => {
     }
     return false;
 }
+
+//UPDATE - SHARE/UNSHARE A GROUP
+router.put('/:id', requireUser, async (req, res) => {
+    try {
+        const userId = req.user._id;
+        const groupId = req.params.id;
+        const groups = await Group.find({ user: userId });
+        const group = groups.find(group => {
+            return group.name !== "No group" && group._id.toString() === groupId;
+        });
+
+        group.shared = !group.shared;
+        group.save();
+
+        return res.json(`Group successfully ${group.shared ? "shared" : "unshared"}`);
+    }
+    catch (err) {
+        return res.json(null);
+    }
+})
 
 //DELETE A GROUP, needs to add figure back to no group
 router.delete('/:id', requireUser, async (req, res) => {
