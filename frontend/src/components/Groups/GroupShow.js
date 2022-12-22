@@ -15,8 +15,8 @@ function GroupShow() {
         dispatch(fetchGroup(groupId));
         return () => dispatch(clearGroupErrors());
     }, [dispatch])
-    console.log(groupId)
-    console.log(group)
+    // console.log(groupId)
+    // console.log(group)
 
     // if (!group) {
     //     return null;

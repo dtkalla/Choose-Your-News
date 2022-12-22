@@ -19,7 +19,6 @@ function NewsIndex({ user }) {
   }
 
   const handleSave = (news) => () => {
-    console.log(news.url)
     return dispatch(addArticle({ 
         headline: news.headline,
         summary: news.summary,
