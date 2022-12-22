@@ -27,7 +27,7 @@ function Groups() {
         </div>
 
         {user.groups &&
-          <GroupsIndex groups={user.groups}/>
+          <GroupsIndex user={user}/>
         }
 
         <p>A Twitter Clone</p>
