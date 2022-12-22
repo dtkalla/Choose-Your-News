@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import './NavBar.css';
 import { logout } from '../../store/session';
 
 function Dropdown () {
-  const loggedIn = useSelector(state => !!state.session.user);
+  // const loggedIn = useSelector(state => !!state.session.user);
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
 
