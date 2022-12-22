@@ -1,13 +1,16 @@
 import { useDispatch } from 'react-redux';
+
+import { fetchCurrentUserFetchedArticlesByGroup } from '../../store/articles';
+
 import './MainPage.css'
 
 
 function IndexSidebar({ groups }) {
-  const dispatch = useDispatch();
 
-  const handleClick = (e) => {
+  const dispatch = useDispatch();
+  const handleClick = (groupId) => (e) => {
     e.preventDefault();
-    dispatch();
+    dispatch(fetchCurrentUserFetchedArticlesByGroup(groupId));
   }
 
   const groupItems = [];
@@ -18,7 +21,7 @@ function IndexSidebar({ groups }) {
         <div 
           key={group._id}
           className="index-sidebar-groups" 
-          onClick={handleClick}
+          onClick={handleClick(group._id)}
         >
           {group.name}
         </div>
