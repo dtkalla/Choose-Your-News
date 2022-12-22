@@ -30,15 +30,19 @@ function IndexSidebar({ groups }) {
     <div className="index-sidebar-container">
       <h1 className="index-sidebar-title">Groups</h1>
       <div className="index-sidebar-groups-container">
+      <hr></hr>
         {groupItems}
+        <hr></hr>
         <div className="index-sidebar-groups">
-          Add a group
+          <h2>Add a group</h2>
         </div>
+        <hr></hr>
       </div>
 
       <div className="index-sidebar-footer">
         See more groups
       </div>
+      
     </div>
   );
 }

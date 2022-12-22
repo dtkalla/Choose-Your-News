@@ -21,8 +21,6 @@ function GroupsCreate({ user }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         setShowGroupCreateModal(false)
-        
-        history.push("/groups") 
 
         return dispatch(
             createGroup({ user: user._id, name: groupName, figures: [], share: true })

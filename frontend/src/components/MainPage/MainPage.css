@@ -1,5 +1,3 @@
-@import url("https://fonts.cdnfonts.com/css/amazon-ember");
-
 /* MainPage */
 
 .index-container {
@@ -13,6 +11,8 @@
 
 .news-index-container {
     border: 1px solid black;
+    border-radius: 25px;
+    border-width: 3px;
     width: 70%
 }
 
@@ -25,9 +25,10 @@
 }
 
 .news-feed-container {
-    border: 1px solid black;
+    /* border: 1px solid black; */
+    border-radius: 25px;
     padding: 12px;
-    max-height: 600px;
+    max-height: 690px;
     overflow: auto;
     
 }
@@ -38,7 +39,8 @@
 
 .news-feed {
     cursor: pointer;
-    border: 1px solid black;
+    /* border: 1px solid black; */
+    border-radius: 25px;
     overflow-wrap: break-word;
     padding: 10px;
     margin: 0 20px 10px;
@@ -58,7 +60,8 @@ a {
     border: 1px solid black;
     width: 30%;
     /* padding: 12px; */
-    
+    border-radius: 25px;
+    border-width: 3px;
 }
 
 .index-sidebar-title {
@@ -67,7 +70,7 @@ a {
     justify-content: center;
     font-size: 22px;
     padding: 28px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     /* font-family: "Trirong", serif; */
 }
 
@@ -89,6 +92,7 @@ a {
     color: #757575;
     font-size: 20px;
     /* font-family: "Trirong", serif; */
+    margin-top: 7%;
 }
 
 .index-sidebar-footer:hover{
@@ -102,11 +106,13 @@ a {
 
 #group-icon{
    font-size: larger;
-   color: #0066CC;
+   color: #54b3d6;
+   padding-left: 3%;
+    
 }
 
 #group-icon:hover{
-    color: #548dc6
+    color: #FFD247;
     
 }
 
@@ -125,7 +131,7 @@ a {
   }
   .news-feed:hover {
     color: #fff;
-    box-shadow: inset 1000px 0 0 0 #32C0D8;
+    box-shadow: inset 10000px 0 0 0 #32C0D8;
 
   }
   
@@ -138,19 +144,24 @@ a {
     text-decoration: none;
   }
   
-  .news-feed > p{
+  .news-feed > .title-one{
     
     display: -webkit-box;
     max-width: 1000px;
-    -webkit-line-clamp: 1;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     font-weight: 700;
 }
 
-.news-feed > p:hover {
+.title-one:hover {
     -webkit-line-clamp: 100;
 }
+.summary-one{
+    /* font-family: "Trirong", serif; */
+    font-weight: 1;
+    font-size: 16px;
+ }
 
 .date-one{
     display: flex;
@@ -159,7 +170,7 @@ a {
 }
 .like-button{
     
-   
+ 
     color: white;
     background-color: #448de0;
     /* font-family: sans-serif; */
@@ -170,8 +181,7 @@ a {
     font-weight: bolder;
     border-radius: 25px;
     border: 1px solid black;
-    height: 10%;
-    margin-top: 5%;
+    margin-left: 92%;
 }
 
 .like-button:hover{
@@ -179,10 +189,3 @@ a {
     
 }
 
-.summary-one{
-    /* font-family: "Trirong", serif; */
-    font-weight: 1;
-    font-size: 16px;
-    display: flex;
-    justify-content: space-between;
-}

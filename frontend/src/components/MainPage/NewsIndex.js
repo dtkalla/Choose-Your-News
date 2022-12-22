@@ -18,8 +18,10 @@ function NewsIndex({ newsFeed }) {
           </div>
             <div className='date-one'>
               {news.publishedDate.slice(0,10)} {news.publishedDate.slice(11,19)} 
+             
             </div>
           </div> 
+          <hr></hr>
         </a>
       )
       newsItems.push(newsItem);
@@ -27,7 +29,7 @@ function NewsIndex({ newsFeed }) {
 
     return (
       <div className="news-index-container">
-        <div className='left-container-title'><h1 className="news-index-title">Your news</h1></div>
+        <div className='left-container-title'><h1 className="news-index-title">Your news <hr></hr></h1></div>
         <div className="news-feed-container">
           {newsItems}
         </div>

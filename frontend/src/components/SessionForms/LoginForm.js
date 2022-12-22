@@ -41,6 +41,9 @@ function LoginForm () {
 
   return (
     <>
+    {/* <div className='line-tail'><img src={linetail}></img></div>
+    <div className='line-mid'><img src={linemid}></img></div>
+    <div className='line-end'><img src={lineend}></img></div> */}
     <div className='title'>
         <h1>Choose</h1>
         <h1>Your</h1>
