@@ -130,11 +130,15 @@ a {
     transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
   }
   .news-feed:hover {
-    color: #fff;
+    
     box-shadow: inset 10000px 0 0 0 #32C0D8;
-
+    
   }
   
+  .news-feed:hover .date-one{
+    color: white;
+  }
+ 
   /* Presentational styles */
   .news-feed {
     color: #0066CC;;
@@ -144,8 +148,8 @@ a {
     text-decoration: none;
   }
   
-  .news-feed > .title-one{
-    
+ .title-one{
+    color:  #0066CC;
     display: -webkit-box;
     max-width: 1000px;
     -webkit-line-clamp: 2;
@@ -156,6 +160,7 @@ a {
 
 .title-one:hover {
     -webkit-line-clamp: 100;
+    color: white;
 }
 .summary-one{
     /* font-family: "Trirong", serif; */
@@ -167,25 +172,38 @@ a {
     display: flex;
     justify-content: space-between;
     font-size: 16px;
+ 
 }
+
+
+
+
 .like-button{
     
- 
+    
     color: white;
     background-color: #448de0;
     /* font-family: sans-serif; */
     font-size: 16px;
-    padding-left: 12px;
+    padding-left: 8px;
     padding-right: 12px;
     padding-top: 3px;
     font-weight: bolder;
     border-radius: 25px;
     border: 1px solid black;
-    margin-left: 92%;
+    margin-left: 85%;
+    margin-right: 5%;
+   
 }
 
 .like-button:hover{
     background-color:#FFD247;
     
 }
+
+.save{
+    display: flex;
+    justify-content: center;
+ }
+
 
