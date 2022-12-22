@@ -6,7 +6,6 @@ const cors = require('cors');
 const csurf = require('csurf');
 /* --- Need to import these to load the models into mongoose --- */
 require('./models/User');
-require('./models/Tweet');
 require('./models/Group');
 require('./models/Figure'); 
 require('./models/Article');
@@ -52,13 +51,11 @@ app.use(
 const articlesRouter = require('./routes/api/articles');
 const figuresRouter = require('./routes/api/figures');
 const groupsRouter = require('./routes/api/groups');
-const tweetsRouter = require('./routes/api/tweets');
 const usersRouter = require('./routes/api/users');
 const csrfRouter = require('./routes/api/csrf');
 app.use('/api/articles', articlesRouter);
 app.use('/api/figures', figuresRouter);
 app.use('/api/groups', groupsRouter);
-app.use('/api/tweets', tweetsRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/csrf', csrfRouter);
 
