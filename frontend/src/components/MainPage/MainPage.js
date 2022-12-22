@@ -1,41 +1,57 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUser, clearUserErrors } from '../../store/users';
-import './MainPage.css'
-import NewsIndex from './NewsIndex'
-import IndexSidebar from './IndexSidebar'
+
+import { fetchCurrentUserGroups } from '../../store/groups';
+import { fetchCurrentUserFetchedArticles, fetchCurrentUserSavedArticles } from '../../store/articles';
+
+import NewsIndex from './NewsIndex';
+import IndexSidebar from './IndexSidebar';
+
+import './MainPage.css';
+
 
 function MainPage() {
-  const dispatch = useDispatch();
   const currentUser = useSelector(state => state.session.user);
-  const user = useSelector(state => state.users.user);
+
+  const groups = useSelector(state => Object.values(state.groups));
+
+  const savedArticles = useSelector(state => state.articles.saved);
+
+  const fetchedArticles = useSelector(state => state.articles.fetched);
+
+  const figures = [];
+  if (groups) {
+    for (let i = 0; i < groups.length; i++) {
+      for (let j = 0; j < groups[i].figures.length; j++){
+        figures.push(groups[i].figures[j]);
+      }
+    }
+  }
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchUser());
-    return () => dispatch(clearUserErrors());
-  }, [dispatch])
+    if (currentUser) {
+      dispatch(fetchCurrentUserGroups());
 
-  if (!user) {
-    return null
-  }
+      dispatch(fetchCurrentUserSavedArticles());
+
+      dispatch(fetchCurrentUserFetchedArticles());
+    }
+  }, [dispatch, currentUser])
+
 
   return (
     <>
       <div className="index-container">
-        {user.fetchedArticles &&
-          // <NewsIndex newsFeed={user.fetchedArticles}/>
-          <NewsIndex user={user}/>
+        {fetchedArticles &&
+          <NewsIndex fetchedArticles={fetchedArticles} savedArticles={savedArticles}/>
         }
 
-        {user.groups &&
-          <IndexSidebar groups={user.groups}/>
+        {groups &&
+          <IndexSidebar groups={groups}/>
         }
       </div>
-
-      <p>Choose Your News</p>
-      <footer>
-        Copyright &copy; 2022 Choose Your News
-      </footer>
     </>
   );
 }

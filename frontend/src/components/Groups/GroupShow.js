@@ -6,21 +6,34 @@ import GroupsIndex from './GroupsIndex'
 import './Groups.css'
 
 function GroupShow() {
-    const groupId = useParams()
+    const groupId = useParams().id
     const dispatch = useDispatch();
-    // const user = useSelector(state => state.users.user);
     const group = useSelector(state => state.groups.group);
-
+    
     useEffect(() => {
         dispatch(fetchGroup(groupId));
-        return () => dispatch(clearGroupErrors());
+        // return () => dispatch(clearGroupErrors());
     }, [dispatch])
-    console.log(groupId)
-    console.log(group)
 
     // if (!group) {
     //     return null;
     // }
+    const groupFigures = [];
+    group.figures.forEach(figure => {
+
+        const groupFigure = (
+            <>
+            <img className="groups-index-items-icon" src="https://www.iconpacks.net/icons/2/free-folder-icon-1437-thumb.png"></img>
+            <div className="groups-index-items-details">
+                <h1 className="groups-index-items-name">
+                    {figure.name}
+                </h1>
+            </div>    
+            </>     
+        )
+        groupFigures.push(groupFigure);
+    })
+
 
   return (
 
@@ -28,9 +41,8 @@ function GroupShow() {
         <div className="groups-user-profile">
             <img className="groups-user-icon" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxXj6tCpW_4LDNshUHKhTxsajwGNQPjfXj3A&usqp=CAU"></img>
             <div className="groups-user-name">{group.name}</div>
-            <div className="groups-user-email">Demo@user.io</div>
         </div>
-
+        {groupFigures}
 
         <p>A Twitter Clone</p>
         <footer>

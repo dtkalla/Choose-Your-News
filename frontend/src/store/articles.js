@@ -77,11 +77,57 @@ export const articlesErrorsReducer = (state = nullErrors, action) => {
   }
 };
 
-const articlesReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
+
+const RECEIVE_CURRENT_USER_FETCHED_ARTICLES = "articles/RECEIVE_CURRENT_USER_FETCHED_ARTICLES";
+
+const receiveCurrentUserFetchedArticles = (fetchedArticles) => ({
+  type: RECEIVE_CURRENT_USER_FETCHED_ARTICLES,
+  fetchedArticles
+});
+
+export const fetchCurrentUserFetchedArticles = () => async dispatch => {
+  try {
+    const res = await jwtFetch(`/api/articles/user/current/fetched`);
+    const fetchedArticles = await res.json();
+    dispatch(receiveCurrentUserFetchedArticles(fetchedArticles));
+  } catch (err) {
+    const resBody = await err.json();
+    if (resBody.statusCode === 400) {
+      return dispatch(receiveErrors(resBody.errors));
+    }
+  }
+};
+
+
+const RECEIVE_CURRENT_USER_SAVED_ARTICLES = "articles/RECEIVE_CURRENT_USER_SAVED_ARTICLES";
+
+const receiveCurrentUserSavedArticles = (savedArticles) => ({
+  type: RECEIVE_CURRENT_USER_SAVED_ARTICLES,
+  savedArticles
+});
+
+export const fetchCurrentUserSavedArticles = () => async dispatch => {
+  try {
+    const res = await jwtFetch(`/api/articles/user/current/saved`);
+    const savedArticles = await res.json();
+    dispatch(receiveCurrentUserSavedArticles(savedArticles));
+  } catch (err) {
+    const resBody = await err.json();
+    if (resBody.statusCode === 400) {
+      return dispatch(receiveErrors(resBody.errors));
+    }
+  }
+};
+
+const articlesReducer = (state = {}, action) => {
   switch(action.type) {
     case UNSAVE_ARTICLE:
       delete state[action.articleId]
       return {...state};
+    case RECEIVE_CURRENT_USER_FETCHED_ARTICLES:
+      return { ...state, fetched: action.fetchedArticles };
+    case RECEIVE_CURRENT_USER_SAVED_ARTICLES:
+      return { ...state, saved: action.savedArticles };
     default:
       return state;
   }
