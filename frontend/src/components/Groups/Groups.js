@@ -1,8 +1,11 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser, clearUserErrors } from '../../store/users';
-import GroupsIndex from './GroupsIndex';
-import './Groups.css';
+
+import GroupsIndex from './GroupsIndex'
+import './Groups.css'
+import groupsimg from './groups-img.png'
+
 
 function Groups() {
   const dispatch = useDispatch();
@@ -21,7 +24,7 @@ function Groups() {
   return (
     <div className="groups-container">
         <div className="groups-user-profile">
-            <img className="groups-user-icon" src="https://cdn.icon-icons.com/icons2/2468/PNG/512/user_kids_avatar_icon_149311.png"></img>
+            <img className="groups-user-icon" src={groupsimg}></img>
             <div className="groups-user-name">Demo</div>
             <div className="groups-user-email">Demo@user.io</div>
         </div>
@@ -30,10 +33,7 @@ function Groups() {
           <GroupsIndex user={user}/>
         }
 
-        <p>A Twitter Clone</p>
-        <footer>
-            Copyright &copy; 2022 Chirper
-        </footer>
+        
     </div>
   );
 }

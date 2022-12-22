@@ -12,10 +12,11 @@ function ArticlesIndex({articles}) {
             <a className="articles-index-items-link" href={article.url}>
                 <div className="articles-index-items-headline">
                     {article.headline}
-                </div>
-                <div className="articles-index-items-summary">
+                    <div className="articles-index-items-summary">
                     {article.summary}
                 </div>
+                </div>
+               
                 <div className="articles-index-items-date">
                     Published Date: {article.publishedDate.slice(0,10)}
                 </div>

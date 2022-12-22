@@ -19,7 +19,6 @@ function NewsIndex({ fetchedArticles, savedArticles }) {
   }
 
   const handleSave = (news) => () => {
-    console.log(news.url)
     return dispatch(addArticle({ 
         headline: news.headline,
         summary: news.summary,
@@ -35,38 +34,33 @@ function NewsIndex({ fetchedArticles, savedArticles }) {
   newsFeed.forEach(news => {
       const newsItem = (
         <>
-        <a href={news.url}>
-          <div className="news-feed">
-            <div className='title-one'>{news.headline}    
-              <div className='summary-one'> 
-                {news.summary}
-              {/* {saved(news.url, savedArticles) ? 
-              <div className='like-button'>
-                Saved
-              </div>
-              :
-              <div className='like-button' onClick={handleSave(news)}>
-                Save
-              </div>
-              } */}
-            </div>
-          </div>
-            <div className='date-one'>
-              {news.publishedDate.slice(0,10)} {news.publishedDate.slice(11,19)} 
-            </div>
-          </div> 
-          <hr></hr>
-        </a>
-                      {saved(news.url, savedArticles) ? 
+        <div className='news-feed'>
+        {saved(news.url, savedArticles) ? 
                         <div className='like-button'>
-                          Saved
+                         <div className='save'>Saved</div> 
                         </div>
                         :
                         <div className='like-button' onClick={handleSave(news)}>
-                          Save
+                            <div className='save'>Save</div> 
                         </div>
                         }
-                        </>
+        
+        <a href={news.url}>
+       
+          <div className='title-one'>{news.headline}
+            <div className='summary-one'> 
+            {news.summary}
+            
+            </div>
+            </div>
+            <div className="date-one">
+            {news.publishedDate.slice(0,10)}
+        </div>
+        </a>
+     
+        </div>
+        <hr></hr>
+        </>
       )
       newsItems.push(newsItem);
   });

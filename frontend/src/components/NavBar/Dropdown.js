@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import './NavBar.css';
 import { logout } from '../../store/session';
+import profile from './profile.png'
 
 function Dropdown () {
-  const loggedIn = useSelector(state => !!state.session.user);
+  // const loggedIn = useSelector(state => !!state.session.user);
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
 
@@ -34,7 +35,7 @@ function Dropdown () {
   return (
     <>
       <button className="dropdown-button" onClick={openMenu}>
-        <i className='fas fa-user-circle' id='profile-link'></i>
+        <div id='profile-link'><img src={profile}></img></div>
       </button>
     
       {showMenu && (
@@ -47,6 +48,9 @@ function Dropdown () {
           </Link>
           <Link className="dropdown-options" to="/articles/">
               Saved Articles
+          </Link>
+          <Link className="dropdown-options" to="/about/">
+              About Us
           </Link>
           <li className="dropdown-options" onClick={logoutUser}>
             Logout
