@@ -5,11 +5,6 @@ import { Modal } from '../../context/Modal';
 import { LargeModal } from '../../context/Modal';
 import { createGroup } from '../../store/groups';
 import { fetchUser, clearUserErrors } from '../../store/users';
-
-
-
-
-
 import './Groups.css'
 
 function GroupsCreate({ user }) {
