@@ -32,9 +32,9 @@ function MainPage() {
         }
       </div>
 
-      <p>A Twitter Clone</p>
+      <p>Choose Your News</p>
       <footer>
-        Copyright &copy; 2022 Chirper
+        Copyright &copy; 2022 Choose Your News
       </footer>
     </>
   );

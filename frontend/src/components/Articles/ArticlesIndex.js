@@ -31,13 +31,6 @@ function ArticlesIndex({articles}) {
     return (
         <div className="articles-index-container">
             {articleItems}
-            <div className="articles-index-items-container">hello</div>
-            <div className="articles-index-items-container">hello</div>
-            <div className="articles-index-items-container">hello</div>
-            <div className="articles-index-items-container">hello</div>
-            <div className="articles-index-items-container">hello</div>
-            <div className="articles-index-items-container">hello</div>
-            <div className="articles-index-items-container">hello</div>
         </div>
     );
 }

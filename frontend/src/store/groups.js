@@ -2,7 +2,7 @@ import jwtFetch from './jwt';
 import { RECEIVE_USER_LOGOUT } from './session';
 
 const RECEIVE_GROUPS = "groups/RECEIVE_GROUPS";
-const RECEIVE_USER_GROUPS = "groups/RECEIVE_USER_GROUPS";
+const RECEIVE_GROUP = "groups/RECEIVE_GROUP";
 const ADD_GROUP = "groups/CREATE_GROUP";
 const RECEIVE_GROUPS_ERRORS = "groups/RECEIVE_GROUPS_ERRORS";
 const CLEAR_GROUP_ERRORS = "groups/CLEAR_GROUP_ERRORS";
@@ -12,9 +12,9 @@ const receiveGroups = groups => ({
   groups
 });
 
-const receiveUserGroups = groups => ({
-  type: RECEIVE_USER_GROUPS,
-  groups
+const receiveGroup = group => ({
+  type: RECEIVE_GROUP,
+  group
 });
 
 const addGroup = group => ({
@@ -45,11 +45,11 @@ export const fetchGroups = () => async dispatch => {
   }
 };
 
-export const fetchUserGroups = id => async dispatch => {
+export const fetchGroup = id => async dispatch => {
   try {
-    const res = await jwtFetch(`/api/groups/user/${id}`);
-    const groups = await res.json();
-    dispatch(receiveUserGroups(groups));
+    const res = await jwtFetch(`/api/groups/${id}`);
+    const group = await res.json();
+    dispatch(receiveGroup(group));
   } catch(err) {
     const resBody = await err.json();
     if (resBody.statusCode === 400) {
@@ -97,8 +97,8 @@ const groupsReducer = (state = { all: {}, user: {}, new: undefined }, action) =>
   switch(action.type) {
     case RECEIVE_GROUPS:
       return { ...state, all: action.groups, new: undefined};
-    case RECEIVE_USER_GROUPS:
-      return { ...state, user: action.groups, new: undefined};
+    case RECEIVE_GROUP:
+      return { ...state, group: action.group, new: undefined};
     case ADD_GROUP:
       return {...state, ...action.group}
     default:
