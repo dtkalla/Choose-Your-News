@@ -5,13 +5,11 @@ import groups from './groups';
 import articles from './articles';
 import session from './session';
 import errors from './errors';
-import tweets from './tweets';
 
 const rootReducer = combineReducers({
   users,
   groups,
   articles,
-  tweets,
   session,
   errors
 });

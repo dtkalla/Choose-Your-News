@@ -4,10 +4,10 @@ import { addArticle } from '../../store/articles'
 import './MainPage.css'
 
 // function NewsIndex({ newsFeed }) {
-function NewsIndex({ user }) {
+function NewsIndex({ fetchedArticles, savedArticles }) {
   const dispatch = useDispatch();
-  const newsFeed = user.fetchedArticles
-  const savedArticles = user.savedArticles
+  const newsFeed = fetchedArticles
+
 
   const saved = (newsUrl, savedArticles) => {
     for (let i = 0; i < savedArticles.length; i++) {

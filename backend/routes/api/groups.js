@@ -53,10 +53,25 @@ router.get('/:id', async (req, res) => {
             fetchedArticles: searchTerms.length === 0 ? [] :
                 await fetchArticlesFromNewYorkTimes(searchTerms.join(" OR "))
         };
+        
         return res.json(obj);
     }
     catch (err) {
         return res.json(null);
+    }
+})
+
+//READ CURRENT USER'S GROUPS
+router.get('/user/current', requireUser, async (req, res) => {
+    try {
+        const userId = req.user._id;
+
+        const groups = await Group.find({ user: userId }).populate("figures");
+
+        return res.json(groups);
+    }
+    catch (err) {
+        return res.json([]);
     }
 })
 
