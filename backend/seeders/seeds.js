@@ -33,15 +33,15 @@ figureNames.forEach(name => {
 
 //Create articles
 const articles = []
-for(let i = 0; i < 14; i++){
+for(let i = 0; i < 12; i++){
   articles.push(
     new Article({
-      headline: i < 7 ? `Elon Musk Disables Twitter Spaces After Clash With Journalists` : `Turmoil at Twitter as Elon Musk Shakes Things Up`,
+      headline: i < 6 ? `Elon Musk Disables Twitter Spaces After Clash With Journalists` : `Turmoil at Twitter as Elon Musk Shakes Things Up`,
       summary: `Twitter Inc.'s live audio service, Twitter Spaces, is down after a number of journalists that had just been suspended from the social network found they could still participate in it.`,
       source: `nairaland`,
       publishedDate: "2022-12-16 15:00:59",
       url: `http://www.nairaland.com/7483666/elon-musk-disables-twitter-spaces`,
-      figure: figures[i % 7].id
+      figure: figures[i % 6].id
     })
   )
 }
