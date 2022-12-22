@@ -12,7 +12,7 @@ function GroupsIndex({user}) {
                     {group.name}
                 </h1>
                 <h1 className="groups-index-items-figures">
-                    {group.figures.length} {group.figures.length > 1 ? "figures" : "figure"}
+                    {group.figures.length} {group.figures.length === 1 ? "figure" : "figures"}
                 </h1>
             </div>         
           </div>

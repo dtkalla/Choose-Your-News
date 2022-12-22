@@ -1,8 +1,10 @@
+import { useSelector, useDispatch } from "react-redux";
 import { deleteSavedArticle } from '../../store/articles';
 
 import './Articles.css'
 
 function ArticlesIndex({articles}) {
+    const dispatch = useDispatch()
 
     const articleItems = articles.map((article) => {
         return (
@@ -18,8 +20,8 @@ function ArticlesIndex({articles}) {
                     Published Date: {article.publishedDate.slice(0,10)}
                 </div>
             </a>
-            <button className="articles-index-items-delete">
-            {/* <button className="articles-index-items-delete" onClick=(() => dispatch(deleteSavedArticle(article._id)))> */}
+            {/* <button className="articles-index-items-delete"> */}
+            <button className="articles-index-items-delete" onClick={() => dispatch(deleteSavedArticle(article._id))}>
                 Delete
             </button>
           </div>

@@ -23,7 +23,8 @@ function MainPage() {
     <>
       <div className="index-container">
         {user.fetchedArticles &&
-          <NewsIndex newsFeed={user.fetchedArticles}/>
+          // <NewsIndex newsFeed={user.fetchedArticles}/>
+          <NewsIndex user={user}/>
         }
 
         {user.groups &&

@@ -25,7 +25,7 @@ function GroupsCreate({ user }) {
         return dispatch(
             createGroup({ user: user._id, name: groupName, figures: [], share: true })
         )
-        }
+    }
 
 
     return (
