@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const { mongoURI: db } = require('../config/keys.js');
 const User = require('../models/User');
-const Tweet = require('../models/Tweet');
 const Group = require('../models/Group');
 const Figure = require('../models/Figure');
 const Article = require("../models/Article.js");
@@ -9,8 +8,7 @@ const Article = require("../models/Article.js");
 const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
 
-const NUM_SEED_USERS = 10;
-const NUM_SEED_TWEETS = 30;
+const NUM_SEED_USERS = 6;
 
 // Create figures
 const figureNames = [
@@ -35,15 +33,15 @@ figureNames.forEach(name => {
 
 //Create articles
 const articles = []
-for(let i = 0; i < 18; i++){
+for(let i = 0; i < 14; i++){
   articles.push(
     new Article({
-      headline: `Example${i}`,
-      summary: `Summary${i}`,
+      headline: i < 7 ? `Elon Musk Disables Twitter Spaces After Clash With Journalists` : `Turmoil at Twitter as Elon Musk Shakes Things Up`,
+      summary: `Twitter Inc.'s live audio service, Twitter Spaces, is down after a number of journalists that had just been suspended from the social network found they could still participate in it.`,
       source: `nairaland`,
       publishedDate: "2022-12-16 15:00:59",
       url: `http://www.nairaland.com/7483666/elon-musk-disables-twitter-spaces`,
-      figure: figures[i % 6].id
+      figure: figures[i % 7].id
     })
   )
 }
@@ -85,6 +83,15 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
   }))
 }
 
+users.push(
+  new User ({
+    username: 'dkalla',
+    email: 'dkalla@marlboro.edu',
+    hashedPassword: bcrypt.hashSync('dragon', 10),
+    savedArticles: [articles[0]._id, articles[7]._id]
+  })
+)
+
 const groupNames = ["business", "sports", "politcs"];
 for (let i = 0; i < groupNames.length; i++) {
   groups.push(
@@ -96,17 +103,17 @@ for (let i = 0; i < groupNames.length; i++) {
   )
 }
 
-// Create tweets
-const tweets = [];
 
-for (let i = 0; i < NUM_SEED_TWEETS; i++) {
-  tweets.push(
-    new Tweet ({
-      text: faker.hacker.phrase(),
-      author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id
+for (let i = 0; i < groupNames.length; i++) {
+  groups.push(
+    new Group({
+      user: users[6]._id,
+      name: groupNames[i],
+      figures: [figures[i * 2]._id, figures[i * 2 + 1]._id]
     })
   )
 }
+
 
 // Connect to database
 mongoose
@@ -122,16 +129,14 @@ mongoose
 
 // Reset and seed db
 const insertSeeds = () => {
-  console.log("Resetting db and seeding users and tweets...");
+  console.log("Resetting db and seeding users and everything else...");
 
   User.collection.drop()
                  .then(() => Article.collection.drop())
-                 .then(() => Tweet.collection.drop())
                  .then(() => Group.collection.drop())
                  .then(() => Figure.collection.drop())
                  .then(() => Article.insertMany(articles))
                  .then(() => User.insertMany(users))
-                 .then(() => Tweet.insertMany(tweets))
                  .then(() => Figure.insertMany(figures))
                  .then(() => Group.insertMany(groups))
                  .then(() => {
