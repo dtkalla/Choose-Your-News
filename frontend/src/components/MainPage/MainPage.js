@@ -23,7 +23,8 @@ function MainPage() {
     <>
       <div className="index-container">
         {user.fetchedArticles &&
-          <NewsIndex newsFeed={user.fetchedArticles}/>
+          // <NewsIndex newsFeed={user.fetchedArticles}/>
+          <NewsIndex user={user}/>
         }
 
         {user.groups &&
@@ -31,9 +32,9 @@ function MainPage() {
         }
       </div>
 
-      <p>A Twitter Clone</p>
+      <p>Choose Your News</p>
       <footer>
-        Copyright &copy; 2022 Chirper
+        Copyright &copy; 2022 Choose Your News
       </footer>
     </>
   );

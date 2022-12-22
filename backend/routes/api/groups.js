@@ -53,7 +53,6 @@ router.get('/:id', async (req, res) => {
             fetchedArticles: searchTerms.length === 0 ? [] :
                 await fetchArticlesFromNewYorkTimes(searchTerms.join(" OR "))
         };
-        
         return res.json(obj);
     }
     catch (err) {
