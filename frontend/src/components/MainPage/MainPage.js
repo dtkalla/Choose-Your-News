@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchCurrentUserGroups } from '../../store/groups';
@@ -6,6 +6,7 @@ import { fetchCurrentUserFetchedArticles, fetchCurrentUserSavedArticles } from '
 
 import NewsIndex from './NewsIndex';
 import IndexSidebar from './IndexSidebar';
+import GroupsIndex from '../Groups/GroupsIndex';
 
 import './MainPage.css';
 
@@ -19,14 +20,22 @@ function MainPage() {
 
   const fetchedArticles = useSelector(state => state.articles.fetched);
 
-  const figures = [];
-  if (groups) {
-    for (let i = 0; i < groups.length; i++) {
-      for (let j = 0; j < groups[i].figures.length; j++){
-        figures.push(groups[i].figures[j]);
+  function getFigures(groups) {
+    const figures = [];
+    if (groups) {
+      for (let i = 0; i < groups.length; i++) {
+        for (let j = 0; j < groups[i].figures.length; j++){
+          figures.push(groups[i].figures[j]);
+        }
       }
     }
+    return figures;
   }
+
+  const figures = groups ? getFigures(groups) : [];
+
+  const [selectedGroup, setSelectedGroup] = useState(undefined);
+
 
   const dispatch = useDispatch();
 
@@ -43,13 +52,25 @@ function MainPage() {
 
   return (
     <>
+      <div className="groups-container">
+        <GroupsIndex groups={groups} setSelectedGroup={setSelectedGroup} />
+      </div>
+
       <div className="index-container">
         {fetchedArticles &&
-          <NewsIndex fetchedArticles={fetchedArticles} savedArticles={savedArticles}/>
+          <NewsIndex fetchedArticles={fetchedArticles} savedArticles={savedArticles} />
         }
 
         {groups &&
-          <IndexSidebar groups={groups}/>
+          <IndexSidebar
+            groupId={
+              selectedGroup === undefined ? undefined : selectedGroup._id
+            }
+
+            figures={
+              selectedGroup === undefined ? figures : selectedGroup.figures
+            } 
+          />
         }
       </div>
     </>

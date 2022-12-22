@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser, clearUserErrors } from '../../store/users';
+
 import GroupsIndex from './GroupsIndex'
 import './Groups.css'
 import groupsimg from './groups-img.png'
+
 
 function Groups() {
   const dispatch = useDispatch();

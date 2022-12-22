@@ -1,50 +1,73 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { Modal } from '../../context/Modal';
-import { LargeModal } from '../../context/Modal';
+
 import { createGroup } from '../../store/groups';
-import { fetchUser, clearUserErrors } from '../../store/users';
+
+import { LargeModal } from '../../context/Modal';
 import './Groups.css'
 
-function GroupsCreate({ user }) {
+
+function GroupsCreate() {
+    const currentUser = useSelector(state => state.session.user);
+
     const dispatch = useDispatch();
-    const history = useHistory();
-    const [groupName, setGroupName] = useState("")
+
+    const [groupName, setGroupName] = useState("");
 
     const [showGroupCreateModal, setShowGroupCreateModal] = useState(false);
 
-    const handleClose = () => {
-        setShowGroupCreateModal(false)
+    const openModal = (e) => {
+        e.preventDefault();
+        setShowGroupCreateModal(true);
+    }
+
+    const closeModal = (e) => {
+        e.preventDefault();
+        setShowGroupCreateModal(false);
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setShowGroupCreateModal(false)
 
-        return dispatch(
-            createGroup({ user: user._id, name: groupName, figures: [], share: true })
-        )
+        const newGroup = {
+            user: currentUser._id, 
+            name: groupName, 
+            figures: []
+        };
+
+        dispatch(createGroup(newGroup));
+        setShowGroupCreateModal(false);
     }
 
 
     return (
         <>
-            <div className="groups-index-items-container" onClick={() => setShowGroupCreateModal(true)}>
-                <img className="groups-index-items-icon" src="https://iconarchive.com/download/i22631/kyo-tux/aeon/Sign-Add.ico"></img>
+            <div className="groups-index-items-container" onClick={openModal}>
+                <img 
+                    className="groups-index-items-icon" 
+                    src="https://iconarchive.com/download/i22631/kyo-tux/aeon/Sign-Add.ico" 
+                />
+
                 <div className="groups-index-items-details">
                     <h1 className="groups-index-items-name">
                         {/* Create a Group */}
                     </h1>
-                </div>         
+                </div>
             </div>
+
             {showGroupCreateModal && (
-            <LargeModal onClose={() => handleClose()}>
+            <LargeModal onClose={closeModal}>
                 <form onSubmit={handleSubmit}>
                     Name:
-                    <input type="text" value={groupName} onChange={(e) => setGroupName(e.target.value)} />
+                    <input
+                        type="text" 
+                        value={groupName}
+                        onChange={(e) => setGroupName(e.target.value)} 
+                    />
                     <br />
-                    <button type="submit">Create</button>
+                    <button type="submit">
+                        Create
+                    </button>
                 </form>
             </LargeModal>
             )}

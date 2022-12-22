@@ -52,6 +52,12 @@ export const fetchCurrentUserFetchedArticlesByGroup = (groupId) => async dispatc
   dispatch(receiveCurrentUserFetchedArticles(fetchedArticles));
 };
 
+export const fetchCurrentUserFetchedArticlesByFigure = (figureName) => async dispatch => {
+  const res = await jwtFetch(`/api/articles/figure/${figureName}/fetched`);
+  const fetchedArticles = await res.json();
+  dispatch(receiveCurrentUserFetchedArticles(fetchedArticles));
+};
+
 
 const RECEIVE_CURRENT_USER_SAVED_ARTICLES = "articles/RECEIVE_CURRENT_USER_SAVED_ARTICLES";
 
