@@ -159,6 +159,20 @@ router.get('/group/:groupId/fetched', requireUser, async (req, res) => {
     }
 })
 
+//READ FIGURE'S FETCHED ARTICLES
+router.get('/figure/:figureName/fetched', requireUser, async (req, res) => {
+    try {
+        const figureName = req.params.figureName;
+
+        const fetchedArticles = await fetchArticlesFromNewYorkTimes(figureName);
+
+        return res.json(fetchedArticles);
+    }
+    catch (err) {
+        return res.json([]);
+    }
+})
+
 //DELETE - UNSAVE AN ARTICLE
 router.delete('/:id', requireUser, async (req, res, next) => {
     try {

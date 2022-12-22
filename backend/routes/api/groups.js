@@ -32,7 +32,7 @@ router.post('/', requireUser, async (req, res) => {
 
         const group = await newGroup.save();
 
-        return res.json(`Group ${group.name} successfully added`);
+        return res.json(group);
     }
     catch (err) {
         return res.json(null);
@@ -68,7 +68,13 @@ router.get('/user/current', requireUser, async (req, res) => {
 
         const groups = await Group.find({ user: userId }).populate("figures");
 
-        return res.json(groups);
+        const groupsObj = {};
+        for (let i = 0; i < groups.length; i++) {
+            const group = groups[i];
+            groupsObj[group._id] = group;
+        }
+
+        return res.json(groupsObj);
     }
     catch (err) {
         return res.json([]);
@@ -235,7 +241,7 @@ router.delete('/:id', requireUser, async (req, res) => {
 
         await Group.findByIdAndRemove(groupId);
 
-        return res.json(`Group successfully deleted`);
+        return res.json(groupId);
     }
     catch (err) {
         return res.json(null);

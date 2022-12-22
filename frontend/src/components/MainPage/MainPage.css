@@ -6,6 +6,11 @@
     margin-top: 20px;
 }
 
+.groups-container {
+    height: 80px;
+    margin: 0 8%;
+}
+
 /* --------------------------------------------- */
 /* NewsIndex */
 

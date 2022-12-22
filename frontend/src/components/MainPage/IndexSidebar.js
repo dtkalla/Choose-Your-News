@@ -1,55 +1,64 @@
 import { useDispatch } from 'react-redux';
 
-import { fetchCurrentUserFetchedArticlesByGroup } from '../../store/articles';
+import { deleteGroup } from '../../store/groups';
+import { fetchCurrentUserFetchedArticlesByFigure } from '../../store/articles';
 
 import './MainPage.css'
 
 
-function IndexSidebar({ groups }) {
-
+function IndexSidebar({ groupId, figures }) {
   const dispatch = useDispatch();
-  const handleClick = (groupId) => (e) => {
+  
+  const handleClick = (figureName) => (e) => {
     e.preventDefault();
-    dispatch(fetchCurrentUserFetchedArticlesByGroup(groupId));
+    dispatch(fetchCurrentUserFetchedArticlesByFigure(figureName));
   }
 
-  const groupItems = [];
-  for (let i = 0; i < groups.length; i++) {
-    const group = groups[i];
-    if (group.name !== "No group") {
-      const groupItem = (
-        <div 
-          key={group._id}
-          className="index-sidebar-groups" 
-          onClick={handleClick(group._id)}
-        >
-          {group.name}
-        </div>
-      );
-      groupItems.push(groupItem);
-    }
+  const handleDelete = (groupId) => (e) => {
+    e.preventDefault();
+    dispatch(deleteGroup(groupId));
+  }
+
+  const figureItems = [];
+  for (let i = 0; i < figures.length; i++) {
+    const figure = figures[i];
+    const figureItem = (
+      <div 
+        key={figure._id}
+        className="index-sidebar-groups" 
+        onClick={handleClick(figure.name)}
+      >
+        {figure.name}
+      </div>
+    );
+    figureItems.push(figureItem);
   };
 
   return (
     <div className="index-sidebar-container">
       
-      <h1 className="index-sidebar-title">Groups</h1>
+      <h1 className="index-sidebar-title">Figures</h1>
       
       <div className="index-sidebar-groups-container">
         
         <hr></hr>
-        {groupItems}
+        {figureItems}
         <hr></hr>
         
-        <div className="index-sidebar-groups">
-          <h2>Add a group</h2>
-        </div>
+        {groupId &&
+          <div 
+            className="index-sidebar-groups"
+            onClick={handleDelete(groupId)}
+          >
+            <h2>Delete Group</h2>
+          </div>
+        }
         <hr></hr>
       
       </div>
 
       <div className="index-sidebar-footer">
-        See more groups
+        See more figures
       </div>
 
     </div>

@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchGroup, clearGroupErrors } from '../../store/groups';
-import GroupsIndex from './GroupsIndex'
+import { fetchGroup } from '../../store/groups';
+// import GroupsIndex from './GroupsIndex'
 import './Groups.css'
 
 function GroupShow() {

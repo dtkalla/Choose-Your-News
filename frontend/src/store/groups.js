@@ -20,7 +20,7 @@ const ADD_GROUP = "groups/ADD_GROUP";
 const addGroup = group => ({
   type: ADD_GROUP,
   group
-})
+});
 
 export const createGroup = (group) => async dispatch => {
   const res = await jwtFetch(`/api/groups/`, {
@@ -29,6 +29,22 @@ export const createGroup = (group) => async dispatch => {
   });
   const createdGroup = await res.json();
   dispatch(addGroup(createdGroup));
+};
+
+
+const REMOVE_GROUP = "groups/REMOVE_GROUP";
+
+const removeGroup = groupId => ({
+  type: REMOVE_GROUP,
+  groupId
+});
+
+export const deleteGroup = (groupId) => async dispatch => {
+  const res = await jwtFetch(`/api/groups/${groupId}`, {
+    method: "DELETE"
+  });
+  const removedGroupId = await res.json();
+  dispatch(removeGroup(removedGroupId));
 };
 
 
@@ -47,13 +63,26 @@ export const fetchCurrentUserGroups = () => async dispatch => {
 
 
 const groupsReducer = (state = {}, action) => {
+  const nextState = { ...state };
+  const keys = Object.keys(nextState);
+
   switch(action.type) {
     case RECEIVE_GROUP:
-      return { ...state, ...action.group};
+      return { ...nextState, ...action.group};
+
     case RECEIVE_CURRENT_USER_GROUPS:
-      return { ...state, ...action.groups};
+      return { ...nextState, ...action.groups};
+      
     case ADD_GROUP:
-      return { ...state, ...action.group};
+      const group = action.group
+      nextState[`${group._id}`] = action.group;
+      return nextState;
+
+    case REMOVE_GROUP:
+      const groupId = action.groupId;
+      delete nextState[groupId];
+      return nextState;
+
     default:
       return state;
   }
