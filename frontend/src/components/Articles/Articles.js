@@ -24,7 +24,9 @@ function Articles() {
         <div className="articles-user-title">
           Saved Articles
         </div>
+        {user.savedArticles && 
         <ArticlesIndex articles={user.savedArticles}/>
+        }
         <p>A Twitter Clone</p>
         <footer>
             Copyright &copy; 2022 Chirper
