@@ -16,6 +16,7 @@ import Profile from './components/Profile/Profile';
 import TweetCompose from './components/Tweets/TweetCompose';
 
 import { getCurrentUser } from './store/session';
+import AboutUs from './components/AboutUs/AboutUs';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -37,9 +38,10 @@ function App() {
         <ProtectedRoute exact path="/groups" component={Groups} />
         {/* <ProtectedRoute path="/groups/:id" component={GroupShow} /> */}
         <ProtectedRoute exact path="/articles" component={Articles} />
-        <ProtectedRoute exact path="/tweets" component={Tweets} />
+        <ProtectedRoute exact path="/about" component={AboutUs} />
+        {/* <ProtectedRoute exact path="/tweets" component={Tweets} /> */}
         <ProtectedRoute exact path="/profile" component={Profile} />
-        <ProtectedRoute exact path="/tweets/new" component={TweetCompose} />
+        {/* <ProtectedRoute exact path="/tweets/new" component={TweetCompose} /> */}
       </Switch>
     </>
   );
