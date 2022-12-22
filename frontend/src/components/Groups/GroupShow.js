@@ -45,10 +45,7 @@ function GroupShow() {
         </div>
         {groupFigures}
 
-        <p>A Twitter Clone</p>
-        <footer>
-            Copyright &copy; 2022 Chirper
-        </footer>
+        
     </div>
     
   );
