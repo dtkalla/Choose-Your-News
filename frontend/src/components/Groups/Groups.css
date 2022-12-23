@@ -1,8 +1,11 @@
 .groups-container {
     margin: 0 8%;
-    margin-top: 20px;
-    display: flex;
-    
+    height: 120px;
+    overflow: scroll;  
+}
+
+.groups-container::-webkit-scrollbar {
+    display: none;
 }
 
 .groups-user-profile {
@@ -32,20 +35,35 @@
 /* --------------------------------------------- */
 /* GroupsIndex */
 
-.groups-index-container {
+/* .groups-index-container {
     display: flex;
     justify-content: center;
-    width: 108%;
-    margin-top: -2%;
+    align-items: center;
+    width: 100%;
+    overflow: scroll;
+    max-height: px;
+} */
+/* .groups-index-container {
+    margin: 0 8%;
+    margin-top: 20px;
+    display: flex;
+} */
+
+.groups-index-container {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    max-width: 100%;
+    height: 100%
 }
 
 .groups-index-items-container {
     width: 90px;
-    margin: 20px 32px;
+    margin: 0 64px 0 0;
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    justify-items: center;
+    align-items: center;
 }
 
 .groups-index-items-details {
@@ -57,7 +75,7 @@
 .groups-index-items-icon {
     height: 60px;
     width: 60px;
-    padding-left: 17px;
+    /* padding-left: 17px; */
 }
 
 .groups-index-items-name {
@@ -70,11 +88,20 @@
 }
 
 .all-figure{
-    width: 500px;
     font-size: 15px;
     font-weight: 600;
 }
 
 .add{
     padding-top:10px ;
+}
+
+.figure-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+ }
+
+.figure-form span {
+    padding: 5px
 }

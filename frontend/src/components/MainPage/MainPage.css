@@ -3,7 +3,7 @@
 .index-container {
     display: flex;
     margin: 0 8%;
-    margin-top: 20px;
+    /* margin-top: 20px; */
 }
 
 .groups-container {
@@ -79,6 +79,16 @@ a {
     padding: 28px;
     /* border: 1px solid black; */
     /* font-family: "Trirong", serif; */
+}
+
+.index-sidebar-groups-container {
+    max-height: 690px;
+    overflow: auto;
+    padding: 12px;
+}
+
+.index-sidebar-groups-container::-webkit-scrollbar {
+    display: none;
 }
 
 .index-sidebar-groups {
@@ -214,6 +224,15 @@ a {
     justify-content: center;
  }
 
+.figure-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+ }
+
+.figure-form span {
+    padding: 5px
+}
 
 .delete-icon{
     height: 50px;

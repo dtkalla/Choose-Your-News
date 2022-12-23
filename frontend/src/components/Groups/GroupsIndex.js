@@ -51,18 +51,18 @@ function GroupsIndex({ setSelectedGroupId }) {
     }
 
     return (
-        <div className="groups-index-container">
-            <div onClick={handleClick()}>
-                <div className='groups-index-items-container'> 
-                    <img className="groups-index-items-icon" src={folder}></img>
-                    <div className='all-figure'> <h1>All Figures</h1></div>
+        // <div className="groups-index-container">
+            <div className="groups-index-container">
+                <div onClick={handleClick()}>
+                    <div className='groups-index-items-container'> 
+                        <img className="groups-index-items-icon" src={folder}></img>
+                        <div className='all-figure'><h1>All</h1></div>
                     </div>
-           
-            
+                </div>
+                {groupItems}
+                <GroupCreate />
             </div>
-            {groupItems}
-            <GroupCreate />
-        </div>
+        // </div>
     );
 }
 

@@ -59,8 +59,11 @@ function GroupsCreate() {
 
             {showGroupCreateModal && (
             <LargeModal onClose={closeModal}>
-                <form onSubmit={handleSubmit}>
-                    Name:
+                <form className="figure-form" onSubmit={handleSubmit}>
+                    <div className='modal-words'>
+                        Enter a name to create a group
+                    </div>
+                    <span>Name:</span>
                     <input
                         type="text" 
                         value={groupName}
