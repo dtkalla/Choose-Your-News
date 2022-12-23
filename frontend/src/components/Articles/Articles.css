@@ -151,7 +151,7 @@
     border: 1px solid black;
     margin-left: 92%;
     pointer-events: auto;
-    
+    cursor: pointer;
 }
 
 .articles-index-items-delete:hover{

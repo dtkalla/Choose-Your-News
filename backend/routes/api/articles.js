@@ -210,7 +210,7 @@ router.delete('/:id', requireUser, async (req, res) => {
 
         const articlesObj = {};
         for (let i = 0; i < articles.length; i++) {
-            await articles[i].populate("figure");
+            await articles[i];
             articlesObj[`"${articles[i]._id}"`] = articles[i];
         }
 
@@ -239,7 +239,7 @@ router.get('/:id', async (req, res) => {
     try {
         const articleId = req.params.id;
 
-        const article = await Article.findById(articleId).populate("figure");
+        const article = await Article.findById(articleId);
 
         return res.json(article);
     }

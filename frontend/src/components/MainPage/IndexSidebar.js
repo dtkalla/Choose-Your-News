@@ -71,7 +71,8 @@ function IndexSidebar({ selectedGroupId, setSelectedGroupId, setSelectedFigureId
         >
         {figure.name}
         </div>
-        <div>
+        <div id='delete-button-div'>
+          <div id='empty-spacing-div'></div>
           <button className="delete-button"
             onClick={handleDeleteFigure(selectedGroupId, figure._id)}
           >
