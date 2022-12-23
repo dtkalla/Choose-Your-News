@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { deleteGroup, createFigure, deleteFigure } from '../../store/groups';
 import { fetchCurrentUserFetchedArticles, fetchCurrentUserFetchedArticlesByGroup, fetchCurrentUserFetchedArticlesByFigure } from '../../store/articles';
+import IndexModal from "./IndexModal";
 
 import './MainPage.css'
 import deleteicon from './delete.png'
