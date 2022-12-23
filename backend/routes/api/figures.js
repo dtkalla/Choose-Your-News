@@ -45,7 +45,7 @@ router.post('/', requireUser, async (req, res) => {
 
         const figureId = figure._id;
 
-        const groups = await Group.find({ user: userId });
+        let groups = await Group.find({ user: userId });
 
         if (!hasFigure(groups, figureId)) {
             const noGroup = groups.find(group => group.name === "No group");
@@ -53,12 +53,17 @@ router.post('/', requireUser, async (req, res) => {
             noGroup.figures.push(figure._id);
 
             await noGroup.save();
+        }
 
-            return res.json(`Successfully added ${figure.name}`);
+        groups = await Group.find({ user: userId }).populate("figures");
+
+        const groupsObj = {};
+        for (let i = 0; i < groups.length; i++) {
+            const group = groups[i];
+            groupsObj[group._id] = group;
         }
-        else {
-            return res.json(`${figure.name} already created`);
-        }
+
+        return res.json(groupsObj);
     }
     catch (err) {
         return res.json(null);
@@ -100,7 +105,7 @@ router.delete('/:id', requireUser, async (req, res) => {
 
         const allGroups = await Group.find();
 
-        const groups = allGroups.filter(group => 
+        let groups = allGroups.filter(group => 
             group.user.toString() === userId.toString());
         
         for(let i = 0; i < groups.length; i++){
@@ -116,7 +121,15 @@ router.delete('/:id', requireUser, async (req, res) => {
             await Figure.findByIdAndRemove(figureId);
         }
 
-        return res.json(`Successfully deleted.`);
+        groups = await Group.find({ user: userId }).populate("figures");
+
+        const groupsObj = {};
+        for (let i = 0; i < groups.length; i++) {
+            const gp = groups[i];
+            groupsObj[`${gp._id}`] = gp;
+        }
+
+        return res.json(groupsObj);
     }
     catch (err) {
         return res.json(null);

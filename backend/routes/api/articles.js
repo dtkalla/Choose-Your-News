@@ -8,6 +8,7 @@ const Article = mongoose.model('Article');
 
 const { requireUser } = require('../../config/passport');
 const { fetchArticlesFromNewYorkTimes } = require('../../config/api');
+const { json } = require('express');
 
 //ONLY FOR TESTING
 router.get('/', async (req, res) => {
@@ -108,14 +109,24 @@ router.get('/user/current/fetched', requireUser, async (req, res) => {
         const groups = await Group.find({ user: userId }).populate("figures");
 
         const searchTerms = [];
-        groups.forEach(group => {
-            group.figures.forEach(figure => searchTerms.push(figure.name));
-        });
-
-        const fetchedArticles = searchTerms.length === 0 ? [] :
+        for(let i = 0; i < groups.length; i++) {
+            const group = groups[i];
+            for(let j = 0; j < group.figures.length; j++) {
+                const figure = group.figures[j];
+                searchTerms.push(figure.name);
+            }
+        }
+        console.log(searchTerms);
+        const articles = searchTerms.length === 0 ? [] :
             await fetchArticlesFromNewYorkTimes(searchTerms.join(" OR "))
 
-        return res.json(fetchedArticles);
+        const articlesObj = {};
+        for (let i = 0; i < articles.length; i++) {
+            const al = articles[i];
+            articlesObj[`${al.url}`] = al;
+        }
+
+        return res.json(articlesObj);
     }
     catch (err) {
         return res.json([]);
@@ -149,10 +160,16 @@ router.get('/group/:groupId/fetched', requireUser, async (req, res) => {
 
         const searchTerms = group.figures.map(figure => `"${figure.name}"`);
 
-        const fetchedArticles = searchTerms.length === 0 ? [] :
+        const articles = searchTerms.length === 0 ? [] :
             await fetchArticlesFromNewYorkTimes(searchTerms.join(" OR "));
 
-        return res.json(fetchedArticles);
+        const articlesObj = {};
+        for (let i = 0; i < articles.length; i++) {
+            const al = articles[i];
+            articlesObj[`${al.url}`] = al;
+        }
+
+        return res.json(articlesObj);
     }
     catch (err) {
         return res.json([]);
@@ -164,9 +181,15 @@ router.get('/figure/:figureName/fetched', requireUser, async (req, res) => {
     try {
         const figureName = req.params.figureName;
 
-        const fetchedArticles = await fetchArticlesFromNewYorkTimes(figureName);
+        const articles = await fetchArticlesFromNewYorkTimes(`"${figureName}"`);
 
-        return res.json(fetchedArticles);
+        const articlesObj = {};
+        for (let i = 0; i < articles.length; i++) {
+            const al = articles[i];
+            articlesObj[`${al.url}`] = al;
+        }
+
+        return res.json(articlesObj);
     }
     catch (err) {
         return res.json([]);
