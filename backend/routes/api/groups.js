@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 
 const Group = mongoose.model('Group');
+const Figure = mongoose.model('Figure');
 
 const { requireUser } = require('../../config/passport');
 const { fetchArticlesFromNewYorkTimes } = require('../../config/api');
@@ -32,7 +33,15 @@ router.post('/', requireUser, async (req, res) => {
 
         const group = await newGroup.save();
 
-        return res.json(group);
+        const groups = await Group.find({ user: userId }).populate("figures");
+
+        const groupsObj = {};
+        for (let i = 0; i < groups.length; i++) {
+            const gp = groups[i];
+            groupsObj[`${gp._id}`] = gp;
+        }
+
+        return res.json(groupsObj);
     }
     catch (err) {
         return res.json(null);
@@ -70,8 +79,8 @@ router.get('/user/current', requireUser, async (req, res) => {
 
         const groupsObj = {};
         for (let i = 0; i < groups.length; i++) {
-            const group = groups[i];
-            groupsObj[group._id] = group;
+            const gp = groups[i];
+            groupsObj[gp._id] = gp;
         }
 
         return res.json(groupsObj);
@@ -88,8 +97,8 @@ router.put('/:id/figure/:figureId', requireUser, async (req, res) => {
         const groupId = req.params.id;
         const figureId = req.params.figureId;
 
-        const groups = await Group.find({ user: userId });
-
+        let groups = await Group.find({ user: userId });
+        
         let noGroup;
         let group;
 
@@ -101,8 +110,6 @@ router.put('/:id/figure/:figureId', requireUser, async (req, res) => {
                 group = groups[i];
             }
         }
-
-        let idx;
 
         idx = noGroup.figures.indexOf(figureId);
         if (idx !== -1) {
@@ -117,7 +124,15 @@ router.put('/:id/figure/:figureId', requireUser, async (req, res) => {
             await group.save();
         }
 
-        return res.json(`Figure successfully added to Group ${group.name}`);
+        groups = await Group.find({ user: userId }).populate("figures");
+
+        const groupsObj = {};
+        for (let i = 0; i < groups.length; i++) {
+            const gp = groups[i];
+            groupsObj[`${gp._id}`] = gp;
+        }
+
+        return res.json(groupsObj);
     }
     catch (err) {
         return res.json(null);
@@ -131,7 +146,7 @@ router.patch('/:id/figure/:figureId', requireUser, async (req, res) => {
         const groupId = req.params.id;
         const figureId = req.params.figureId;
 
-        const groups = await Group.find({ user: userId });
+        let groups = await Group.find({ user: userId });
         
         let hasGroup = false;
         let noGroup;
@@ -168,7 +183,15 @@ router.patch('/:id/figure/:figureId', requireUser, async (req, res) => {
             }
         }
 
-        return res.json(`Figure successfully removed from Group ${group.name}`);
+        groups = await Group.find({ user: userId }).populate("figures");
+
+        const groupsObj = {};
+        for (let i = 0; i < groups.length; i++) {
+            const gp = groups[i];
+            groupsObj[`${gp._id}`] = gp;
+        }
+
+        return res.json(groupsObj);
     }
     catch (err) {
         return res.json(null);
@@ -214,7 +237,7 @@ router.delete('/:id', requireUser, async (req, res) => {
 
         const userId = req.user._id;
 
-        const groups = await Group.find({ user: userId });
+        let groups = await Group.find({ user: userId });
 
         let group;
         let noGroup;
@@ -241,7 +264,15 @@ router.delete('/:id', requireUser, async (req, res) => {
 
         await Group.findByIdAndRemove(groupId);
 
-        return res.json(groupId);
+        groups = await Group.find({ user: userId }).populate("figures");
+
+        const groupsObj = {};
+        for (let i = 0; i < groups.length; i++) {
+            const gp = groups[i];
+            groupsObj[`${gp._id}`] = gp;
+        }
+
+        return res.json(groupsObj);
     }
     catch (err) {
         return res.json(null);
