@@ -4,7 +4,7 @@ import { deleteGroup } from '../../store/groups';
 import { fetchCurrentUserFetchedArticlesByFigure } from '../../store/articles';
 
 import './MainPage.css'
-
+import deleteicon from './delete.png'
 
 function IndexSidebar({ groupId, figures }) {
   const dispatch = useDispatch();
@@ -42,15 +42,18 @@ function IndexSidebar({ groupId, figures }) {
       <div className="index-sidebar-groups-container">
         
         <hr></hr>
-        {figureItems}
+        {figureItems }
+       
         <hr></hr>
-        
         {groupId &&
           <div 
+           
             className="index-sidebar-groups"
             onClick={handleDelete(groupId)}
           >
-            <h2>Delete Group</h2>
+
+            <div className='delete-position'> <div class-name='delete-header'>delete group</div><img className='delete-icon' src={deleteicon}></img></div>
+            
           </div>
         }
         <hr></hr>
@@ -59,8 +62,9 @@ function IndexSidebar({ groupId, figures }) {
 
       <div className="index-sidebar-footer">
         See more figures
+        
       </div>
-
+     
     </div>
   );
 }

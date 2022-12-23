@@ -215,3 +215,12 @@ a {
  }
 
 
+.delete-icon{
+    height: 50px;
+   margin-left:20%;
+    margin-top: 10%;
+}
+
+.delete-header{
+    color: red;
+}
