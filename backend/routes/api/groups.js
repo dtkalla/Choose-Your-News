@@ -5,19 +5,6 @@ const mongoose = require('mongoose');
 const Group = mongoose.model('Group');
 
 const { requireUser } = require('../../config/passport');
-const { fetchArticlesFromNewYorkTimes } = require('../../config/api');
-
-//ONLY FOR TESTING
-router.get('/', async (req, res) => {
-    try {
-        const groups = await Group.find().populate("figures");
-
-        return res.json(groups);
-    }
-    catch (err) {
-        return res.json([]);
-    }
-})
 
 
 //CREATE A GROUP, WORKS
@@ -74,18 +61,22 @@ router.get('/user/current', requireUser, async (req, res) => {
 router.put('/:id/figure/:figureId', requireUser, async (req, res) => {
     try {
         const userId = req.user._id;
+
         const groupId = req.params.id;
+
         const figureId = req.params.figureId;
 
         let groups = await Group.find({ user: userId });
         
         let noGroup;
+
         let group;
 
         for (let i = 0; i < groups.length; i++) {
             if (groups[i].name === "No group") {
                 noGroup = groups[i];
             }
+
             if (groups[i]._id.toString() === groupId) {
                 group = groups[i];
             }
@@ -124,13 +115,17 @@ router.put('/:id/figure/:figureId', requireUser, async (req, res) => {
 router.patch('/:id/figure/:figureId', requireUser, async (req, res) => {
     try {
         const userId = req.user._id;
+
         const groupId = req.params.id;
+
         const figureId = req.params.figureId;
 
         let groups = await Group.find({ user: userId });
         
         let hasGroup = false;
+
         let noGroup;
+
         let group;
 
         for (let i = 0; i < groups.length; i++) {
@@ -139,9 +134,11 @@ router.patch('/:id/figure/:figureId', requireUser, async (req, res) => {
                 groups[i].figures.indexOf(figureId) !== -1) {
                 hasGroup = true;
             }
+
             if (groups[i].name === "No group") {
                 noGroup = groups[i];
             }
+
             if (groups[i]._id.toString() === groupId) {
                 group = groups[i];
             }
@@ -180,6 +177,7 @@ router.patch('/:id/figure/:figureId', requireUser, async (req, res) => {
 });
 
 
+//HELPER FOR DELETE A GROUP
 const hasFigure = (groups, excludedGroupId, figureId) => {
     for (let i = 0; i < groups.length; i++) {
         if (groups[i]._id.toString() !== excludedGroupId) {
@@ -192,27 +190,6 @@ const hasFigure = (groups, excludedGroupId, figureId) => {
     return false;
 }
 
-//UPDATE - SHARE/UNSHARE A GROUP
-router.put('/:id', requireUser, async (req, res) => {
-    try {
-        const userId = req.user._id;
-        const groupId = req.params.id;
-        const groups = await Group.find({ user: userId });
-        const group = groups.find(group => {
-            return group.name !== "No group" && group._id.toString() === groupId;
-        });
-
-        group.shared = !group.shared;
-        group.save();
-
-        return res.json(`Group successfully ${group.shared ? "shared" : "unshared"}`);
-    }
-    catch (err) {
-        return res.json(null);
-    }
-})
-
-
 //DELETE A GROUP, WORKS
 router.delete('/:id', requireUser, async (req, res) => {
     try {
@@ -223,6 +200,7 @@ router.delete('/:id', requireUser, async (req, res) => {
         let groups = await Group.find({ user: userId });
 
         let group;
+
         let noGroup;
 
         for (let i = 0; i < groups.length; i++) {
@@ -263,9 +241,42 @@ router.delete('/:id', requireUser, async (req, res) => {
 });
 
 
+//UPDATE - SHARE/UNSHARE A GROUP
+router.put('/:id', requireUser, async (req, res) => {
+    try {
+        const userId = req.user._id;
+        const groupId = req.params.id;
+        const groups = await Group.find({ user: userId });
+        const group = groups.find(group => {
+            return group.name !== "No group" && group._id.toString() === groupId;
+        });
+
+        group.shared = !group.shared;
+        group.save();
+
+        return res.json(`Group successfully ${group.shared ? "shared" : "unshared"}`);
+    }
+    catch (err) {
+        return res.json(null);
+    }
+})
+
+
+//ONLY FOR TESTING
+router.get('/', async (req, res) => {
+    try {
+        const groups = await Group.find().populate("figures");
+
+        return res.json(groups);
+    }
+    catch (err) {
+        return res.json([]);
+    }
+})
+
 module.exports = router;
 
-//READ A GROUP
+// //READ A GROUP
 // router.get('/:id', async (req, res) => {
 //     try {
 //         const groupId = req.params.id;

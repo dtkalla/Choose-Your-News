@@ -8,28 +8,6 @@ const Figure = mongoose.model('Figure');
 const { requireUser } = require('../../config/passport');
 
 
-//ONLY FOR TESTING
-router.get('/', async (req, res) => {
-    try {
-        const figures = await Figure.find();
-            
-        return res.json(figures);
-    }
-    catch (err) {
-        return res.json([]);
-    }
-})
-
-const hasFigure = (groups, figureId) => {
-    for(let i = 0; i < groups.length; i++) {
-        const idx = groups[i].figures.indexOf(figureId);
-        if (idx !== -1) {
-            return true;
-        }
-    }
-    return false;
-}
-
 //CREATE A FIGURE, WORKS
 router.post('/', requireUser, async (req, res) => {
     try {
@@ -69,7 +47,6 @@ router.post('/', requireUser, async (req, res) => {
         return res.json({});
     }
 });
-
 
 //DELETE A FIGURE, WORKS
 router.delete('/:id', requireUser, async (req, res) => {
@@ -112,9 +89,32 @@ router.delete('/:id', requireUser, async (req, res) => {
 });
 
 
+//ONLY FOR TESTING
+router.get('/', async (req, res) => {
+    try {
+        const figures = await Figure.find();
+
+        return res.json(figures);
+    }
+    catch (err) {
+        return res.json([]);
+    }
+})
+
+const hasFigure = (groups, figureId) => {
+    for (let i = 0; i < groups.length; i++) {
+        const idx = groups[i].figures.indexOf(figureId);
+        if (idx !== -1) {
+            return true;
+        }
+    }
+    return false;
+}
+
+
 module.exports = router;
 
-//READ A FIGURE
+// //READ A FIGURE
 // router.get('/:id', requireUser, async (req, res) => {
 //     try {
 //         const user = await req.user.populate("savedArticles");

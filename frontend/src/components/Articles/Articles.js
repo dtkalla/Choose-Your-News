@@ -1,8 +1,10 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { fetchCurrentUserSavedArticles } from '../../store/articles';
-import ArticlesIndex from './ArticlesIndex'
-import './Articles.css'
+
+import ArticlesIndex from './ArticlesIndex';
+import './Articles.css';
 
 function Articles() {
   const currentUser = useSelector(state => state.session.user);

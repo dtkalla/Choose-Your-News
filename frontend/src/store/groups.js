@@ -1,6 +1,5 @@
 import jwtFetch from './jwt';
 
-
 const RECEIVE_CURRENT_USER_GROUPS = "groups/RECEIVE_CURRENT_USER_GROUPS";
 
 const receiveCurrentUserGroups = (groups) => ({
@@ -8,17 +7,14 @@ const receiveCurrentUserGroups = (groups) => ({
   groups
 });
 
-
 export const fetchCurrentUserGroups = () => async dispatch => {
     const res = await jwtFetch(`/api/groups/user/current`);
     const groups = await res.json();
     dispatch(receiveCurrentUserGroups(groups));
 };
 
-
 export const createFigure = (figure, groupId = undefined) => async dispatch => {
   let res;
-
   if(groupId){
     const figureId = figure;
     res = await jwtFetch(`/api/groups/${groupId}/figure/${figureId}`, {
@@ -34,7 +30,6 @@ export const createFigure = (figure, groupId = undefined) => async dispatch => {
       })
     });
   }
-
   const groups = await res.json();
   dispatch(receiveCurrentUserGroups(groups));
 };
@@ -42,7 +37,6 @@ export const createFigure = (figure, groupId = undefined) => async dispatch => {
 
 export const deleteFigure = (figureId, groupId = undefined) => async dispatch => {
   let res;
-
   if(groupId){
     res = await jwtFetch(`/api/groups/${groupId}/figure/${figureId}`, {
       method: "PATCH"
@@ -53,7 +47,6 @@ export const deleteFigure = (figureId, groupId = undefined) => async dispatch =>
       method: "DELETE"
     });
   }
-
   const groups = await res.json();
   dispatch(receiveCurrentUserGroups(groups));
 };
@@ -63,7 +56,6 @@ export const deleteGroup = (groupId) => async dispatch => {
   const res = await jwtFetch(`/api/groups/${groupId}`, {
     method: "DELETE"
   });
-
   const groups = await res.json();
   dispatch(receiveCurrentUserGroups(groups));
 };
@@ -74,7 +66,6 @@ export const createGroup = (group) => async dispatch => {
     method: "POST",
     body: JSON.stringify(group)
   });
-
   const groups = await res.json();
   dispatch(receiveCurrentUserGroups(groups));
 };
@@ -89,6 +80,5 @@ const groupsReducer = (state = {}, action) => {
       return state;
   }
 };
-
 
 export default groupsReducer;

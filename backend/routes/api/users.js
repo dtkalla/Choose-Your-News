@@ -90,7 +90,7 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
 // to req.user. (restoreUser will NOT return an error response if there is no
 // current user.)
 
-//READ CURRENT USER, WORKS
+//READ CURRENT USER
 router.get('/current', restoreUser, async (req, res) => {
   if (!isProduction) {
     // In development, allow React server to gain access to the CSRF token
