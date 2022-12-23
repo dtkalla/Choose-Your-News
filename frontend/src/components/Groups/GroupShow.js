@@ -10,6 +10,7 @@
 //     const dispatch = useDispatch();
 //     const group = useSelector(state => state.groups.group);
     
+
 //     useEffect(() => {
 //         dispatch(fetchGroup(groupId));
 //         // return () => dispatch(clearGroupErrors());
@@ -49,9 +50,8 @@
 //             Copyright &copy; 2022 Chirper
 //         </footer>
 //     </div>
-    
-//   );
-// }
 
+//  );
+// }
 
 // export default GroupShow;

@@ -14,6 +14,7 @@ import LoginForm from './components/SessionForms/LoginForm';
 import SignupForm from './components/SessionForms/SignupForm';
 
 import { getCurrentUser } from './store/session';
+import AboutUs from './components/AboutUs/AboutUs';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -35,6 +36,8 @@ function App() {
         <ProtectedRoute exact path="/groups" component={Groups} />
         <ProtectedRoute path="/groups/:id" component={GroupShow} />
         <ProtectedRoute exact path="/articles" component={Articles} />
+        <ProtectedRoute exact path="/about" component={AboutUs} />
+
       </Switch>
       <Footer />
     </>

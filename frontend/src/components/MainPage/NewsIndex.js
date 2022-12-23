@@ -17,7 +17,6 @@ function NewsIndex({ fetchedArticles, savedArticles }) {
   }
 
   const handleSave = (news) => () => {
-    console.log(news.url)
     return dispatch(addArticle({ 
         headline: news.headline,
         summary: news.summary,
@@ -28,7 +27,6 @@ function NewsIndex({ fetchedArticles, savedArticles }) {
       })
     ) 
   }
-
 
   const articleItems = [];
 
