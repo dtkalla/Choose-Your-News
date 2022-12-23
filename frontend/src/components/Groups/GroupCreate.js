@@ -43,11 +43,12 @@ function GroupsCreate() {
     return (
         <>
             <div className="groups-index-items-container" onClick={openModal}>
+                <div className="add">
                 <img 
                     className="groups-index-items-icon" 
                     src={add} 
                 />
-
+                </div>
                 <div className="groups-index-items-details">
                     <h1 className="groups-index-items-name">
                         {/* Create a Group */}
