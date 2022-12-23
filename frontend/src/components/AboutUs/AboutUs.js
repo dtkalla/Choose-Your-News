@@ -5,7 +5,6 @@ import Qiao from './Qiao.png'
 import Github from './github.png'
 import LinkedIn from './LinkedIn.png'
 import './AboutUs.css'
-import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 
 function AboutUs() {
     return (
@@ -19,8 +18,8 @@ function AboutUs() {
                         <p className='about-us-title'>Team Lead</p>
                         <p>I'm Jeffrey, etc.</p>
                         <div className="Job-Links">
-                            <Link to='https://github.com/jeffreych6'><img className="Github" src={Github} /></Link>
-                            <Link to='https://github.com/jeffreych6'><img className="LinkedIn" src={LinkedIn} /></Link>
+                            <a href='https://github.com/jeffreych6'><img className="Github" src={Github} /></a>
+                            <a href='https://github.com/jeffreych6'><img className="LinkedIn" src={LinkedIn} /></a>
                             <div id='project-links'>
                                 <p>Other projects:</p>
                                 <a href='https://jeffreych6.github.io/income_tax_by_state/'>Income Tax by State</a>
@@ -37,8 +36,8 @@ function AboutUs() {
                         <p className='about-us-title'>Frontend Lead</p>
                         <p>I'm Ishtahad, etc.</p>
                         <div className="Job-Links">
-                            <Link to='https://github.com/IshsGit/'><img className="Github" src={Github} /></Link>
-                            <Link to='https://www.linkedin.com/'><img className="LinkedIn" src={LinkedIn} /></Link>
+                            <a href='https://github.com/IshsGit/'><img className="Github" src={Github} /></a>
+                            <a href='https://www.linkedin.com/'><img className="LinkedIn" src={LinkedIn} /></a>
                             <div id='project-links'>
                                 <p>Other projects:</p>
                                 <a href='https://ishsgit.github.io/FindYourKetoRedux/'>Find Your Keto</a>
@@ -55,8 +54,8 @@ function AboutUs() {
                         <p className='about-us-title'>Backend Lead</p>
                         <p>I'm Daniel, etc.</p>
                         <div className="Job-Links">
-                            <Link to='https://github.com/dtkalla'><img className="Github" src={Github} /></Link>
-                            <Link to='https://www.linkedin.com/in/daniel-kalla-496aa7234/'><img className="LinkedIn" src={LinkedIn} /></Link>
+                            <a href='https://github.com/dtkalla'><img className="Github" src={Github} /></a>
+                            <a href='https://www.linkedin.com/in/daniel-kalla-496aa7234/'><img className="LinkedIn" src={LinkedIn} /></a>
                             <div id='project-links'>
                                 <p>Other projects:</p>
                                 <a href='https://dtkalla.github.io/JavaScript-Project-Disease-Tracker/'>Disease Tracker</a>
@@ -73,8 +72,8 @@ function AboutUs() {
                         <p className='about-us-title'>Flex</p>
                         <p>I'm Qiao, etc.</p>
                         <div className="Job-Links">
-                            <Link to='https://github.com/qyhAppAcademy'><img className="Github" src={Github} /></Link>
-                            <Link to='https://www.linkedin.com/in/qiao-yang-han-367590257/'><img className="LinkedIn" src={LinkedIn} /></Link>
+                            <a href='https://github.com/qyhAppAcademy'><img className="Github" src={Github} /></a>
+                            <a href='https://www.linkedin.com/in/qiao-yang-han-367590257/'><img className="LinkedIn" src={LinkedIn} /></a>
                             <div id='project-links'>
                                 <p>Other projects:</p>
                                 <a href='https://qyhappacademy.github.io/portugal_trade_data_visualization/'>Portugal Trade Data Visualization</a>
