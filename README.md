@@ -52,9 +52,10 @@ Users can read reviews of each listing, see ratings, and leave their own ratings
 
 ## Technologies and libraries used:
 - MongoDB
-- JavaScript
 - Express.js
 - React/Redux
+- Node.js
+- JavaScript
 - NYT Articles API
 
 <!-- ## Implementation Timeline:
