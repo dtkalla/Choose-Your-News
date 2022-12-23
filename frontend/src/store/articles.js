@@ -62,8 +62,10 @@ const articlesReducer = (state = {}, action) => {
   switch(action.type) {
     case RECEIVE_CURRENT_USER_FETCHED_ARTICLES:
       return { ...state, fetched: action.fetchedArticles };
+
     case RECEIVE_CURRENT_USER_SAVED_ARTICLES:
       return { ...state, saved: action.savedArticles };
+      
     default:
       return state;
   }
