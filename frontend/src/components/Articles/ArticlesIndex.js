@@ -39,12 +39,16 @@ function ArticlesIndex({articles}) {
                     Published Date: {article.publishedDate.slice(0,10)}
                 </div>
             </a>
-            <button 
+            
+            <div id='unsave-button-div'>
+                <div id='empty-spacing-div'></div>
+                <button 
                 className="articles-index-items-delete" 
                 onClick={handleUnsaveArticle(article._id)}
-            >
-                Unsave
-            </button>
+                >
+                    Unsave
+                </button>
+            </div>
           </div>
         )
     })

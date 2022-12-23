@@ -10,11 +10,10 @@ const { requireUser } = require('../../config/passport');
 const { fetchArticlesFromNewYorkTimes } = require('../../config/api');
 
 //HELPER METHODS
-const hasArticle = (user, url, figureId) => {
+const hasArticle = (user, url) => {
     const savedArticles = user.savedArticles;
     return savedArticles.some(savedArticle => {
-        return savedArticle.url === url &&
-            savedArticle.figure.toString() === figureId.toString();
+        return savedArticle.url === url;
     });
 }
 
@@ -37,7 +36,7 @@ router.get('/user/current/saved', requireUser, async (req, res) => {
 
         const articles = [];
         for (let i = 0; i < user.savedArticles.length; i++) {
-            articles.push(await user.savedArticles[i].populate("figure"));
+            articles.push(await user.savedArticles[i]);
         }
 
         const articlesObj = {};
@@ -142,15 +141,11 @@ router.post('/', requireUser, async (req, res) => {
         const figureId = req.body.figureId;
 
         const groups = await Group.find({ user: req.user._id });
-        if (!hasFigure(groups, figureId)) {
-            return res.json("Must follow figure to save article");
-        }
 
         let user = await req.user.populate("savedArticles");
 
         let article = await Article.findOne({
-            url,
-            figure: figureId
+            url
         });
         if (!article) {
             article = new Article({
@@ -158,12 +153,11 @@ router.post('/', requireUser, async (req, res) => {
                 summary,
                 source,
                 publishedDate,
-                url,
-                figure: figureId
+                url
             });
         }
 
-        if (!hasArticle(user, url, figureId)) {
+        if (!hasArticle(user, url)) {
             await article.save();
             user.savedArticles.push(article);
             await user.save();
@@ -173,7 +167,6 @@ router.post('/', requireUser, async (req, res) => {
 
         const articlesObj = {};
         for (let i = 0; i < articles.length; i++) {
-            await articles[i].populate("figure");
             articlesObj[`"${articles[i]._id}"`] = articles[i];
         }
 
@@ -217,7 +210,7 @@ router.delete('/:id', requireUser, async (req, res) => {
 
         const articlesObj = {};
         for (let i = 0; i < articles.length; i++) {
-            await articles[i].populate("figure");
+            await articles[i];
             articlesObj[`"${articles[i]._id}"`] = articles[i];
         }
 
@@ -246,7 +239,7 @@ router.get('/:id', async (req, res) => {
     try {
         const articleId = req.params.id;
 
-        const article = await Article.findById(articleId).populate("figure");
+        const article = await Article.findById(articleId);
 
         return res.json(article);
     }

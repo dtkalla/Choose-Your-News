@@ -22,10 +22,6 @@ const articleSchema = Schema({
         type: String,
         required: true
     },
-    figure: {
-        type: Schema.Types.ObjectId,
-        ref: 'Figure'
-    }
 }, {
     // tells mongoose to add and maintain `createdAt` and `updatedAt` fields with
     // datetime timestamps

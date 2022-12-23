@@ -56,7 +56,7 @@ function NewsIndex({ fetchedArticles, savedArticles, selectedFigureId }) {
               {/* <hr></hr> */}
             </a>
 
-            {selectedFigureId && (saved(article.url, savedArticles) ? 
+            {(saved(article.url, savedArticles) ? 
               <div className='like-button'>
                 Saved
               </div>

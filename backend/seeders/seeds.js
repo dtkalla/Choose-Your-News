@@ -40,8 +40,7 @@ for(let i = 0; i < 12; i++){
       summary: `Twitter Inc.'s live audio service, Twitter Spaces, is down after a number of journalists that had just been suspended from the social network found they could still participate in it.`,
       source: `nairaland`,
       publishedDate: "2022-12-16 15:00:59",
-      url: `http://www.nairaland.com/7483666/elon-musk-disables-twitter-spaces`,
-      figure: figures[i % 6].id
+      url: `http://www.nairaland.com/7483666/elon-musk-disables-twitter-spaces`
     })
   )
 }

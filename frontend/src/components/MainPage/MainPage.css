@@ -204,7 +204,7 @@ a {
 .like-button{
     display:flex;
     justify-content: center;
-    min-width: 30px;
+    min-width: 35px;
     color: white;
     background-color: #448de0;
     /* font-family: sans-serif; */
@@ -224,6 +224,15 @@ a {
     cursor: pointer
 }
 
+
+#delete-button-div {
+    display: flex;
+}
+
+#empty-spacing-div{
+    width: 80%;
+}
+
 .delete-button {
     display:flex;
     justify-content: center;
@@ -238,7 +247,7 @@ a {
     font-weight: bolder;
     border-radius: 25px;
     border: 1px solid black;
-    margin-left: 80%;
+    /* margin-left: 80%; */
     margin-right: 5%;
 }
 

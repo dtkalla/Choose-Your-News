@@ -138,6 +138,14 @@
     color: #0066CC;
 }
 
+#unsave-button-div {
+    display: flex;
+}
+
+#empty-spacing-div{
+    width: 80%;
+}
+
 .articles-index-items-delete{
     color: white;
     background-color: #448de0;
@@ -149,9 +157,9 @@
     font-weight: bolder;
     border-radius: 25px;
     border: 1px solid black;
-    margin-left: 92%;
+    margin-left: 12%;
     pointer-events: auto;
-    
+    cursor: pointer;
 }
 
 .articles-index-items-delete:hover{
