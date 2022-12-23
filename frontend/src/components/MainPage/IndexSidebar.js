@@ -5,7 +5,7 @@ import { deleteGroup, createFigure, deleteFigure } from '../../store/groups';
 import { fetchCurrentUserFetchedArticles, fetchCurrentUserFetchedArticlesByGroup, fetchCurrentUserFetchedArticlesByFigure } from '../../store/articles';
 
 import './MainPage.css'
-import IndexModal from "./IndexModal";
+import deleteicon from './delete.png'
 
 
 function IndexSidebar({ selectedGroupId, setSelectedGroupId, figures }) {
@@ -97,20 +97,31 @@ function IndexSidebar({ selectedGroupId, setSelectedGroupId, figures }) {
       <div className="index-sidebar-groups-container">
         
         <hr></hr>
-        {figureItems}
+        {figureItems }
+       
         <hr></hr>
         
         {selectedGroupId &&
           <div 
+           
             className="index-sidebar-groups"
             onClick={handleDeleteGroup(selectedGroupId)}
           >
-            <h2>Delete Group</h2>
+
+            <div className='delete-position'> <div class-name='delete-header'>delete group</div><img className='delete-icon' src={deleteicon}></img></div>
+            
           </div>
         }
         <hr></hr>
       
       </div>
+
+      <div className="index-sidebar-footer">
+        See more figures
+        
+      </div>
+     
+
     </div>
 
       {showFigureCreateModal && (
