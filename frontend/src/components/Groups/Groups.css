@@ -105,3 +105,12 @@
 .figure-form span {
     padding: 5px
 }
+
+.form-button {
+    font-size: 14px;
+    border-radius: 8px;
+}
+
+.form-button:hover {
+    cursor: pointer
+}

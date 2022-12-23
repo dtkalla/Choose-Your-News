@@ -59,7 +59,7 @@ function IndexModal({ selectedGroupId, value, setValue, handleSubmit, setShowMod
 
                 <br />
 
-                <button type="submit">
+                <button className="form-button" type="submit">
                     Create
                 </button>
             </form>

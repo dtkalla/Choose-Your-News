@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 
 function AboutUs() {
     return (
-        <>
+        <div className="about-us-container">
             <h1 className='title-about-us'>About Us</h1>
             <ul>
                 <div className="about-us-person" id="Jeffrey">
@@ -85,7 +85,7 @@ function AboutUs() {
                     
                 </div>
             </ul>
-        </>        
+        </div>        
     )
 }
 

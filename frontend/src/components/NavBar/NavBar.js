@@ -20,7 +20,7 @@ function NavBar () {
     <nav className="nav-bar-container">
       <div className="nav-bar">
         <div className="left-nav">
-          <Link className="logo" to="/index">Choose Your News</Link>
+          <Link className="logo" to="/">Choose Your News</Link>
         </div>
         <div className="right-nav">
           <Dropdown />
