@@ -12,7 +12,7 @@ function GroupsCreate() {
 
     const dispatch = useDispatch();
 
-    const [groupName, setGroupName] = useState("");
+    const [groupName, setGroupName] = useState(undefined);
 
     const [showGroupCreateModal, setShowGroupCreateModal] = useState(false);
 
@@ -36,6 +36,7 @@ function GroupsCreate() {
         };
 
         dispatch(createGroup(newGroup));
+        setGroupName(undefined);
         setShowGroupCreateModal(false);
     }
 

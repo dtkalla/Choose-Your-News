@@ -81,7 +81,7 @@ const articlesReducer = (state = {}, action) => {
       delete state[action.articleId]
       return {...state};
     case RECEIVE_CURRENT_USER_FETCHED_ARTICLES:
-      return { ...state, fetched: action.fetchedArticles };
+      return { ...action.fetchedArticles };
     case RECEIVE_CURRENT_USER_SAVED_ARTICLES:
       return { ...state, saved: action.savedArticles };
     default:
