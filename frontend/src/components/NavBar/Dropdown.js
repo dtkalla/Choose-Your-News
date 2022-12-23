@@ -40,15 +40,9 @@ function Dropdown () {
     
       {showMenu && (
         <ul className="dropdown-menu">
-          <li className="dropdown-options">
-            Figures
-          </li>
-          <Link className="dropdown-options" to="/groups/">
-              Groups
-          </Link>
-          <Link className="dropdown-options" to="/articles/">
+          {/* <Link className="dropdown-options" to="/articles/">
               Saved Articles
-          </Link>
+          </Link> */}
           <Link className="dropdown-options" to="/about/">
               About Us
           </Link>

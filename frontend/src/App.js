@@ -32,7 +32,7 @@ function App() {
         <AuthRoute exact path="/login" component={LoginForm} />
         <AuthRoute exact path="/signup" component={SignupForm} />
 
-        <ProtectedRoute exact path="/index" component={MainPage} />
+        <ProtectedRoute exact path="/" component={MainPage} />
         <ProtectedRoute exact path="/groups" component={Groups} />
         <ProtectedRoute path="/groups/:id" component={GroupShow} />
         <ProtectedRoute exact path="/articles" component={Articles} />

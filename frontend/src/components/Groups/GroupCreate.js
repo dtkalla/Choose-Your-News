@@ -70,7 +70,7 @@ function GroupsCreate() {
                         onChange={(e) => setGroupName(e.target.value)} 
                     />
                     <br />
-                    <button type="submit">
+                    <button className="form-button" type="submit">
                         Create
                     </button>
                 </form>

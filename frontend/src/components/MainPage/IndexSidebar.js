@@ -71,10 +71,11 @@ function IndexSidebar({ selectedGroupId, setSelectedGroupId, figures }) {
         {figure.name}
         </div>
         <div>
-          <button
+          <button className="delete-button"
             onClick={handleDeleteFigure(selectedGroupId, figure._id)}
           >
-            {selectedGroupId ? "Remove figure from group" : "Delete figure"}
+            {/* {selectedGroupId ? "Remove figure from group" : "Delete figure"} */}
+            {selectedGroupId ? "Remove" : "Delete"}
           </button>
         </div>
       </>
@@ -87,10 +88,10 @@ function IndexSidebar({ selectedGroupId, setSelectedGroupId, figures }) {
     <div className="index-sidebar-container">
       
       <h1 className="index-sidebar-title">
-        Figures
-        <div>
-          <button onClick={() => setShowFigureCreateModal(true)}>
-            {selectedGroupId ? "Add figure to group" : "Add figure"}
+        <h1>Figures</h1>
+        <div className="title-add">
+          <button className="add-button" onClick={() => setShowFigureCreateModal(true)}>
+            {selectedGroupId ? "Add" : "Create"}
           </button>
         </div>
       </h1>
@@ -113,16 +114,9 @@ function IndexSidebar({ selectedGroupId, setSelectedGroupId, figures }) {
             
           </div>
         }
-        <hr></hr>
+
       
-      </div>
-
-      <div className="index-sidebar-footer">
-        See more figures
-        
-      </div>
-     
-
+      </div>     
     </div>
 
       {showFigureCreateModal && (
