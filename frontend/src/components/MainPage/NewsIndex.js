@@ -24,8 +24,7 @@ function NewsIndex({ fetchedArticles, savedArticles, selectedFigureId }) {
         summary: news.summary,
         source: news.source,
         publishedDate: news.publishedDate,
-        url: news.url,
-        figureId: selectedFigureId
+        url: news.url
       }));
   }
 

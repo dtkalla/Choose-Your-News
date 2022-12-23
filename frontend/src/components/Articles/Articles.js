@@ -31,10 +31,6 @@ function Articles() {
         <ArticlesIndex articles={savedArticles}/>
         }
 
-        {/* <p>Choose Your News</p>
-        <footer>
-          Copyright &copy; 2022 Choose Your News
-        </footer> */}
     </div>
   );
 }
