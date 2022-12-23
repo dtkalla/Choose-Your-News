@@ -37,14 +37,16 @@ function GroupsCreate({ user }) {
                 </div>         
             </div>
             {showGroupCreateModal && (
+                   <div className='create-form'>
             <LargeModal onClose={() => handleClose()}>
-                <form onSubmit={handleSubmit}>
+                <form  className='create-form' onSubmit={handleSubmit}>
                     Name:
                     <input type="text" value={figureName} onChange={(e) => setFigureName(e.target.value)} />
                     <br />
                     <button type="submit">Create</button>
                 </form>
             </LargeModal>
+            </div>
             )}
         </>
     );

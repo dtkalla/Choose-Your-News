@@ -64,3 +64,8 @@
 .groups-index-items-figures {
     padding: 5px 0;
 }
+
+
+.create-form > form{
+    padding-left: 10px;
+}
