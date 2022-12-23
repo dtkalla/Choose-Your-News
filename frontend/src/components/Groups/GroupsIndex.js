@@ -1,19 +1,24 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchCurrentUserFetchedArticles, fetchCurrentUserFetchedArticlesByGroup } from '../../store/articles';
 
 import GroupCreate from './GroupCreate'
 import './Groups.css'
 
-function GroupsIndex({ groups, setSelectedGroup }) {
+function GroupsIndex({ setSelectedGroupId }) {
+    const groupsObj = useSelector(state => state.groups);
+
+    const groups = groupsObj ? Object.values(groupsObj) : [];
+
     const dispatch = useDispatch();
+
     const handleClick = (groupId = undefined) => (e) => {
       e.preventDefault();
       if(groupId){
-        setSelectedGroup(groups.find(group => group._id === groupId));
+        setSelectedGroupId(groupId);
         dispatch(fetchCurrentUserFetchedArticlesByGroup(groupId));
       }
       else {
-        setSelectedGroup(undefined);
+        setSelectedGroupId(undefined);
         dispatch(fetchCurrentUserFetchedArticles());
       }
     }

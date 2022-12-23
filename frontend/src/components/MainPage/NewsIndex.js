@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addArticle } from '../../store/articles'
 import './MainPage.css'
 
-// function NewsIndex({ newsFeed }) {
+
 function NewsIndex({ fetchedArticles, savedArticles }) {
   const dispatch = useDispatch();
-  const newsFeed = fetchedArticles
-
 
   const saved = (newsUrl, savedArticles) => {
     for (let i = 0; i < savedArticles.length; i++) {
@@ -31,55 +29,66 @@ function NewsIndex({ fetchedArticles, savedArticles }) {
     ) 
   }
 
-  const newsItems = [];
-  newsFeed.forEach(news => {
-      const newsItem = (
-        <>
-        <a href={news.url}>
-          <div className="news-feed">
-            <div className='title-one'>{news.headline}    
-              <div className='summary-one'> 
-                {news.summary}
-              {/* {saved(news.url, savedArticles) ? 
+
+  const articleItems = [];
+
+  if (fetchedArticles) {
+    fetchedArticles.forEach(article => {
+        const articleItem = (
+          <>
+            <a href={article.url}>
+              <div className="news-feed">
+                <div className='title-one'>
+                  
+                  {article.headline}
+                  
+                  <div className='summary-one'> 
+                    {article.summary}
+                  </div>
+
+                </div>
+
+                <div className='date-one'>
+                  {article.publishedDate.slice(0,10)} {article.publishedDate.slice(11,19)} 
+                </div>
+
+              </div>
+
+              <hr></hr>
+            </a>
+
+            {saved(article.url, savedArticles) ? 
               <div className='like-button'>
                 Saved
               </div>
               :
-              <div className='like-button' onClick={handleSave(news)}>
+              <div className='like-button' onClick={handleSave(article)}>
                 Save
               </div>
-              } */}
-            </div>
-          </div>
-            <div className='date-one'>
-              {news.publishedDate.slice(0,10)} {news.publishedDate.slice(11,19)} 
-            </div>
-          </div> 
-          <hr></hr>
-        </a>
-                      {saved(news.url, savedArticles) ? 
-                        <div className='like-button'>
-                          Saved
-                        </div>
-                        :
-                        <div className='like-button' onClick={handleSave(news)}>
-                          Save
-                        </div>
-                        }
-                        </>
-      )
-      newsItems.push(newsItem);
-  });
-
-    return (
-      <div className="news-index-container">
-        <div className='left-container-title'><h1 className="news-index-title">Your news <hr></hr></h1></div>
-        <div className="news-feed-container">
-          {newsItems}
-        </div>
-      </div>
-    );
+            }
+          </>
+        );
+        articleItems.push(articleItem);
+    });
   }
+
+  return (
+    <div className="news-index-container">
+      
+      <div className='left-container-title'>
+        <h1 className="news-index-title">
+          Your news
+          <hr></hr>
+        </h1>
+      </div>
+      
+      <div className="news-feed-container">
+        { fetchedArticles ? articleItems : <p>Loading...</p> }
+      </div>
+    
+    </div>
+  );
+}
   
-  export default NewsIndex;
+export default NewsIndex;
   
