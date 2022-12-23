@@ -106,35 +106,8 @@ router.get('/current', restoreUser, async (req, res) => {
   }
 
   try {
-    const user = await req.user.populate("savedArticles");
-
-    const groups = await Group.find({ user: user._id }).populate("figures");
-
-    const figures = [];
-    groups.forEach(group => {
-      for (let i = 0; i < group.figures.length; i++) {
-        figures.push(group.figures[i]);
-      }
-    });
-
-    const savedArticles = [];
-    user.savedArticles.forEach(async (savedArticle) => {
-      savedArticles.push(await savedArticle.populate("figure"));
-    });
-
-    const searchTerms = figures.map(figure => `"${figure.name}"`);
-
-    const obj = {
-      _id: user._id,
-      username: user.username,
-      email: user.email,
-      savedArticles: savedArticles,
-      groups: groups,
-      fetchedArticles: searchTerms.length === 0 ? [] :
-        await fetchArticlesFromNewYorkTimes(searchTerms.join(" OR "))
-    };
-
-    return res.json(obj);
+    const user = req.user;
+    return res.json(user);
   }
   catch (err) {
     return res.json(null);

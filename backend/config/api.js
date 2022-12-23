@@ -18,7 +18,7 @@ exports.fetchArticlesFromNewYorkTimes = async (query) => {
    
     
 
-    const url = `${newyorktimesUrl}sort=newest&${filterQueryString}&api-key=${newyorktimesApiKey}`;
+    const url = `${newyorktimesUrl}${filterQueryString}&sort=relevance&api-key=${newyorktimesApiKey}`;
 
     
     const response = await axios.get(url);

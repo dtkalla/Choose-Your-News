@@ -14,11 +14,15 @@ import './MainPage.css';
 function MainPage() {
   const currentUser = useSelector(state => state.session.user);
 
-  const groups = useSelector(state => Object.values(state.groups));
+  const groupsObj = useSelector(state => state.groups);
 
-  const savedArticles = useSelector(state => state.articles.saved);
+  // const savedArticles = useSelector(state => state.articles.saved);
 
-  const fetchedArticles = useSelector(state => state.articles.fetched);
+  const fetchedArticlesObj = useSelector(state => state.articles);
+
+  const groups = groupsObj ? Object.values(groupsObj) : [];
+
+  const fetchedArticles = fetchedArticlesObj ? Object.values(fetchedArticlesObj) :[];
 
   function getFigures(groups) {
     const figures = [];
@@ -34,7 +38,7 @@ function MainPage() {
 
   const figures = groups ? getFigures(groups) : [];
 
-  const [selectedGroup, setSelectedGroup] = useState(undefined);
+  const [selectedGroupId, setSelectedGroupId] = useState(undefined);
 
 
   const dispatch = useDispatch();
@@ -42,10 +46,6 @@ function MainPage() {
   useEffect(() => {
     if (currentUser) {
       dispatch(fetchCurrentUserGroups());
-
-      dispatch(fetchCurrentUserSavedArticles());
-
-      dispatch(fetchCurrentUserFetchedArticles());
     }
   }, [dispatch, currentUser])
 
@@ -53,25 +53,19 @@ function MainPage() {
   return (
     <>
       <div className="groups-container">
-        <GroupsIndex groups={groups} setSelectedGroup={setSelectedGroup} />
+        <GroupsIndex setSelectedGroupId={setSelectedGroupId} />
       </div>
 
       <div className="index-container">
-        {fetchedArticles &&
-          <NewsIndex fetchedArticles={fetchedArticles} savedArticles={savedArticles} />
-        }
+        <NewsIndex fetchedArticles={fetchedArticles} savedArticles={[]} />
 
-        {groups &&
-          <IndexSidebar
-            groupId={
-              selectedGroup === undefined ? undefined : selectedGroup._id
-            }
-
-            figures={
-              selectedGroup === undefined ? figures : selectedGroup.figures
-            } 
-          />
-        }
+        <IndexSidebar
+          selectedGroupId={selectedGroupId}
+          setSelectedGroupId={setSelectedGroupId}
+          figures={
+            selectedGroupId === undefined ? figures : groupsObj[selectedGroupId].figures
+          }
+        />
       </div>
     </>
   );
