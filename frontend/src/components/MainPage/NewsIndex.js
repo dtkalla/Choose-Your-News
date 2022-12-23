@@ -53,7 +53,7 @@ function NewsIndex({ fetchedArticles, savedArticles, selectedFigureId }) {
 
               </div>
 
-              <hr></hr>
+              {/* <hr></hr> */}
             </a>
 
             {selectedFigureId && (saved(article.url, savedArticles) ? 
@@ -66,6 +66,7 @@ function NewsIndex({ fetchedArticles, savedArticles, selectedFigureId }) {
               </div>)
             }
           </div>
+
         );
         articleItems.push(articleItem);
     });

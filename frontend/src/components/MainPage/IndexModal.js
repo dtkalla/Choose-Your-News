@@ -26,6 +26,7 @@ function IndexModal({ selectedGroupId, value, setValue, handleSubmit, setShowMod
         inputField = (
             <>
                 <span>Name: </span>
+                
                 <select 
                     value={value}
                     onChange={e => setValue(e.target.value)} 
@@ -50,12 +51,15 @@ function IndexModal({ selectedGroupId, value, setValue, handleSubmit, setShowMod
 
     return (
         <LargeModal onClose={() => setShowModal(false)}>
-            <form onSubmit={handleSubmit}>
+            <form className="figure-form" onSubmit={handleSubmit}>
+                <div className='modal-words'>
+                    Enter a name to create a figure
+                </div>
                 { inputField }
 
                 <br />
 
-                <button type="submit">
+                <button className="form-button" type="submit">
                     Create
                 </button>
             </form>

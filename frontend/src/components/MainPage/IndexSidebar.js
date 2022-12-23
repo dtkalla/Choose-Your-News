@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { deleteGroup, createFigure, deleteFigure } from '../../store/groups';
 import { fetchCurrentUserFetchedArticles, fetchCurrentUserFetchedArticlesByGroup, fetchCurrentUserFetchedArticlesByFigure } from '../../store/articles';
+import IndexModal from "./IndexModal";
 
 import './MainPage.css'
-import IndexModal from "./IndexModal";
+import deleteicon from './delete.png'
 
 
 function IndexSidebar({ selectedGroupId, setSelectedGroupId, setSelectedFigureId, figures }) {
@@ -71,10 +72,11 @@ function IndexSidebar({ selectedGroupId, setSelectedGroupId, setSelectedFigureId
         {figure.name}
         </div>
         <div>
-          <button
+          <button className="delete-button"
             onClick={handleDeleteFigure(selectedGroupId, figure._id)}
           >
-            {selectedGroupId ? "Remove figure from group" : "Delete figure"}
+            {/* {selectedGroupId ? "Remove figure from group" : "Delete figure"} */}
+            {selectedGroupId ? "Remove" : "Delete"}
           </button>
         </div>
       </>
@@ -87,10 +89,10 @@ function IndexSidebar({ selectedGroupId, setSelectedGroupId, setSelectedFigureId
     <div className="index-sidebar-container">
       
       <h1 className="index-sidebar-title">
-        Figures
-        <div>
-          <button onClick={() => setShowFigureCreateModal(true)}>
-            {selectedGroupId ? "Add figure to group" : "Add figure"}
+        <h1>Figures</h1>
+        <div className="title-add">
+          <button className="add-button" onClick={() => setShowFigureCreateModal(true)}>
+            {selectedGroupId ? "Add" : "Create"}
           </button>
         </div>
       </h1>
@@ -98,20 +100,24 @@ function IndexSidebar({ selectedGroupId, setSelectedGroupId, setSelectedFigureId
       <div className="index-sidebar-groups-container">
         
         <hr></hr>
-        {figureItems}
+        {figureItems }
+       
         <hr></hr>
         
         {selectedGroupId &&
           <div 
+           
             className="index-sidebar-groups"
             onClick={handleDeleteGroup(selectedGroupId)}
           >
-            <h2>Delete Group</h2>
+
+            <div className='delete-position'> <div class-name='delete-header'>delete group</div><img className='delete-icon' src={deleteicon}></img></div>
+            
           </div>
         }
-        <hr></hr>
+
       
-      </div>
+      </div>     
     </div>
 
       {showFigureCreateModal && (
