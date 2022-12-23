@@ -90,7 +90,7 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
 // to req.user. (restoreUser will NOT return an error response if there is no
 // current user.)
 
-//READ CURRENT USER
+//READ CURRENT USER, WORKS
 router.get('/current', restoreUser, async (req, res) => {
   if (!isProduction) {
     // In development, allow React server to gain access to the CSRF token
@@ -110,7 +110,7 @@ router.get('/current', restoreUser, async (req, res) => {
     return res.json(user);
   }
   catch (err) {
-    return res.json(null);
+    return res.json({});
   }
 })
 
@@ -123,7 +123,7 @@ router.get('/', async (req, res) => {
     return res.json(users);
   }
   catch (err) {
-    return res.json([]);
+    return res.json({});
   }
 })
 
@@ -158,7 +158,7 @@ router.get('/:id', async (req, res) => {
     return res.json(obj);
   } 
   catch (err) {
-    return res.json(null);
+    return res.json({});
   }
 })
 

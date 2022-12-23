@@ -3,7 +3,6 @@ const router = express.Router();
 const mongoose = require('mongoose');
 
 const Group = mongoose.model('Group');
-const Figure = mongoose.model('Figure');
 
 const { requireUser } = require('../../config/passport');
 const { fetchArticlesFromNewYorkTimes } = require('../../config/api');
@@ -20,7 +19,8 @@ router.get('/', async (req, res) => {
     }
 })
 
-//CREATE A GROUP
+
+//CREATE A GROUP, WORKS
 router.post('/', requireUser, async (req, res) => {
     try {
         const userId = req.user._id;
@@ -31,7 +31,7 @@ router.post('/', requireUser, async (req, res) => {
             figures: []
         });
 
-        const group = await newGroup.save();
+        await newGroup.save();
 
         const groups = await Group.find({ user: userId }).populate("figures");
 
@@ -44,33 +44,12 @@ router.post('/', requireUser, async (req, res) => {
         return res.json(groupsObj);
     }
     catch (err) {
-        return res.json(null);
+        return res.json({});
     }
 });
 
-//READ A GROUP
-router.get('/:id', async (req, res) => {
-    try {
-        const groupId = req.params.id;
 
-        const group = await Group.findById(groupId).populate("figures"); //populate user?
-
-        const searchTerms = group.figures.map(figure => `"${figure.name}"`);
-
-        const obj = {
-            ...group._doc,
-            fetchedArticles: searchTerms.length === 0 ? [] :
-                await fetchArticlesFromNewYorkTimes(searchTerms.join(" OR "))
-        };
-        
-        return res.json(obj);
-    }
-    catch (err) {
-        return res.json(null);
-    }
-})
-
-//READ CURRENT USER'S GROUPS
+//READ CURRENT USER'S GROUPS, WORKS
 router.get('/user/current', requireUser, async (req, res) => {
     try {
         const userId = req.user._id;
@@ -86,11 +65,12 @@ router.get('/user/current', requireUser, async (req, res) => {
         return res.json(groupsObj);
     }
     catch (err) {
-        return res.json([]);
+        return res.json({});
     }
 })
 
-//UPDATE - ADD A FIGURE TO A GROUP
+
+//UPDATE - ADD A FIGURE TO A GROUP, WORKS
 router.put('/:id/figure/:figureId', requireUser, async (req, res) => {
     try {
         const userId = req.user._id;
@@ -135,11 +115,12 @@ router.put('/:id/figure/:figureId', requireUser, async (req, res) => {
         return res.json(groupsObj);
     }
     catch (err) {
-        return res.json(null);
+        return res.json({});
     }
 });
 
-//UPDATE - REMOVE A FIGURE FROM A GROUP
+
+//UPDATE - REMOVE A FIGURE FROM A GROUP, WORKS
 router.patch('/:id/figure/:figureId', requireUser, async (req, res) => {
     try {
         const userId = req.user._id;
@@ -194,9 +175,10 @@ router.patch('/:id/figure/:figureId', requireUser, async (req, res) => {
         return res.json(groupsObj);
     }
     catch (err) {
-        return res.json(null);
+        return res.json({});
     }
 });
+
 
 const hasFigure = (groups, excludedGroupId, figureId) => {
     for (let i = 0; i < groups.length; i++) {
@@ -230,7 +212,8 @@ router.put('/:id', requireUser, async (req, res) => {
     }
 })
 
-//DELETE A GROUP, needs to add figure back to no group
+
+//DELETE A GROUP, WORKS
 router.delete('/:id', requireUser, async (req, res) => {
     try {
         const groupId = req.params.id;
@@ -275,8 +258,31 @@ router.delete('/:id', requireUser, async (req, res) => {
         return res.json(groupsObj);
     }
     catch (err) {
-        return res.json(null);
+        return res.json({});
     }
 });
 
-module.exports = router;    
+
+module.exports = router;
+
+//READ A GROUP
+// router.get('/:id', async (req, res) => {
+//     try {
+//         const groupId = req.params.id;
+
+//         const group = await Group.findById(groupId).populate("figures"); //populate user?
+
+//         const searchTerms = group.figures.map(figure => `"${figure.name}"`);
+
+//         const obj = {
+//             ...group._doc,
+//             fetchedArticles: searchTerms.length === 0 ? [] :
+//                 await fetchArticlesFromNewYorkTimes(searchTerms.join(" OR "))
+//         };
+        
+//         return res.json(obj);
+//     }
+//     catch (err) {
+//         return res.json(null);
+//     }
+// })

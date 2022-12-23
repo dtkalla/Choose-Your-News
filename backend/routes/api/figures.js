@@ -6,7 +6,7 @@ const Group = mongoose.model('Group');
 const Figure = mongoose.model('Figure');
 
 const { requireUser } = require('../../config/passport');
-const { fetchArticlesFromNewYorkTimes } = require('../../config/api');
+
 
 //ONLY FOR TESTING
 router.get('/', async (req, res) => {
@@ -30,7 +30,7 @@ const hasFigure = (groups, figureId) => {
     return false;
 }
 
-//CREATE A FIGURE
+//CREATE A FIGURE, WORKS
 router.post('/', requireUser, async (req, res) => {
     try {
         let figure = await Figure.findOne({ name: req.body.name });
@@ -66,53 +66,28 @@ router.post('/', requireUser, async (req, res) => {
         return res.json(groupsObj);
     }
     catch (err) {
-        return res.json(null);
+        return res.json({});
     }
 });
 
-//READ A FIGURE
-router.get('/:id', requireUser, async (req, res) => {
-    try {
-        const user = await req.user.populate("savedArticles");
 
-        const figureId = req.params.id;
-
-        const figure = await Figure.findById(figureId);
-
-        const savedArticles = user.savedArticles
-            .filter(savedArticle => 
-                savedArticle.figure.toString() === figure._id.toString());
-        
-        const obj = {
-            ...figure._doc,
-            savedArticles: savedArticles,
-            fetchedArticles: await fetchArticlesFromNewYorkTimes(`"${figure.name}"`)
-        };
-
-        return res.json(obj);
-    }
-    catch (err) {
-        return res.json(null);
-    }
-})
-
-//DELETE A FIGURE
+//DELETE A FIGURE, WORKS
 router.delete('/:id', requireUser, async (req, res) => {
     try {
         const userId = req.user._id;
-        
+
         const figureId = req.params.id;
 
         const allGroups = await Group.find();
 
-        let groups = allGroups.filter(group => 
+        let groups = allGroups.filter(group =>
             group.user.toString() === userId.toString());
-        
-        for(let i = 0; i < groups.length; i++){
+
+        for (let i = 0; i < groups.length; i++) {
             const idx = groups[i].figures.indexOf(figureId);
-            if (idx !== -1){
+            if (idx !== -1) {
                 groups[i].figures = groups[i].figures.slice(0, idx)
-                    .concat(groups[i].figures.slice(idx+1));
+                    .concat(groups[i].figures.slice(idx + 1));
                 await groups[i].save();
             }
         }
@@ -132,8 +107,35 @@ router.delete('/:id', requireUser, async (req, res) => {
         return res.json(groupsObj);
     }
     catch (err) {
-        return res.json(null);
+        return res.json({});
     }
 });
 
+
 module.exports = router;
+
+//READ A FIGURE
+// router.get('/:id', requireUser, async (req, res) => {
+//     try {
+//         const user = await req.user.populate("savedArticles");
+
+//         const figureId = req.params.id;
+
+//         const figure = await Figure.findById(figureId);
+
+//         const savedArticles = user.savedArticles
+//             .filter(savedArticle => 
+//                 savedArticle.figure.toString() === figure._id.toString());
+        
+//         const obj = {
+//             ...figure._doc,
+//             savedArticles: savedArticles,
+//             fetchedArticles: await fetchArticlesFromNewYorkTimes(`"${figure.name}"`)
+//         };
+
+//         return res.json(obj);
+//     }
+//     catch (err) {
+//         return res.json(null);
+//     }
+// })

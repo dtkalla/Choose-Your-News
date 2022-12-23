@@ -1,38 +1,6 @@
 import jwtFetch from './jwt';
 
 
-const SAVE_ARTICLE = "articles/SAVE_ARTICLE";
-
-const saveArticle = article => ({
-  type: SAVE_ARTICLE,
-  article
-})
-
-export const addArticle = (article) => async dispatch => {
-  const res = await jwtFetch(`/api/articles/`, {
-    method: "POST",
-    body: JSON.stringify(article)
-  });
-  const addedArticle = await res.json();
-  dispatch(saveArticle(addedArticle));
-};
-
-
-const UNSAVE_ARTICLE = "articles/UNSAVE_ARTICLE"
-
-const unsaveArticle = articleId => ({
-  type: UNSAVE_ARTICLE,
-  articleId
-})
-
-export const deleteSavedArticle = articleId => async dispatch => {
-  const res = await jwtFetch(`/api/articles/${articleId}`, {
-    method: 'DELETE'
-  });
-  dispatch(unsaveArticle(articleId));
-};
-
-
 const RECEIVE_CURRENT_USER_FETCHED_ARTICLES = "articles/RECEIVE_CURRENT_USER_FETCHED_ARTICLES";
 
 const receiveCurrentUserFetchedArticles = (fetchedArticles) => ({
@@ -72,16 +40,28 @@ export const fetchCurrentUserSavedArticles = () => async dispatch => {
   dispatch(receiveCurrentUserSavedArticles(savedArticles));
 };
 
+export const saveArticle = (article) => async dispatch => {
+  const res = await jwtFetch(`/api/articles/`, {
+    method: "POST",
+    body: JSON.stringify(article)
+  });
+  const savedArticles = await res.json();
+  dispatch(receiveCurrentUserSavedArticles(savedArticles));
+};
+
+export const unsaveArticle = (articleId) => async dispatch => {
+  const res = await jwtFetch(`/api/articles/${articleId}`, {
+    method: 'DELETE'
+  });
+  const savedArticles = await res.json();
+  dispatch(receiveCurrentUserSavedArticles(savedArticles));
+};
+
 
 const articlesReducer = (state = {}, action) => {
   switch(action.type) {
-    case SAVE_ARTICLE:
-      return { ...state, ...action.article }
-    case UNSAVE_ARTICLE:
-      delete state[action.articleId]
-      return {...state};
     case RECEIVE_CURRENT_USER_FETCHED_ARTICLES:
-      return { ...action.fetchedArticles };
+      return { ...state, fetched: action.fetchedArticles };
     case RECEIVE_CURRENT_USER_SAVED_ARTICLES:
       return { ...state, saved: action.savedArticles };
     default:
