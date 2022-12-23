@@ -5,7 +5,7 @@ import { createGroup } from '../../store/groups';
 
 import { LargeModal } from '../../context/Modal';
 import './Groups.css'
-
+import add from './add.png'
 
 function GroupsCreate() {
     const currentUser = useSelector(state => state.session.user);
@@ -45,7 +45,7 @@ function GroupsCreate() {
             <div className="groups-index-items-container" onClick={openModal}>
                 <img 
                     className="groups-index-items-icon" 
-                    src="https://iconarchive.com/download/i22631/kyo-tux/aeon/Sign-Add.ico" 
+                    src={add} 
                 />
 
                 <div className="groups-index-items-details">

@@ -186,7 +186,7 @@ a {
 
 .like-button{
     
-    
+    min-width: 30px;
     color: white;
     background-color: #448de0;
     /* font-family: sans-serif; */

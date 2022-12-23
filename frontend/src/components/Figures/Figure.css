@@ -11,8 +11,8 @@
 }
 
 .groups-user-icon {
-    height: 120px;
-    width: 120px;
+    height: 70px;
+    width: 70px;
     border-bottom: 1px solid #DDDDDD;
     border-radius: 50%;
 }
@@ -34,6 +34,8 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    /* width: 108%;
+    justify-items: center; */
 }
 
 .groups-index-items-container {

@@ -1,6 +1,8 @@
 .groups-container {
     margin: 0 8%;
     margin-top: 20px;
+    display: flex;
+    
 }
 
 .groups-user-profile {
@@ -33,13 +35,17 @@
 .groups-index-container {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
+    width: 108%;
+   
 }
 
 .groups-index-items-container {
     width: 90px;
     margin: 20px 32px;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
 }
 
 .groups-index-items-details {
@@ -49,15 +55,22 @@
 }
 
 .groups-index-items-icon {
-    height: 90px;
-    width: 90px;
+    height: 60px;
+    width: 60px;
+    padding-left: 17px;
 }
 
 .groups-index-items-name {
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 600;
 }
 
 .groups-index-items-figures {
     padding: 5px 0;
+}
+
+.all-figure{
+    width: 500px;
+    font-size: 15px;
+    font-weight: 600;
 }
