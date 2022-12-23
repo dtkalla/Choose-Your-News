@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { addArticle } from '../../store/articles'
+import { useDispatch, useSelector } from 'react-redux';
+import { saveArticle } from '../../store/articles'
 import './MainPage.css'
 
 
-function NewsIndex({ fetchedArticles, savedArticles }) {
+function NewsIndex({ fetchedArticles, savedArticles, selectedFigureId }) {
   const dispatch = useDispatch();
 
   const saved = (newsUrl, savedArticles) => {
@@ -16,16 +16,17 @@ function NewsIndex({ fetchedArticles, savedArticles }) {
     return false;
   }
 
-  const handleSave = (news) => () => {
-    return dispatch(addArticle({ 
+  const handleSaveArticle = (news) => (e) => {
+      e.preventDefault();
+
+      dispatch(saveArticle({
         headline: news.headline,
         summary: news.summary,
         source: news.source,
         publishedDate: news.publishedDate,
         url: news.url,
-        figure: '63a470bdc80436748242920a'
-      })
-    ) 
+        figureId: selectedFigureId
+      }));
   }
 
   const articleItems = [];
@@ -33,7 +34,7 @@ function NewsIndex({ fetchedArticles, savedArticles }) {
   if (fetchedArticles) {
     fetchedArticles.forEach(article => {
         const articleItem = (
-          <>
+          <div>
             <a href={article.url}>
               <div className="news-feed">
                 <div className='title-one'>
@@ -55,19 +56,17 @@ function NewsIndex({ fetchedArticles, savedArticles }) {
               {/* <hr></hr> */}
             </a>
 
-            {saved(article.url, savedArticles) ? 
+            {selectedFigureId && (saved(article.url, savedArticles) ? 
               <div className='like-button'>
                 Saved
               </div>
               :
-              <div className='like-button' onClick={handleSave(article)}>
+              <div className='like-button' onClick={handleSaveArticle(article)}>
                 Save
-              </div>
+              </div>)
             }
+          </div>
 
-            <hr></hr>
-            
-          </>
         );
         articleItems.push(articleItem);
     });

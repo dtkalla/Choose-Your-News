@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchCurrentUserGroups } from '../../store/groups';
-import { fetchCurrentUserFetchedArticles, fetchCurrentUserSavedArticles } from '../../store/articles';
+import { fetchCurrentUserSavedArticles } from '../../store/articles';
 
 import NewsIndex from './NewsIndex';
 import IndexSidebar from './IndexSidebar';
@@ -16,13 +16,16 @@ function MainPage() {
 
   const groupsObj = useSelector(state => state.groups);
 
-  // const savedArticles = useSelector(state => state.articles.saved);
+  const fetchedArticlesObj = useSelector(state => state.articles.fetched);
 
-  const fetchedArticlesObj = useSelector(state => state.articles);
+  const savedArticlesObj = useSelector(state => state.articles.saved);
 
   const groups = groupsObj ? Object.values(groupsObj) : [];
 
   const fetchedArticles = fetchedArticlesObj ? Object.values(fetchedArticlesObj) :[];
+
+  const savedArticles = savedArticlesObj ? Object.values(savedArticlesObj) : [];
+
 
   function getFigures(groups) {
     const figures = [];
@@ -40,12 +43,15 @@ function MainPage() {
 
   const [selectedGroupId, setSelectedGroupId] = useState(undefined);
 
+  const [selectedFigureId, setSelectedFigureId] = useState(undefined);
+
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (currentUser) {
       dispatch(fetchCurrentUserGroups());
+      dispatch(fetchCurrentUserSavedArticles());
     }
   }, [dispatch, currentUser])
 
@@ -57,11 +63,16 @@ function MainPage() {
       </div>
 
       <div className="index-container">
-        <NewsIndex fetchedArticles={fetchedArticles} savedArticles={[]} />
+        <NewsIndex 
+          fetchedArticles={fetchedArticles} 
+          savedArticles={savedArticles}
+          selectedFigureId={selectedFigureId}
+        />
 
         <IndexSidebar
           selectedGroupId={selectedGroupId}
           setSelectedGroupId={setSelectedGroupId}
+          setSelectedFigureId={setSelectedFigureId}
           figures={
             selectedGroupId === undefined ? figures : groupsObj[selectedGroupId].figures
           }

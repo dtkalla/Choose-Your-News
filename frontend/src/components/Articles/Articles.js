@@ -1,31 +1,32 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUser, clearUserErrors } from '../../store/users';
+import { fetchCurrentUserSavedArticles } from '../../store/articles';
 import ArticlesIndex from './ArticlesIndex'
 import './Articles.css'
 
 function Articles() {
-  const dispatch = useDispatch();
   const currentUser = useSelector(state => state.session.user);
-  const user = useSelector(state => state.users.user);
 
+  const savedArticlesObj = useSelector(state => state.articles.saved);
+
+  const savedArticles = savedArticlesObj ? Object.values(savedArticlesObj) : [];
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchUser());
-    return () => dispatch(clearUserErrors());
-  }, [dispatch])
+    if (currentUser) {
+      dispatch(fetchCurrentUserSavedArticles());
+    }
+  }, [dispatch, currentUser])
 
-  if (!user) {
-    return null
-  }
 
   return (
     <div className="articles-container">
         <div className="articles-user-title">
           Saved Articles
         </div>
-        {user.savedArticles && 
-        <ArticlesIndex articles={user.savedArticles}/>
+        {savedArticles && 
+        <ArticlesIndex articles={savedArticles}/>
         }
 
         {/* <p>Choose Your News</p>

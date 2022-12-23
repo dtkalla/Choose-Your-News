@@ -8,7 +8,6 @@ const Article = mongoose.model('Article');
 
 const { requireUser } = require('../../config/passport');
 const { fetchArticlesFromNewYorkTimes } = require('../../config/api');
-const { json } = require('express');
 
 //ONLY FOR TESTING
 router.get('/', async (req, res) => {
@@ -36,6 +35,7 @@ router.get('/:id', async (req, res) => {
     }
 })
 
+
 const hasArticle = (user, url, figureId) => {
     const savedArticles = user.savedArticles;
     return savedArticles.some(savedArticle => {
@@ -54,22 +54,23 @@ const hasFigure = (groups, figureId) => {
     return false;
 }
 
-//CREATE - SAVE AN ARTICLE
-router.post('/', requireUser, async (req, res, next) => {
+//CREATE - SAVE AN ARTICLE, WORKS
+router.post('/', requireUser, async (req, res) => {
     try {
         const headline      = req.body.headline;
         const summary       = req.body.summary;
         const source        = req.body.source;
         const publishedDate = req.body.publishedDate;
         const url           = req.body.url;
-        const figureId      = req.body.figure;
+        const figureId      = req.body.figureId;
 
         const groups = await Group.find({ user: req.user._id });
         if (!hasFigure(groups, figureId)) {
             return res.json("Must follow figure to save article");
         }
 
-        const user = await req.user.populate("savedArticles");
+        let user = await req.user.populate("savedArticles");
+
 
         let article = await Article.findOne({
             url,
@@ -87,21 +88,50 @@ router.post('/', requireUser, async (req, res, next) => {
         }
         
         if (!hasArticle(user, url, figureId)) {
-            article = await article.save();
-            user.savedArticles.push(article._id);
+            await article.save();
+            user.savedArticles.push(article);
             await user.save();
-            return res.json("Article successfully saved");
         }
-        else {
-            return res.json("Article already saved");
+
+        const articles = user.savedArticles;
+
+        const articlesObj = {};
+        for (let i = 0; i < articles.length; i++) {
+            await articles[i].populate("figure");
+            articlesObj[`"${articles[i]._id}"`] = articles[i];
         }
+        return res.json(articlesObj);
     }
     catch(err) {
-        return res.json(null);
+        return res.json({});
     }
 });
 
-//READ CURRENT USER'S FETCHED ARTICLES
+
+//READ CURRENT USER'S SAVED ARTICLES, WORKS
+router.get('/user/current/saved', requireUser, async (req, res) => {
+    try {
+        const userId = req.user._id;
+        const user = await User.findById(userId).populate("savedArticles");
+
+        const articles = [];
+        for (let i = 0; i < user.savedArticles.length; i++) {
+            articles.push(await user.savedArticles[i].populate("figure"));
+        }
+
+        const articlesObj = {};
+        for (let i = 0; i < articles.length; i++) {
+            const al = articles[i];
+            articlesObj[`"${al._id}"`] = al;
+        }
+        return res.json(articlesObj);
+    }
+    catch (err) {
+        return res.json({});
+    }
+})
+
+//READ CURRENT USER'S FETCHED ARTICLES, WORKS
 router.get('/user/current/fetched', requireUser, async (req, res) => {
     try {
         const userId = req.user._id;
@@ -116,7 +146,6 @@ router.get('/user/current/fetched', requireUser, async (req, res) => {
                 searchTerms.push(figure.name);
             }
         }
-        console.log(searchTerms);
         const articles = searchTerms.length === 0 ? [] :
             await fetchArticlesFromNewYorkTimes(searchTerms.join(" OR "))
 
@@ -129,29 +158,11 @@ router.get('/user/current/fetched', requireUser, async (req, res) => {
         return res.json(articlesObj);
     }
     catch (err) {
-        return res.json([]);
+        return res.json({});
     }
 })
 
-//READ CURRENT USER'S SAVED ARTICLES
-router.get('/user/current/saved', requireUser, async (req, res) => {
-    try {
-        const userId = req.user._id;
-        const user = await User.findById(userId).populate("savedArticles");
-
-        const savedArticles = [];
-        for(let i = 0; i < user.savedArticles.length; i++){
-            savedArticles.push(await user.savedArticles[i].populate("figure"));
-        }
-
-        return res.json(savedArticles);
-    }
-    catch (err) {
-        return res.json([]);
-    }
-})
-
-//READ GROUP'S FETCHED ARTICLES
+//READ GROUP'S FETCHED ARTICLES, WORKS
 router.get('/group/:groupId/fetched', requireUser, async (req, res) => {
     try {
         const groupId = req.params.groupId;
@@ -172,11 +183,11 @@ router.get('/group/:groupId/fetched', requireUser, async (req, res) => {
         return res.json(articlesObj);
     }
     catch (err) {
-        return res.json([]);
+        return res.json({});
     }
 })
 
-//READ FIGURE'S FETCHED ARTICLES
+//READ FIGURE'S FETCHED ARTICLES, WORKS
 router.get('/figure/:figureName/fetched', requireUser, async (req, res) => {
     try {
         const figureName = req.params.figureName;
@@ -192,12 +203,13 @@ router.get('/figure/:figureName/fetched', requireUser, async (req, res) => {
         return res.json(articlesObj);
     }
     catch (err) {
-        return res.json([]);
+        return res.json({});
     }
 })
 
+
 //DELETE - UNSAVE AN ARTICLE
-router.delete('/:id', requireUser, async (req, res, next) => {
+router.delete('/:id', requireUser, async (req, res) => {
     try {
         const user = req.user;
 
@@ -224,11 +236,21 @@ router.delete('/:id', requireUser, async (req, res, next) => {
             await Article.findByIdAndRemove(articleId);
         }
 
-        return res.json("Article successfully unsaved");
+        await user.populate("savedArticles");
+
+        const articles = user.savedArticles;
+
+        const articlesObj = {};
+        for (let i = 0; i < articles.length; i++) {
+            await articles[i].populate("figure");
+            articlesObj[`"${articles[i]._id}"`] = articles[i];
+        }
+        return res.json(articlesObj);
     }
     catch(err) {
-        next(err);
+        return res.json({});
     }
 });
+
 
 module.exports = router;

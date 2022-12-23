@@ -9,7 +9,7 @@ import './MainPage.css'
 import deleteicon from './delete.png'
 
 
-function IndexSidebar({ selectedGroupId, setSelectedGroupId, figures }) {
+function IndexSidebar({ selectedGroupId, setSelectedGroupId, setSelectedFigureId, figures }) {
   const currentUser = useSelector(state => state.session.user);
 
   const groupsObj = useSelector(state => state.groups);
@@ -31,9 +31,10 @@ function IndexSidebar({ selectedGroupId, setSelectedGroupId, figures }) {
   const [showFigureCreateModal, setShowFigureCreateModal] = useState(false);
 
 
-  const handleShowFigure = (figureName) => (e) => {
+  const handleShowFigure = (figure) => (e) => {
     e.preventDefault();
-    dispatch(fetchCurrentUserFetchedArticlesByFigure(figureName));
+    dispatch(fetchCurrentUserFetchedArticlesByFigure(figure.name));
+    setSelectedFigureId(figure._id);
   }
 
   const handleAddFigure = (e) => {
@@ -66,7 +67,7 @@ function IndexSidebar({ selectedGroupId, setSelectedGroupId, figures }) {
         <div 
           key={figure._id}
           className="index-sidebar-groups" 
-          onClick={handleShowFigure(figure.name)}
+          onClick={handleShowFigure(figure)}
         >
         {figure.name}
         </div>
