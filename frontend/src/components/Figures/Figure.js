@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchGroup, clearGroupErrors } from '../../store/groups';
 import GroupsIndex from './GroupsIndex'
 import './Figure.css'
+import folder from './folder.png'
 
 function Figure() {
     const groupId = useParams().id
@@ -23,7 +24,7 @@ function Figure() {
 
         const groupFigure = (
             <>
-            <img className="groups-index-items-icon" src="https://www.iconpacks.net/icons/2/free-folder-icon-1437-thumb.png"></img>
+            <img className="groups-index-items-icon" src={"https://www.iconpacks.net/icons/2/free-folder-icon-1437-thumb.png"}></img>
             <div className="groups-index-items-details">
                 <h1 className="groups-index-items-name">
                     {figure.name}

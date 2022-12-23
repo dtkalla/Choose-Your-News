@@ -45,6 +45,7 @@ export function LargeModal({ onClose, children }) {
     <div className="modal-container">
       <div className="modal-background" onClick={onClose} />
       <div className="large-modal">
+        <div className='modal-words'>Enter a name to add a figure</div>
         {children}
       </div>
     </div>,

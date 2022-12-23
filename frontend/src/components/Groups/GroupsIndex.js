@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCurrentUserFetchedArticles, fetchCurrentUserFetchedArticlesByGroup } from '../../store/articles';
-
+import folder from './folder.png'
 import GroupCreate from './GroupCreate'
 import './Groups.css'
 
@@ -33,9 +33,10 @@ function GroupsIndex({ setSelectedGroupId }) {
                     className="groups-index-items-container"
                     onClick={handleClick(group._id)}
                 >
+                    
                     <img 
                         className="groups-index-items-icon" 
-                        src="https://www.iconpacks.net/icons/2/free-folder-icon-1437-thumb.png"
+                        src={folder}
                     />
 
                     <div className="groups-index-items-details">
@@ -52,7 +53,12 @@ function GroupsIndex({ setSelectedGroupId }) {
     return (
         <div className="groups-index-container">
             <div onClick={handleClick()}>
-                <h1>All Figures</h1>
+                <div className='groups-index-items-container'> 
+                    <img className="groups-index-items-icon" src={folder}></img>
+                    <div className='all-figure'> <h1>All Figures</h1></div>
+                    </div>
+           
+            
             </div>
             {groupItems}
             <GroupCreate />

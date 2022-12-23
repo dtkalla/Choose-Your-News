@@ -72,4 +72,14 @@
   animation-fill-mode: both;
   animation-name: keyframe_d37zz3;
   overflow: clip;
+  height: 480px;
+  width: 320px;
+  justify-content: center;
+}
+
+.modal-words{
+  position: absolute;
+  left: 50%;
+  bottom: 65%;
+  transform: translate(-50%, -50%);
 }
