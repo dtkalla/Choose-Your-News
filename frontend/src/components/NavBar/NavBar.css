@@ -12,19 +12,20 @@
 }
 
 .logo {
-    font-family: "Trirong", serif;
+    font-size: 20px;
     font-weight: bold;
     color: black;
-    text-decoration: none;
 }
 
 /* --------------------------------------------- */
 /* Dropdown */
 
 .dropdown-button {
-    margin-left: 75px;
-    border: none;
-    background: none;
+    border: 1px solid #F7F7F7;
+    border-radius: 50%;
+    height: 55px;
+    width: 55px;
+    margin-left: 105px;
 }
 
 .dropdown-button:hover{
@@ -37,7 +38,8 @@
     position: absolute;
     background-color: white;
     border: 1px solid #DDDDDD;
-    margin-top: 8px;
+    margin-top: 5px;
+    padding: 12px 0;
     border-radius: 20px;
     width: 160px
 }
@@ -50,11 +52,6 @@
 
 .dropdown-options:hover {
     cursor: pointer;
+    font-weight: bold;
     background-color: #F7F7F7;
-}
-
-#profile-link{
-    font-size:36px;
-
-    color: #0066cc;
 }
