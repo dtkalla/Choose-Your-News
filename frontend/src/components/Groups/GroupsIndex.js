@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCurrentUserFetchedArticles, fetchCurrentUserFetchedArticlesByGroup } from '../../store/articles';
+import { fetchCurrentUserGroups } from '../../store/groups';
 import folder from './folder.png'
 import GroupCreate from './GroupCreate'
 import './Groups.css'
@@ -15,10 +16,12 @@ function GroupsIndex({ setSelectedGroupId }) {
       e.preventDefault();
       if(groupId){
         setSelectedGroupId(groupId);
+        dispatch(fetchCurrentUserGroups());
         dispatch(fetchCurrentUserFetchedArticlesByGroup(groupId));
       }
       else {
         setSelectedGroupId(undefined);
+        dispatch(fetchCurrentUserGroups());
         dispatch(fetchCurrentUserFetchedArticles());
       }
     }

@@ -14,13 +14,13 @@ import './MainPage.css';
 function MainPage() {
   const currentUser = useSelector(state => state.session.user);
 
-  const groupsObj = useSelector(state => state.groups);
+  // const groupsObj = useSelector(state => state.groups);
 
   const fetchedArticlesObj = useSelector(state => state.articles.fetched);
 
   const savedArticlesObj = useSelector(state => state.articles.saved);
 
-  const groups = groupsObj ? Object.values(groupsObj) : [];
+  // const groups = groupsObj ? Object.values(groupsObj) : [];
 
   const fetchedArticles = fetchedArticlesObj ? Object.values(fetchedArticlesObj) :[];
 
@@ -39,7 +39,7 @@ function MainPage() {
     return figures;
   }
 
-  const figures = groups ? getFigures(groups) : [];
+  // const figures = groups ? getFigures(groups) : [];
 
   const [selectedGroupId, setSelectedGroupId] = useState(undefined);
 
@@ -50,8 +50,8 @@ function MainPage() {
 
   useEffect(() => {
     if (currentUser) {
-      dispatch(fetchCurrentUserGroups());
-      dispatch(fetchCurrentUserSavedArticles());
+      // dispatch(fetchCurrentUserGroups());
+      // dispatch(fetchCurrentUserSavedArticles());
     }
   }, [dispatch, currentUser])
 
@@ -63,19 +63,19 @@ function MainPage() {
       </div>
 
       <div className="index-container">
-        <NewsIndex 
+        {/* <NewsIndex 
           fetchedArticles={fetchedArticles} 
           savedArticles={savedArticles}
           selectedFigureId={selectedFigureId}
-        />
+        /> */}
 
         <IndexSidebar
           selectedGroupId={selectedGroupId}
           setSelectedGroupId={setSelectedGroupId}
           setSelectedFigureId={setSelectedFigureId}
-          figures={
-            selectedGroupId === undefined ? figures : groupsObj[selectedGroupId].figures
-          }
+          // figures={
+          //   selectedGroupId === undefined ? figures : groupsObj[selectedGroupId].figures
+          // }
         />
       </div>
     </>
