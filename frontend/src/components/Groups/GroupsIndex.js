@@ -6,10 +6,6 @@ import GroupCreate from './GroupCreate'
 import './Groups.css'
 
 function GroupsIndex({ setSelectedGroupId }) {
-    const groupsObj = useSelector(state => state.groups);
-
-    const groups = groupsObj ? Object.values(groupsObj) : [];
-
     const dispatch = useDispatch();
 
     const handleClick = (groupId = undefined) => (e) => {
@@ -26,46 +22,38 @@ function GroupsIndex({ setSelectedGroupId }) {
       }
     }
 
+    const groups = useSelector(state => state.groups);
+    const groupsArray = groups ? Object.values(groups) : [];
     const groupItems = [];
-    for(let i = 0; i < groups.length; i++) {
-        const group = groups[i];
-        if(group.name !== "No group") {
-            const groupItem = (
-                <div 
-                    key={group._id} 
-                    className="groups-index-items-container"
-                    onClick={handleClick(group._id)}
-                >
-                    
-                    <img 
-                        className="groups-index-items-icon" 
-                        src={folder}
-                    />
-
-                    <div className="groups-index-items-details">
-                        <h1 className="groups-index-items-name">
-                            {group.name}
-                        </h1>
-                    </div>
+    for (let i = 0; i < groupsArray.length; i++) {
+        const group = groupsArray[i];
+        const groupId = group.name === "No group" ? undefined : group._id;
+        const groupName = group.name === "No group" ? "All" : group.name;
+        const groupItem = (
+            <div 
+                className="groups-index-items-container"
+                key={groupId}
+                onClick={handleClick(groupId)}
+            >
+                <img 
+                    className="groups-index-items-icon" 
+                    src={folder}
+                />
+                <div className="groups-index-items-details">
+                    <h1 className="groups-index-items-name">
+                        {groupName}
+                    </h1>
                 </div>
-            )
-            groupItems.push(groupItem);
-        }
+            </div>
+        )
+        groupItems.push(groupItem);
     }
 
     return (
-        // <div className="groups-index-container">
-            <div className="groups-index-container">
-                <div onClick={handleClick()}>
-                    <div className='groups-index-items-container'> 
-                        <img className="groups-index-items-icon" src={folder}></img>
-                        <div className='all-figure'><h1>All</h1></div>
-                    </div>
-                </div>
-                {groupItems}
-                <GroupCreate />
-            </div>
-        // </div>
+        <div className="groups-index-container">
+            {groupItems}
+            <GroupCreate />
+        </div>
     );
 }
 
