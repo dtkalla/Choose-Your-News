@@ -1,25 +1,22 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCurrentUserFetchedArticles, fetchCurrentUserFetchedArticlesByGroup } from '../../store/articles';
-import { fetchCurrentUserGroups } from '../../store/groups';
-import folder from './folder.png'
-import GroupCreate from './GroupCreate'
-import './Groups.css'
+import { fetchCurrentUserFetchedArticles, 
+    fetchCurrentUserFetchedArticlesByGroup } from '../../store/articles';
+import GroupCreate from './GroupCreate';
+import folder from './folder.png';
+import './Groups.css';
 
 function GroupsIndex({ setSelectedGroupId }) {
     const dispatch = useDispatch();
-
-    const handleClick = (groupId = undefined) => (e) => {
-      e.preventDefault();
-      if(groupId){
+    const handleSelectGroup = (groupId) => (e) => {
+        e.preventDefault();
+        groupId = groupId === "undefined" ? undefined : groupId;
         setSelectedGroupId(groupId);
-        dispatch(fetchCurrentUserGroups());
-        dispatch(fetchCurrentUserFetchedArticlesByGroup(groupId));
-      }
-      else {
-        setSelectedGroupId(undefined);
-        dispatch(fetchCurrentUserGroups());
-        dispatch(fetchCurrentUserFetchedArticles());
-      }
+        // if(groupId){
+        //     dispatch(fetchCurrentUserFetchedArticlesByGroup(groupId));
+        // }
+        // else {
+        //     dispatch(fetchCurrentUserFetchedArticles());
+        // }
     }
 
     const groups = useSelector(state => state.groups);
@@ -27,13 +24,13 @@ function GroupsIndex({ setSelectedGroupId }) {
     const groupItems = [];
     for (let i = 0; i < groupsArray.length; i++) {
         const group = groupsArray[i];
-        const groupId = group.name === "No group" ? undefined : group._id;
+        const groupId = group.name === "No group" ? "undefined" : group._id;
         const groupName = group.name === "No group" ? "All" : group.name;
         const groupItem = (
             <div 
                 className="groups-index-items-container"
                 key={groupId}
-                onClick={handleClick(groupId)}
+                onClick={handleSelectGroup(groupId)}
             >
                 <img 
                     className="groups-index-items-icon" 
@@ -56,6 +53,5 @@ function GroupsIndex({ setSelectedGroupId }) {
         </div>
     );
 }
-
 
 export default GroupsIndex;

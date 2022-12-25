@@ -1,20 +1,30 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
 import { createGroup } from '../../store/groups';
-
 import { LargeModal } from '../../context/Modal';
-import './Groups.css'
-import add from './add.png'
+import add from './add.png';
+import './Groups.css';
 
-function GroupsCreate() {
+function GroupCreate() {
     const currentUser = useSelector(state => state.session.user);
-
-    const dispatch = useDispatch();
 
     const [groupName, setGroupName] = useState(undefined);
 
+    const dispatch = useDispatch();
+
     const [showGroupCreateModal, setShowGroupCreateModal] = useState(false);
+
+    const handleCreateGroup = (e) => {
+        e.preventDefault();
+        const newGroup = {
+            user: currentUser._id,
+            name: groupName,
+            figures: []
+        };
+        dispatch(createGroup(newGroup));
+        setGroupName(undefined);
+        setShowGroupCreateModal(false);
+    }
 
     const openModal = (e) => {
         e.preventDefault();
@@ -26,40 +36,28 @@ function GroupsCreate() {
         setShowGroupCreateModal(false);
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        const newGroup = {
-            user: currentUser._id, 
-            name: groupName, 
-            figures: []
-        };
-
-        dispatch(createGroup(newGroup));
-        setGroupName(undefined);
-        setShowGroupCreateModal(false);
-    }
-
-
     return (
         <>
-            <div className="groups-index-items-container" onClick={openModal}>
+            <div
+                className="groups-index-items-container"
+                onClick={openModal}
+            >
                 <div className="add">
-                <img 
-                    className="groups-index-items-icon" 
-                    src={add} 
-                />
+                    <img 
+                        className="groups-index-items-icon" 
+                        src={add} 
+                    />
                 </div>
                 <div className="groups-index-items-details">
                     <h1 className="groups-index-items-name">
-                        {/* Create a Group */}
+                        Create
                     </h1>
                 </div>
             </div>
 
             {showGroupCreateModal && (
             <LargeModal onClose={closeModal}>
-                <form className="figure-form" onSubmit={handleSubmit}>
+                <form className="figure-form" onSubmit={handleCreateGroup}>
                     <div className='modal-words'>
                         Enter a name to create a group
                     </div>
@@ -80,5 +78,4 @@ function GroupsCreate() {
     );
 }
 
-
-export default GroupsCreate;
+export default GroupCreate;
