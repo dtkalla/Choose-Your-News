@@ -14,6 +14,8 @@ function IndexSidebar({ selectedGroupId, setSelectedGroupId, setSelectedFigureId
 
   const groupsObj = useSelector(state => state.groups);
 
+  const groups = groupsObj ? Object.values(groupsObj) : [];
+
   useEffect(() => {
     if(currentUser) {
       if(selectedGroupId){
@@ -89,14 +91,17 @@ function IndexSidebar({ selectedGroupId, setSelectedGroupId, setSelectedFigureId
     <>
     <div className="index-sidebar-container">
       
-      <h1 className="index-sidebar-title">
-        <h1>Figures</h1>
+      <div className="index-sidebar-title">
+        <h1>
+          {selectedGroupId ? 
+          `${groupsObj[selectedGroupId].name} figures` : "All figures"}
+        </h1>
         <div className="title-add">
           <button className="add-button" onClick={() => setShowFigureCreateModal(true)}>
             {selectedGroupId ? "Add" : "Create"}
           </button>
         </div>
-      </h1>
+      </div>
       
       <div className="index-sidebar-groups-container">
         
