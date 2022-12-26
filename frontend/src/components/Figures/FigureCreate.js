@@ -1,13 +1,23 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
+import { createFigure } from '../../store/groups';
 import { LargeModal } from '../../context/Modal';
 
-function FigureCreate({ selectedGroupId, value, setValue, handleSubmit, setShowModal}) {
-    const [figureName, setFigureName] = useState(undefined);
+function FigureCreate({ selectedGroupId }) {
+    const [figure, setFigure] = useState(undefined);
 
     const dispatch = useDispatch();
 
     const [showFigureCreateModal, setShowFigureCreateModal] = useState(false);
+
+    const handleCreateFigure = (e) => {
+        e.preventDefault();
+        if (figure) {
+            dispatch(createFigure(figure, selectedGroupId));
+        }
+        setFigure(undefined);
+        setShowFigureCreateModal(false);
+    }
 
     const openModal = (e) => {
         e.preventDefault();
@@ -19,14 +29,15 @@ function FigureCreate({ selectedGroupId, value, setValue, handleSubmit, setShowM
         setShowFigureCreateModal(false);
     }
 
-    const noGroup = useSelector(state => Object.values(state.groups)
-        .find(group => group.name === "No group"));
+    const groups = useSelector(state => state.groups);
+    const noGroup = Object.values(groups)
+        .find(group => group.name === "No group");
 
     let inputField;
 
     if (selectedGroupId) {
         const defaultOption = (
-            <option value={undefined} default>select figure</option>
+            <option key={undefined} value={undefined} default>select figure</option>
         );
 
         const figureOptions = [defaultOption];
@@ -34,7 +45,7 @@ function FigureCreate({ selectedGroupId, value, setValue, handleSubmit, setShowM
         for (let i = 0; i < noGroup.figures.length; i++) {
             const figure = noGroup.figures[i];
             const figureOption = (
-                <option value={figure._id}>{figure.name}</option>
+                <option key={figure._id} value={figure._id}>{figure.name}</option>
             );
             figureOptions.push(figureOption);
         }
@@ -42,8 +53,8 @@ function FigureCreate({ selectedGroupId, value, setValue, handleSubmit, setShowM
         inputField = (
             <>
                 <select 
-                    value={figureName}
-                    onChange={e => setFigureName(e.target.value)} 
+                    value={figure}
+                    onChange={e => setFigure(e.target.value)} 
                 >
                     {figureOptions}
                 </select>
@@ -55,8 +66,8 @@ function FigureCreate({ selectedGroupId, value, setValue, handleSubmit, setShowM
             <>
                 <input
                     type="text"
-                    value={figureName}
-                    onChange={e => setFigureName(e.target.value)}
+                    value={figure}
+                    onChange={e => setFigure(e.target.value)}
                 />
             </>
         );
@@ -64,29 +75,32 @@ function FigureCreate({ selectedGroupId, value, setValue, handleSubmit, setShowM
 
     return (
         <>
+            <h1>
+                {selectedGroupId ? `${groups[selectedGroupId].name}` : "all"} figures
+            </h1>
             <div className="title-add">
                 <button className="add-button" onClick={openModal}>
                     {selectedGroupId ? "add figure" : "create figure"}
                 </button>
-            </div>
 
-            {showFigureCreateModal &&
-            <LargeModal onClose={closeModal}>
-                <form className="figure-form" onSubmit={handleSubmit}>
-                    <div className='modal-words'>
-                        enter a name to create a figure
-                    </div>
-                    <span>
-                        name: 
-                    </span>
-                    {inputField}
-                    <br />
-                    <button className="form-button" type="submit">
-                        create figure
-                    </button>
-                </form>
-            </LargeModal>
-            }
+                {showFigureCreateModal &&
+                <LargeModal onClose={closeModal}>
+                    <form className="figure-form" onSubmit={handleCreateFigure}>
+                        <div className='modal-words'>
+                            enter a name to create a figure
+                        </div>
+                        <span>
+                            name:
+                        </span>
+                        {inputField}
+                        <br />
+                        <button className="form-button" type="submit">
+                            create figure
+                        </button>
+                    </form>
+                </LargeModal>
+                }
+            </div>
         </>
     );
 }
