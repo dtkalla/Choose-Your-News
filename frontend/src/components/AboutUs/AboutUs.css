@@ -10,12 +10,19 @@
 .about-us-person {
     display: flex;
     flex-direction: row;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
+    margin: 30px;
+}
+
+#about-person-list {
+    display: grid;
+    grid-template-columns: auto auto;
 }
 
 
 #profile-pic-about-us {
-    width: 300px;
+    width: 250px;
+    height: 250px;
     margin-right: 30px;
     margin-left: 30px;
 }
@@ -66,4 +73,8 @@
     font-size: 24px;
     font-weight: 600;
     margin: 30px;
+}
+
+.about-project {
+    margin-left: 30px;
 }
