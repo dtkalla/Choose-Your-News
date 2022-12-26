@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createGroup } from '../../store/groups';
 import { LargeModal } from '../../context/Modal';
-import add from './add.png';
-import './Groups.css';
+import createIcon from './images/create.png';
+import './css/Groups.css';
 
 function GroupCreate() {
     const currentUser = useSelector(state => state.session.user);
@@ -45,12 +45,12 @@ function GroupCreate() {
                 <div className="add">
                     <img 
                         className="groups-index-items-icon" 
-                        src={add} 
+                        src={createIcon} 
                     />
                 </div>
                 <div className="groups-index-items-details">
                     <h1 className="groups-index-items-name">
-                        Create
+                        create group
                     </h1>
                 </div>
             </div>
@@ -59,9 +59,11 @@ function GroupCreate() {
             <LargeModal onClose={closeModal}>
                 <form className="figure-form" onSubmit={handleCreateGroup}>
                     <div className='modal-words'>
-                        Enter a name to create a group
+                        enter a name to create a group
                     </div>
-                    <span>Name:</span>
+                    <span>
+                        name:
+                    </span>
                     <input
                         type="text" 
                         value={groupName}
@@ -69,7 +71,7 @@ function GroupCreate() {
                     />
                     <br />
                     <button className="form-button" type="submit">
-                        Create
+                        create group
                     </button>
                 </form>
             </LargeModal>

@@ -5,8 +5,8 @@ import { fetchCurrentUserGroups } from '../../store/groups';
 import { fetchCurrentUserSavedArticles } from '../../store/articles';
 
 import NewsIndex from './NewsIndex';
-import IndexSidebar from './IndexSidebar';
 import GroupsIndex from '../Groups/GroupsIndex';
+import FiguresSidebar from '../Figures/FiguresSidebar';
 
 import './MainPage.css';
 
@@ -69,7 +69,7 @@ function MainPage() {
           selectedFigureId={selectedFigureId}
         /> */}
 
-        <IndexSidebar
+        <FiguresSidebar
           selectedGroupId={selectedGroupId}
           setSelectedGroupId={setSelectedGroupId}
           setSelectedFigureId={setSelectedFigureId}

@@ -2,8 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchCurrentUserFetchedArticles, 
     fetchCurrentUserFetchedArticlesByGroup } from '../../store/articles';
 import GroupCreate from './GroupCreate';
-import folder from './folder.png';
-import './Groups.css';
+import folder from './images/folder.png';
+import './css/Groups.css';
 
 function GroupsIndex({ setSelectedGroupId }) {
     const dispatch = useDispatch();
@@ -25,7 +25,7 @@ function GroupsIndex({ setSelectedGroupId }) {
     for (let i = 0; i < groupsArray.length; i++) {
         const group = groupsArray[i];
         const groupId = group.name === "No group" ? "undefined" : group._id;
-        const groupName = group.name === "No group" ? "All" : group.name;
+        const groupName = group.name === "No group" ? "all" : group.name;
         const groupItem = (
             <div 
                 className="groups-index-items-container"

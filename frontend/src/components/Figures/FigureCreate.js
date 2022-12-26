@@ -1,56 +1,94 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { Modal } from '../../context/Modal';
+import React, { useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import { LargeModal } from '../../context/Modal';
-import { createGroup } from '../../store/groups';
-import { fetchUser, clearUserErrors } from '../../store/users';
-import './Groups.css'
 
-function GroupsCreate({ user }) {
+function FigureCreate({ selectedGroupId, value, setValue, handleSubmit, setShowModal}) {
+    const [figureName, setFigureName] = useState(undefined);
+
     const dispatch = useDispatch();
-    const [figureName, setFigureName] = useState("")
-    const [showGroupCreateModal, setShowGroupCreateModal] = useState(false);
 
-    const handleClose = () => {
-        setShowGroupCreateModal(false)
-    }
+    const [showFigureCreateModal, setShowFigureCreateModal] = useState(false);
 
-    const handleSubmit = (e) => {
+    const openModal = (e) => {
         e.preventDefault();
-        setShowGroupCreateModal(false)
-
-        return dispatch(
-            createGroup({ user: user._id, name: groupName, figures: [], share: true })
-        )
+        setShowFigureCreateModal(true);
     }
 
+    const closeModal = (e) => {
+        e.preventDefault();
+        setShowFigureCreateModal(false);
+    }
+
+    const noGroup = useSelector(state => Object.values(state.groups)
+        .find(group => group.name === "No group"));
+
+    let inputField;
+
+    if (selectedGroupId) {
+        const defaultOption = (
+            <option value={undefined} default>select figure</option>
+        );
+
+        const figureOptions = [defaultOption];
+
+        for (let i = 0; i < noGroup.figures.length; i++) {
+            const figure = noGroup.figures[i];
+            const figureOption = (
+                <option value={figure._id}>{figure.name}</option>
+            );
+            figureOptions.push(figureOption);
+        }
+
+        inputField = (
+            <>
+                <select 
+                    value={figureName}
+                    onChange={e => setFigureName(e.target.value)} 
+                >
+                    {figureOptions}
+                </select>
+            </>
+        );
+    }
+    else {
+        inputField = (
+            <>
+                <input
+                    type="text"
+                    value={figureName}
+                    onChange={e => setFigureName(e.target.value)}
+                />
+            </>
+        );
+    }
 
     return (
         <>
-            <div className="groups-index-items-container" onClick={() => setShowGroupCreateModal(true)}>
-                <img className="groups-index-items-icon" src="https://iconarchive.com/download/i22631/kyo-tux/aeon/Sign-Add.ico"></img>
-                <div className="groups-index-items-details">
-                    <h1 className="groups-index-items-name">
-                        {/* Create a Group */}
-                    </h1>
-                </div>         
+            <div className="title-add">
+                <button className="add-button" onClick={openModal}>
+                    {selectedGroupId ? "add figure" : "create figure"}
+                </button>
             </div>
-            {showGroupCreateModal && (
-                   <div className='create-form'>
-            <LargeModal onClose={() => handleClose()}>
-                <form  className='create-form' onSubmit={handleSubmit}>
-                    Name:
-                    <input type="text" value={figureName} onChange={(e) => setFigureName(e.target.value)} />
+
+            {showFigureCreateModal &&
+            <LargeModal onClose={closeModal}>
+                <form className="figure-form" onSubmit={handleSubmit}>
+                    <div className='modal-words'>
+                        enter a name to create a figure
+                    </div>
+                    <span>
+                        name: 
+                    </span>
+                    {inputField}
                     <br />
-                    <button type="submit">Create</button>
+                    <button className="form-button" type="submit">
+                        create figure
+                    </button>
                 </form>
             </LargeModal>
-            </div>
-            )}
+            }
         </>
     );
 }
 
-
-export default GroupsCreate;
+export default FigureCreate;

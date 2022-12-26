@@ -7,8 +7,6 @@ import NavBar from './components/NavBar/NavBar';
 import Footer from './components/Footer/Footer';
 
 import MainPage from './components/MainPage/MainPage';
-import Groups from './components/Groups/Groups';
-import GroupShow from './components/Groups/GroupShow';
 import Articles from './components/Articles/Articles';
 import LoginForm from './components/SessionForms/LoginForm';
 import SignupForm from './components/SessionForms/SignupForm';
@@ -33,8 +31,6 @@ function App() {
         <AuthRoute exact path="/signup" component={SignupForm} />
 
         <ProtectedRoute exact path="/" component={MainPage} />
-        <ProtectedRoute exact path="/groups" component={Groups} />
-        <ProtectedRoute path="/groups/:id" component={GroupShow} />
         <ProtectedRoute exact path="/articles" component={Articles} />
         <ProtectedRoute exact path="/about" component={AboutUs} />
 
