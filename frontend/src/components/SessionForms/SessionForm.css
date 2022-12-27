@@ -1,7 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Koulen&family=Lato&family=Nunito&family=Playfair+Display:ital@1&family=Prata&family=Raleway:ital,wght@1,100&family=Roboto&family=Roboto+Condensed&family=Teko&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Trirong');
-@import url('https://fonts.googleapis.com/css?family=Rye');
-
 .session-form > label {
   width: 100%;
   padding: 4px 0;
@@ -15,7 +11,6 @@
 
 .session-form > input {
   width: 200px;
-
 }
 
 .session-form > input[type="submit"] {
@@ -30,73 +25,52 @@
   background: transparent;
 }
 
-
-.form-container{
+.form-container {
   margin-left: 20px;
   float: right;
-  display: flex;
-  flex-direction: column;
-  display: flex;
-  text-align: center;
-  min-height: 100vh;
   padding-top: 15%;
   padding-right: 10%;
   margin-top: 2%;
-  
 }
 
-/* body{
-  margin: 0;
-  height: 100vh;
-  font-weight: 100;
-  background: radial-gradient(lightblue,#becbe9);
- 
-
-} */
-
-.signup-button{
- margin-top: 10px;
+.signup-button {
+  margin-top: 10px;
   margin-right: 5px;
-justify-content: center;
-font-family: Roboto, sans-serif;
-font-weight: 0;
-font-size: 14px;
-color: #fff;
-background-color: #0066CC;
-padding: 10px 30px;
-border: 2px solid #0066cc;
-box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
-border-radius: 50px;
-transition : 1000ms;
-transform: translateY(0);
-display: flex;
-flex-direction: row;
-align-items: center;
-cursor: pointer;
+  justify-content: center;
+  font-family: Roboto, sans-serif;
+  font-weight: 0;
+  font-size: 14px;
+  color: #fff;
+  background-color: #0066CC;
+  padding: 10px 30px;
+  border: 2px solid #0066cc;
+  border-radius: 50px;
+  transition : 1000ms;
+  transform: translateY(0);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
 }
 
-.signup-button:hover{
-
-transition : 1000ms;
-padding: 10px 80px;
-transform : translateY(-0px);
-background-color: #fff;
-color: #0066cc;
-border: solid 2px #0066cc;
+.signup-button:hover {
+  transition : 1000ms;
+  padding: 10px 80px;
+  transform : translateY(-0px);
+  background-color: #fff;
+  color: #0066cc;
+  border: solid 2px #0066cc;
 }
 
-.session-form > input[type="submit"]{
+.session-form > input[type="submit"] {
   width: 80%;
-  
 }
 
 .session-form > input{
   max-width: 30%;
-  
 }
 
-input[type="text" i], input[type="password" i]{
-
+input[type="text" i], input[type="password" i] {
   padding: 5px;
   font-size: 16px;
   border-width: 1px;
@@ -106,24 +80,20 @@ input[type="text" i], input[type="password" i]{
   border-style: solid;
   border-radius: 0px;
   box-shadow: 0px 0px 5px rgba(66,66,66,.75);
-  /* text-shadow: 0px 0px 5px rgba(66,66,66,.75); */
 }
 
-input[type="text" i]:focus, input[type="password" i]:focus{
+input[type="text" i]:focus, input[type="password" i]:focus {
   outline:none;
 }
 
-.field{
+.field {
   color: black;
   font-size: 20px;
-  /* font-family: "Trirong", serif; */
   font-weight: bold;
-
 }
 
-.title{
+.title {
   font-size: 70px;
-  /* font-family: ''; */
   font-weight: bold;
   color: #000000;
   position: absolute;
@@ -134,30 +104,39 @@ input[type="text" i]:focus, input[type="password" i]:focus{
   background: transparent;
 }
 
-.title > h1{
+.title > h1 {
   padding: 10px 0;
 }
 
-.buttons{
+.buttons {
   display: flex;
  
 }
 
-.signup-link{
+.signup-link {
   margin-top: 15px;
   margin-right: 50px;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: Roboto, sans-serif;
 }
 
-.line-tail{
+.signup-link-button {
+  color: #0066cc;
+}
+
+.signup-link-button:hover {
+  color: #FFD247;
+  text-decoration: underline
+}
+
+/* .line-tail{
   position: absolute;
-width: 0px;
-height: 0px;
-margin-top: 20%;
-margin-right:70%
-}
+  width: 0px;
+  height: 0px;
+  margin-top: 20%;
+  margin-right:70%
+} */
 
-.line-mid{
+/* .line-mid{
   position: absolute;
   width: 0px;
 height: 0px;
@@ -171,8 +150,4 @@ margin-left: 38%;
 height: 0px;
 margin-top: 20%;
 margin-left: 91%;
-}
-
-.footer{
-
-}
+} */

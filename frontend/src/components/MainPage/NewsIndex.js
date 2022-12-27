@@ -33,9 +33,9 @@ function NewsIndex({ fetchedArticles, savedArticles, selectedFigureId }) {
   if (fetchedArticles) {
     fetchedArticles.forEach(article => {
         const articleItem = (
-          <div>
-            <a href={article.url}>
-              <div className="news-feed">
+          <>
+            <div className="news-feed">
+              <a href={article.url}>
                 <div className='title-one'>
                   
                   {article.headline}
@@ -49,22 +49,20 @@ function NewsIndex({ fetchedArticles, savedArticles, selectedFigureId }) {
                 <div className='date-one'>
                   {article.publishedDate.slice(0,10)} {article.publishedDate.slice(11,19)} 
                 </div>
+              </a>
 
-              </div>
-
-              {/* <hr></hr> */}
-            </a>
-
-            {(saved(article.url, savedArticles) ? 
-              <div className='like-button'>
-                Saved
-              </div>
-              :
-              <div className='like-button' onClick={handleSaveArticle(article)}>
-                Save
-              </div>)
-            }
-          </div>
+              {(saved(article.url, savedArticles) ? 
+                <div className='like-button'>
+                  Saved
+                </div>
+                :
+                <div className='like-button' onClick={handleSaveArticle(article)}>
+                  Save
+                </div>)
+              }
+            </div>
+            {/* <hr /> */}
+          </>
 
         );
         articleItems.push(articleItem);
