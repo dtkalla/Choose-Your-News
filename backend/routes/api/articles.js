@@ -68,7 +68,7 @@ router.get('/user/current/fetched', requireUser, async (req, res) => {
                 searchTerms.push(figure.name);
             }
         }
-
+        console.log(searchTerms.join(" OR "));
         const articles = searchTerms.length === 0 ? [] :
             await fetchArticlesFromNewYorkTimes(searchTerms.join(" OR "))
 
