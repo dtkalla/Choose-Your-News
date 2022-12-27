@@ -1,7 +1,7 @@
 # MERN Project: Choose Your News
 
 
-With so much news going on in the world all the time, it's impossible to keep up with all of it.  [Choose your news](https://choose-your-news.onrender.com/) is a news aggregating service that lets you get news about specific figures you choose to follow. You can organize these figures into different groups based on topic, as well as save specific news articles and share your groups with other users.
+With so much news going on in the world all the time, it's impossible to keep up with all of it.  [Choose your news](https://choose-your-news.onrender.com/) is a news filtering service that lets you get news about specific figures you choose to follow. You can organize these figures into different groups based on topic, as well as save specific news articles and share your groups with other users.
 
 
 <!-- ![](images/WaterBnb_splash.png) -->
