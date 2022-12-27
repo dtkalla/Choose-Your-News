@@ -10,18 +10,22 @@ With so much news going on in the world all the time, it's impossible to keep up
 
 ## With Choose Your News, users can:
 
-- #### See news about figures they follow
+- #### See news pulled from the NY Times Articles API
 
 News about followed figures is pulled live using the NYTimes API based on headlines and shown in a stream, similar to a social media newsfeed.  Pages show the most recent ten relevant articles, organized from most to least recent.
 
 <!-- ![](images/listings_show_page.png) -->
+
+- #### Follow specific figures and get news about them
+
+Users can choose which figures to follow, and their news feed is made up of news about these figures.  Users can filter to see only news about a specific figure they follow.
 
 
 - #### Organize figures they follow into groups
 
 <!-- ![](images/reservation_form.png) -->
 
-Users can create groups to hold different figures they follow.  In addition to helping with organization, this lets users view three different types news streams: one for all figures they follow (on the home/index page), one for each group the follow, and one for each individual figure.  Users can move figures into and out of groups.
+Users can create groups to hold different figures they follow.  In addition to helping with organization, this lets users filter news to see only news about people in a given group.  (Altogether, there are three ways to view the news index: one for all figures they follow (on the home/index page), one for each group the follow, and one for each individual figure.)  Users can move figures into and out of groups.
 
 
 
@@ -36,11 +40,7 @@ Users can bookmark interesting articles to their profiles, which will save these
 
 
 
-<!-- - #### See ratings and reviews; rate/review a property
 
-![](images/reviews.png)
-
-Users can read reviews of each listing, see ratings, and leave their own ratings/reviews.  This is *not* a full CRUD feature -- like AirBnb, WaterBnb doesn't allow users to delete or modify reviews, because it could create a conflict of interest.  Average rating is stored with each listing and dynamically recalculated whenever a user rates a property.  (For purposes of being a better demo, logged-in users can rate/review any property, but they can't rate/review the same property more than once in a day.) -->
 
 
 
