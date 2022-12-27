@@ -8,7 +8,7 @@ import './css/Groups.css';
 function GroupCreate() {
     const currentUser = useSelector(state => state.session.user);
 
-    const [groupName, setGroupName] = useState(undefined);
+    const [groupName, setGroupName] = useState(null);
 
     const dispatch = useDispatch();
 
@@ -22,17 +22,19 @@ function GroupCreate() {
             figures: []
         };
         dispatch(createGroup(newGroup));
-        setGroupName(undefined);
+        setGroupName(null);
         setShowGroupCreateModal(false);
     }
 
     const openModal = (e) => {
         e.preventDefault();
+        setGroupName(null);
         setShowGroupCreateModal(true);
     }
 
     const closeModal = (e) => {
         e.preventDefault();
+        setGroupName(null);
         setShowGroupCreateModal(false);
     }
 
@@ -66,7 +68,7 @@ function GroupCreate() {
                     </span>
                     <input
                         type="text" 
-                        value={groupName}
+                        value={groupName ? groupName : ""}
                         onChange={(e) => setGroupName(e.target.value)} 
                     />
                     <br />

@@ -7,8 +7,10 @@ const GroupDelete = ({ selectedGroupId, setSelectedGroupId }) => {
 
     const handleDeleteGroup = (selectedGroupId) => (e) => {
         e.preventDefault();
-        dispatch(deleteGroup(selectedGroupId));
-        setSelectedGroupId(undefined);
+        if (selectedGroupId) {
+            dispatch(deleteGroup(selectedGroupId));
+            setSelectedGroupId(null);
+        }
     }
 
     return (

@@ -1,11 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { saveArticle } from '../../store/articles'
-import './MainPage.css'
+import { fetchCurrentUserFetchedArticles, 
+  fetchCurrentUserSavedArticles } from '../../store/articles';
+import { saveArticle } from '../../store/articles';
 
-
-function NewsIndex({ fetchedArticles, savedArticles, selectedFigureId }) {
+function NewsIndex() {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCurrentUserFetchedArticles());
+    dispatch(fetchCurrentUserSavedArticles());
+  }, [dispatch]);
+
+  const fetchedArticles = useSelector(state =>
+    state.articles.fetched ? Object.values(state.articles.fetched) : []);
+
+  const savedArticles = useSelector(state =>
+    state.articles.saved ? Object.values(state.articles.saved) : []);
 
   const saved = (newsUrl, savedArticles) => {
     for (let i = 0; i < savedArticles.length; i++) {

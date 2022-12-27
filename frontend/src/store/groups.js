@@ -1,3 +1,5 @@
+import { fetchCurrentUserFetchedArticles,
+  fetchCurrentUserFetchedArticlesByGroup } from './articles';
 import jwtFetch from './jwt';
 
 const RECEIVE_CURRENT_USER_GROUPS = "groups/RECEIVE_CURRENT_USER_GROUPS";
@@ -32,10 +34,16 @@ export const createFigure = (figure, groupId = undefined) => async dispatch => {
   }
   const groups = await res.json();
   dispatch(receiveCurrentUserGroups(groups));
+  if(groupId){
+    dispatch(fetchCurrentUserFetchedArticlesByGroup(groupId));
+  }
+  else{
+    dispatch(fetchCurrentUserFetchedArticles());
+  }
 };
 
 
-export const deleteFigure = (figureId, groupId = undefined) => async dispatch => {
+export const deleteFigure = (figureId, groupId) => async dispatch => {
   let res;
   if(groupId){
     res = await jwtFetch(`/api/groups/${groupId}/figure/${figureId}`, {
@@ -49,6 +57,12 @@ export const deleteFigure = (figureId, groupId = undefined) => async dispatch =>
   }
   const groups = await res.json();
   dispatch(receiveCurrentUserGroups(groups));
+  if (groupId) {
+    dispatch(fetchCurrentUserFetchedArticlesByGroup(groupId));
+  }
+  else {
+    dispatch(fetchCurrentUserFetchedArticles());
+  }
 };
 
 
@@ -58,6 +72,7 @@ export const deleteGroup = (groupId) => async dispatch => {
   });
   const groups = await res.json();
   dispatch(receiveCurrentUserGroups(groups));
+  dispatch(fetchCurrentUserFetchedArticles());
 };
 
 

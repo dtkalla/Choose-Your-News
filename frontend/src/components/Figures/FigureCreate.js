@@ -4,7 +4,7 @@ import { createFigure } from '../../store/groups';
 import { LargeModal } from '../../context/Modal';
 
 function FigureCreate({ selectedGroupId }) {
-    const [figure, setFigure] = useState(undefined);
+    const [figure, setFigure] = useState(null);
 
     const dispatch = useDispatch();
 
@@ -15,17 +15,19 @@ function FigureCreate({ selectedGroupId }) {
         if (figure) {
             dispatch(createFigure(figure, selectedGroupId));
         }
-        setFigure(undefined);
+        setFigure(null);
         setShowFigureCreateModal(false);
     }
 
     const openModal = (e) => {
         e.preventDefault();
+        setFigure(null);
         setShowFigureCreateModal(true);
     }
 
     const closeModal = (e) => {
         e.preventDefault();
+        setFigure(null);
         setShowFigureCreateModal(false);
     }
 
@@ -37,7 +39,7 @@ function FigureCreate({ selectedGroupId }) {
 
     if (selectedGroupId) {
         const defaultOption = (
-            <option key={undefined} value={undefined} default>select figure</option>
+            <option key={"null"} value={""} default>select figure</option>
         );
 
         const figureOptions = [defaultOption];
@@ -53,7 +55,7 @@ function FigureCreate({ selectedGroupId }) {
         inputField = (
             <>
                 <select 
-                    value={figure}
+                    value={figure ? figure : ""}
                     onChange={e => setFigure(e.target.value)} 
                 >
                     {figureOptions}
@@ -66,7 +68,7 @@ function FigureCreate({ selectedGroupId }) {
             <>
                 <input
                     type="text"
-                    value={figure}
+                    value={figure ? figure : ""}
                     onChange={e => setFigure(e.target.value)}
                 />
             </>
@@ -87,7 +89,7 @@ function FigureCreate({ selectedGroupId }) {
                 <LargeModal onClose={closeModal}>
                     <form className="figure-form" onSubmit={handleCreateFigure}>
                         <div className='modal-words'>
-                            enter a name to create a figure
+                            enter a name to { selectedGroupId ? "add" : "create" } a figure
                         </div>
                         <span>
                             name:
@@ -95,7 +97,7 @@ function FigureCreate({ selectedGroupId }) {
                         {inputField}
                         <br />
                         <button className="form-button" type="submit">
-                            create figure
+                            {selectedGroupId ? "add" : "create"} figure
                         </button>
                     </form>
                 </LargeModal>

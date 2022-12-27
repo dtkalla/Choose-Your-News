@@ -1,55 +1,26 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux';
-
-import { fetchCurrentUserGroups } from '../../store/groups';
-import { fetchCurrentUserSavedArticles } from '../../store/articles';
-
-import NewsIndex from './NewsIndex';
-
+import React, { useState } from "react";
 import GroupsIndex from '../Groups/GroupsIndex';
-import FiguresSidebar from '../Figures/FiguresSidebar';
-
+import NewsIndex from '../Articles/NewsIndex';
+import Sidebar from '../Sidebar/Sidebar';
 import './MainPage.css';
 
-
 function MainPage() {
-  const currentUser = useSelector(state => state.session.user);
-
-  // const fetchedArticlesObj = useSelector(state => state.articles.fetched);
-
-  // const savedArticlesObj = useSelector(state => state.articles.saved);
-
-  // const fetchedArticles = fetchedArticlesObj ? Object.values(fetchedArticlesObj) :[];
-
-  // const savedArticles = savedArticlesObj ? Object.values(savedArticlesObj) : [];
-
-  const [selectedGroupId, setSelectedGroupId] = useState(undefined);
-
-  const [selectedFigureId, setSelectedFigureId] = useState(undefined);
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-      dispatch(fetchCurrentUserGroups());
-      // dispatch(fetchCurrentUserSavedArticles());
-  }, [dispatch])
+  const [selectedGroupId, setSelectedGroupId] = useState(null);
 
   return (
     <>
       <div className="groups-container">
-        <GroupsIndex setSelectedGroupId={setSelectedGroupId} />
+        <GroupsIndex 
+          selectedGroupId={selectedGroupId}
+          setSelectedGroupId={setSelectedGroupId}
+        />
       </div>
 
       <div className="index-container">
-        {/* <NewsIndex 
-          fetchedArticles={fetchedArticles} 
-          savedArticles={savedArticles}
-          selectedFigureId={selectedFigureId}
-        /> */}
-        <FiguresSidebar
+        <NewsIndex />
+        <Sidebar
           selectedGroupId={selectedGroupId}
           setSelectedGroupId={setSelectedGroupId}
-          setSelectedFigureId={setSelectedFigureId}
         />
       </div>
     </>

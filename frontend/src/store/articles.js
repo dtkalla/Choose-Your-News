@@ -20,8 +20,8 @@ export const fetchCurrentUserFetchedArticlesByGroup = (groupId) => async dispatc
   dispatch(receiveCurrentUserFetchedArticles(fetchedArticles));
 };
 
-export const fetchCurrentUserFetchedArticlesByFigure = (figure) => async dispatch => {
-  const res = await jwtFetch(`/api/articles/figure/${figure.name}/fetched`);
+export const fetchCurrentUserFetchedArticlesByFigure = (figureId) => async dispatch => {
+  const res = await jwtFetch(`/api/articles/figure/${figureId}/fetched`);
   const fetchedArticles = await res.json();
   dispatch(receiveCurrentUserFetchedArticles(fetchedArticles));
 };

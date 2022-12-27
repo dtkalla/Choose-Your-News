@@ -1,20 +1,20 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchCurrentUserFetchedArticlesByFigure } from '../../store/articles';
 import { deleteFigure } from '../../store/groups';
 
-const FiguresIndex = ({ selectedGroupId, setSelectedFigureId }) => {
+const FiguresIndex = ({ selectedGroupId }) => {
     const groups = useSelector(state => state.groups);
 
     const dispatch = useDispatch();
     
-    const handleShowFigure = (figure) => (e) => {
+    const handleShowFigure = (figureId) => (e) => {
         e.preventDefault();
-        // dispatch(fetchCurrentUserFetchedArticlesByFigure(figure));
-        setSelectedFigureId(figure._id);
+        dispatch(fetchCurrentUserFetchedArticlesByFigure(figureId));
     }
 
     const handleDeleteFigure = (selectedGroupId, figureId) => (e) => {
         e.preventDefault();
-        dispatch(deleteFigure(selectedGroupId, figureId));
+        dispatch(deleteFigure(figureId, selectedGroupId));
     }
 
     function getFigures(groups) {
@@ -47,7 +47,7 @@ const FiguresIndex = ({ selectedGroupId, setSelectedFigureId }) => {
             <div key={figure._id}>
                 <div
                     className="index-sidebar-groups"
-                    onClick={handleShowFigure(figure)}
+                    onClick={handleShowFigure(figure._id)}
                 >
                     {figure.name}
                 </div>
@@ -56,8 +56,7 @@ const FiguresIndex = ({ selectedGroupId, setSelectedFigureId }) => {
                     <button className="delete-button"
                         onClick={handleDeleteFigure(selectedGroupId, figure._id)}
                     >
-                        {/* {selectedGroupId ? "Remove figure from group" : "Delete figure"} */}
-                        {selectedGroupId ? "remove" : "delete"}
+                        {selectedGroupId ? "remove from group" : "delete"}
                     </button>
                 </div>
             </div>

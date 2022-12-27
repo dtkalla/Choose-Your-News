@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 const User = mongoose.model('User');
 const Group = mongoose.model('Group');
+const Figure = mongoose.model('Figure');
 const Article = mongoose.model('Article');
 
 const { requireUser } = require('../../config/passport');
@@ -110,11 +111,13 @@ router.get('/group/:groupId/fetched', requireUser, async (req, res) => {
 })
 
 //READ FIGURE'S FETCHED ARTICLES, WORKS
-router.get('/figure/:figureName/fetched', requireUser, async (req, res) => {
+router.get('/figure/:figureId/fetched', requireUser, async (req, res) => {
     try {
-        const figureName = req.params.figureName;
+        const figureId = req.params.figureId;
 
-        const articles = await fetchArticlesFromNewYorkTimes(`"${figureName}"`);
+        const figure = await Figure.findById(figureId);
+
+        const articles = await fetchArticlesFromNewYorkTimes(`"${figure.name}"`);
 
         const articlesObj = {};
         for (let i = 0; i < articles.length; i++) {
