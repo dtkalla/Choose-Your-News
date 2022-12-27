@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import GroupsIndex from '../Groups/GroupsIndex';
+import Topbar from "./Topbar";
 import NewsIndex from '../Articles/NewsIndex';
-import Sidebar from '../Sidebar/Sidebar';
+import Sidebar from './Sidebar/Sidebar';
 import './MainPage.css';
 
 function MainPage() {
@@ -10,12 +10,11 @@ function MainPage() {
   return (
     <>
       <div className="groups-container">
-        <GroupsIndex 
-          selectedGroupId={selectedGroupId}
-          setSelectedGroupId={setSelectedGroupId}
-        />
+        <div className="groups-index-container">
+          <Topbar />
+        </div>
       </div>
-
+      
       <div className="index-container">
         <NewsIndex />
         <Sidebar

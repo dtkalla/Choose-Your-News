@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchCurrentUserGroups } from '../../store/groups';
 import { fetchCurrentUserFetchedArticles, 
     fetchCurrentUserFetchedArticlesByGroup } from '../../store/articles';
-import GroupCreate from './GroupCreate';
 import folder from './images/folder.png';
 import './css/Groups.css';
 
@@ -59,10 +58,9 @@ function GroupsIndex({ selectedGroupId, setSelectedGroupId }) {
     }
 
     return (
-        <div className="groups-index-container">
+        <>
             {groupItems}
-            <GroupCreate />
-        </div>
+        </>
     );
 }
 

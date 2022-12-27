@@ -1,7 +1,6 @@
-import FigureCreate from "../Figures/FigureCreate";
-import FiguresIndex from "../Figures/FiguresIndex";
-import GroupDelete from "../Groups/GroupDelete";
-import '../MainPage/MainPage.css';
+import FigureCreate from "../../Figures/FigureCreate";
+import FiguresIndex from "../../Figures/FiguresIndex";
+import GroupDelete from "../../Groups/GroupDelete";
 
 function Sidebar({ selectedGroupId, setSelectedGroupId }) {
   return (

@@ -29,11 +29,10 @@ function App() {
       <Switch>
         <AuthRoute exact path="/login" component={LoginForm} />
         <AuthRoute exact path="/signup" component={SignupForm} />
-
+        
         <ProtectedRoute exact path="/" component={MainPage} />
         <ProtectedRoute exact path="/articles" component={Articles} />
         <ProtectedRoute exact path="/about" component={AboutUs} />
-
       </Switch>
       <Footer />
     </>
