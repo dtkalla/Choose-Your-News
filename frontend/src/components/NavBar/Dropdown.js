@@ -39,14 +39,7 @@ function Dropdown () {
     
       {showMenu && (
         <ul className="dropdown-menu">
-<<<<<<< HEAD
-          {/* <Link className="dropdown-options" to="/articles/">
-              Saved Articles
-          </Link> */}
           <Link className="dropdown-options" to="/savedArticles/">
-=======
-          <Link className="dropdown-options" to="/articles/">
->>>>>>> main
               Saved Articles
           </Link>
           <Link className="dropdown-options" to="/about/">
