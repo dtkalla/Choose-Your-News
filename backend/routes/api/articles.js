@@ -18,16 +18,6 @@ const hasArticle = (user, url) => {
     });
 }
 
-const hasFigure = (groups, figureId) => {
-    for (let i = 0; i < groups.length; i++) {
-        const idx = groups[i].figures.indexOf(figureId);
-        if (idx !== -1) {
-            return true;
-        }
-    }
-    return false;
-}
-
 
 //READ CURRENT USER'S SAVED ARTICLES, WORKS
 router.get('/user/current/saved', requireUser, async (req, res) => {
@@ -141,15 +131,10 @@ router.post('/', requireUser, async (req, res) => {
         const source = req.body.source;
         const publishedDate = req.body.publishedDate;
         const url = req.body.url;
-        const figureId = req.body.figureId;
-
-        const groups = await Group.find({ user: req.user._id });
 
         let user = await req.user.populate("savedArticles");
 
-        let article = await Article.findOne({
-            url
-        });
+        let article = await Article.findOne({url});
         if (!article) {
             article = new Article({
                 headline,

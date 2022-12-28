@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchCurrentUserGroups } from '../../store/groups';
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCurrentUserGroups } from "../../store/groups";
 import { fetchCurrentUserFetchedArticles, 
-    fetchCurrentUserFetchedArticlesByGroup } from '../../store/articles';
-import folder from './images/folder.png';
-import './css/Groups.css';
+    fetchCurrentUserFetchedArticlesByGroup } from "../../store/articles";
+import folder from "./images/folder.png";
+import "./css/GroupsIndex.css";
 
 function GroupsIndex({ selectedGroupId, setSelectedGroupId }) {
     const dispatch = useDispatch();
@@ -58,9 +58,7 @@ function GroupsIndex({ selectedGroupId, setSelectedGroupId }) {
     }
 
     return (
-        <>
-            {groupItems}
-        </>
+        <>{groupItems}</>
     );
 }
 

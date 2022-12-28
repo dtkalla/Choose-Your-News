@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from 'react-redux';
-import { createFigure } from '../../store/groups';
-import { LargeModal } from '../../context/Modal';
+import { useSelector, useDispatch } from "react-redux";
+import { createFigure } from "../../store/groups";
+import { LargeModal } from "../../context/Modal";
+import "./css/FigureCreate.css";
 
 function FigureCreate({ selectedGroupId }) {
     const [figure, setFigure] = useState(null);

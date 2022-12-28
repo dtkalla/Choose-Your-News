@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
-import { deleteGroup } from '../../store/groups';
-import deleteIcon from './images/delete.png';
+import { deleteGroup } from "../../store/groups";
+import deleteIcon from "./images/delete.png";
+import "./css/GroupDelete.css";
 
 const GroupDelete = ({ selectedGroupId, setSelectedGroupId }) => {
     const dispatch = useDispatch();
@@ -16,14 +17,18 @@ const GroupDelete = ({ selectedGroupId, setSelectedGroupId }) => {
     return (
         selectedGroupId ? (
             <div
-                className="index-sidebar-groups"
+                className="sidebar-body-items"
                 onClick={handleDeleteGroup(selectedGroupId)}
             >
                 <div className='delete-position'>
                     <div class-name='delete-header'>
                         <p>delete group</p>
                     </div>
-                    <img className='delete-icon' src={deleteIcon} />
+                    <img 
+                        className='delete-icon' 
+                        src={deleteIcon} 
+                        alt="delete-group-icon"
+                    />
                 </div>
             </div>
         ) : (

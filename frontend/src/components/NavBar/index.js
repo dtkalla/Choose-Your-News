@@ -4,9 +4,7 @@ import './NavBar.css';
 // import { logout } from '../../store/session';
 import Dropdown from './Dropdown'
 
-
-
-function NavBar () {
+function NavBar() {
   // const loggedIn = useSelector(state => !!state.session.user);
   // const dispatch = useDispatch();
   

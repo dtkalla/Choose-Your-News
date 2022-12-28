@@ -1,22 +1,22 @@
 import React, { useState } from "react";
 import Topbar from "./Topbar";
-import NewsIndex from '../Articles/NewsIndex';
-import Sidebar from './Sidebar/Sidebar';
-import './MainPage.css';
+import FetchedArticlesIndex from "../Articles/FetchedArticlesIndex";
+import Sidebar from "./Sidebar";
+import "./index.css";
 
 function MainPage() {
   const [selectedGroupId, setSelectedGroupId] = useState(null);
 
   return (
     <>
-      <div className="groups-container">
-        <div className="groups-index-container">
-          <Topbar />
-        </div>
+      <div className="top-bar-container">
+        <Topbar
+          selectedGroupId={selectedGroupId}
+          setSelectedGroupId={setSelectedGroupId}
+        />
       </div>
-      
-      <div className="index-container">
-        <NewsIndex />
+      <div className="body-container">
+        <FetchedArticlesIndex />
         <Sidebar
           selectedGroupId={selectedGroupId}
           setSelectedGroupId={setSelectedGroupId}
@@ -25,6 +25,5 @@ function MainPage() {
     </>
   );
 }
-
 
 export default MainPage;

@@ -1,0 +1,25 @@
+.groups-index-items-container {
+    width: 90px;
+    margin: 0 64px 0 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.groups-index-items-icon {
+    height: 60px;
+    width: 60px;
+    /* padding-left: 17px; */
+}
+
+.groups-index-items-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.groups-index-items-name {
+    font-size: 15px;
+    font-weight: 600;
+}

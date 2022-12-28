@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { createGroup } from '../../store/groups';
-import { LargeModal } from '../../context/Modal';
-import createIcon from './images/create.png';
-import './css/Groups.css';
+import { createGroup } from "../../store/groups";
+import { LargeModal } from "../../context/Modal";
+import createIcon from "./images/create.png";
+import "./css/GroupsIndex.css";
+import "./css/GroupCreate.css";
 
 function GroupCreate() {
     const currentUser = useSelector(state => state.session.user);
@@ -47,7 +48,8 @@ function GroupCreate() {
                 <div className="add">
                     <img 
                         className="groups-index-items-icon" 
-                        src={createIcon} 
+                        src={createIcon}
+                        alt="create-group-icon"
                     />
                 </div>
                 <div className="groups-index-items-details">

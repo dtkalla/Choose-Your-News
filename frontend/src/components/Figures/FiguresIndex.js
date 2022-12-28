@@ -1,6 +1,7 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchCurrentUserFetchedArticlesByFigure } from '../../store/articles';
-import { deleteFigure } from '../../store/groups';
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCurrentUserFetchedArticlesByFigure } from "../../store/articles";
+import { deleteFigure } from "../../store/groups";
+import "./css/FiguresIndex.css";
 
 const FiguresIndex = ({ selectedGroupId }) => {
     const groups = useSelector(state => state.groups);
@@ -46,7 +47,7 @@ const FiguresIndex = ({ selectedGroupId }) => {
         const figureItem = (
             <div key={figure._id}>
                 <div
-                    className="index-sidebar-groups"
+                    className="sidebar-body-items"
                     onClick={handleShowFigure(figure._id)}
                 >
                     {figure.name}
