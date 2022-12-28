@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './SessionForm.css';
 
-import { login, logout, clearSessionErrors } from '../../store/session';
+import { login, clearSessionErrors } from '../../store/session';
 
 function LoginForm () {
   const [email, setEmail] = useState('');
@@ -41,54 +41,50 @@ function LoginForm () {
 
   return (
     <>
-    {/* <div className='line-tail'><img src={linetail}></img></div>
-    <div className='line-mid'><img src={linemid}></img></div>
-    <div className='line-end'><img src={lineend}></img></div> */}
-    <div className='title'>
-        <h1>Choose</h1>
-        <h1>Your</h1>
-        <h1>News</h1>
+      <div className='title'>
+          <h1>Choose</h1>
+          <h1>Your</h1>
+          <h1>News</h1>
       </div>
 
-    <div className='form-container'>
-    <form className="session-form" onSubmit={handleSubmit}>
+      <div className='form-container'>
+        <form className="session-form" onSubmit={handleSubmit}>
+          <label>
+            <span className='field'>Email</span>
+            <input type="text"
+              value={email}
+              onChange={update('email')}
+              placeholder="Email"
+            />
+          </label>
+          <div className="errors">{errors?.email}</div>
+      
+          <label>
+            <span className='field'>Password</span>
+            <input type="password"
+              value={password}
+              onChange={update('password')}
+              placeholder="Password"
+            />
+          </label>
+          <div className="errors">{errors?.password}</div>
 
-     
-      <label>
-        <span className='field'>Email</span>
-        <input type="text"
-          value={email}
-          onChange={update('email')}
-          placeholder="Email"
-        />
-      </label>
-      <div className="errors">{errors?.email}</div>
-    
-      <label>
-        <span className='field'>Password</span>
-        <input type="password"
-          value={password}
-          onChange={update('password')}
-          placeholder="Password"
-        />
-      </label>
-      <div className="errors">{errors?.password}</div>
-      <div className='buttons'>
-      <input className='signup-button'
-        type="submit"
-        value="Log In"
-        disabled={!email || !password}
-      />        
-    <button className="signup-button" type="submit" onClick={loginDemo}>
-      Demo Login
-    </button>
- 
-        </div>
-        <div className='signup-link'>
-        <Link  to='/signup'>Signup</Link>
-        </div>
-    </form>
-    </div>
+          <div className='buttons'>
+            <input className='signup-button'
+              type="submit"
+              value="Log In"
+              disabled={!email || !password}
+            />        
+            <button className="signup-button" onClick={loginDemo}>
+              Demo Login
+            </button>
+          </div>
+
+          <div className='signup-link'>
+            <Link className="signup-link-button" to='/signup'>Signup</Link>
+          </div>
+        </form>
+      </div>
     </>
   );
 }

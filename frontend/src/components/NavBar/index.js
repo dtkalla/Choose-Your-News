@@ -1,9 +1,8 @@
 import { Link } from 'react-router-dom';
-// import { useSelector, useDispatch } from 'react-redux';
 import './NavBar.css';
-// import { logout } from '../../store/session';
 import Dropdown from './Dropdown'
 
+<<<<<<< HEAD:frontend/src/components/NavBar/index.js
 function NavBar() {
   // const loggedIn = useSelector(state => !!state.session.user);
   // const dispatch = useDispatch();
@@ -13,6 +12,10 @@ function NavBar() {
   //     dispatch(logout());
   // }
 
+=======
+
+function NavBar () {
+>>>>>>> main:frontend/src/components/NavBar/NavBar.js
 
   return (
     <nav className="nav-bar-container">

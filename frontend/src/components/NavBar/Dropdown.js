@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import './NavBar.css';
+
 import { logout } from '../../store/session';
-import profile from './profile.png'
+
+import './NavBar.css';
+import profile from '../../assets/profile.png'
 
 function Dropdown () {
-  // const loggedIn = useSelector(state => !!state.session.user);
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
 
@@ -34,16 +35,18 @@ function Dropdown () {
 
   return (
     <>
-      <button className="dropdown-button" onClick={openMenu}>
-        <div id='profile-link'><img src={profile}></img></div>
-      </button>
+      <img className='dropdown-button' onClick={openMenu} src={profile} />
     
       {showMenu && (
         <ul className="dropdown-menu">
+<<<<<<< HEAD
           {/* <Link className="dropdown-options" to="/articles/">
               Saved Articles
           </Link> */}
           <Link className="dropdown-options" to="/savedArticles/">
+=======
+          <Link className="dropdown-options" to="/articles/">
+>>>>>>> main
               Saved Articles
           </Link>
           <Link className="dropdown-options" to="/about/">
