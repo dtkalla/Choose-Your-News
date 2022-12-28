@@ -1,12 +1,12 @@
-import './Footer.css';
+import "./index.css";
 
 function Footer() {
     return (
-        <footer className='footer'>
+        <footer className="footer">
             <p>Choose Your News</p>
             <p>Copyright &copy; 2022 Choose Your News</p>
         </footer>
-    )
+    );
 }
 
 export default Footer;

@@ -1,16 +1,14 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import users from './users';
+import session from './session';
 import groups from './groups';
 import articles from './articles';
-import session from './session';
 import errors from './errors';
 
 const rootReducer = combineReducers({
-  users,
+  session,
   groups,
   articles,
-  session,
   errors
 });
 
@@ -30,5 +28,3 @@ const configureStore = (preloadedState) => {
 };
 
 export default configureStore;
-
-

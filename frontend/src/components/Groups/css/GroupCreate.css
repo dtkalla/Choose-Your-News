@@ -1,0 +1,22 @@
+.add {
+    padding-top: 10px;
+}
+
+.figure-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.figure-form span {
+    padding: 5px
+}
+
+.form-button {
+    font-size: 14px;
+    border-radius: 8px;
+}
+
+.form-button:hover {
+    cursor: pointer
+}

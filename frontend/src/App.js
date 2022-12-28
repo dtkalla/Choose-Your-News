@@ -3,15 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Switch } from 'react-router-dom';
 
 import { AuthRoute, ProtectedRoute } from './components/Routes/Routes';
-import NavBar from './components/NavBar/NavBar';
-import Footer from './components/Footer/Footer';
-
-import MainPage from './components/MainPage/MainPage';
-import Groups from './components/Groups/Groups';
-import GroupShow from './components/Groups/GroupShow';
-import Articles from './components/Articles/Articles';
 import LoginForm from './components/SessionForms/LoginForm';
 import SignupForm from './components/SessionForms/SignupForm';
+import NavBar from './components/NavBar';
+import MainPage from './components/MainPage';
+import SavedArticlesIndex from './components/Articles/SavedArticlesIndex.js';
+import Footer from './components/Footer/';
 
 import { getCurrentUser } from './store/session';
 import AboutUs from './components/AboutUs/AboutUs';
@@ -31,13 +28,11 @@ function App() {
       <Switch>
         <AuthRoute exact path="/login" component={LoginForm} />
         <AuthRoute exact path="/signup" component={SignupForm} />
-
+        
         <ProtectedRoute exact path="/" component={MainPage} />
-        <ProtectedRoute exact path="/groups" component={Groups} />
-        <ProtectedRoute path="/groups/:id" component={GroupShow} />
-        <ProtectedRoute exact path="/articles" component={Articles} />
+        <ProtectedRoute 
+          exact path="/savedArticles" component={SavedArticlesIndex} />
         <ProtectedRoute exact path="/about" component={AboutUs} />
-
       </Switch>
       <Footer />
     </>

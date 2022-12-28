@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 const User = mongoose.model('User');
 const Group = mongoose.model('Group');
+const Figure = mongoose.model('Figure');
 const Article = mongoose.model('Article');
 
 const { requireUser } = require('../../config/passport');
@@ -15,16 +16,6 @@ const hasArticle = (user, url) => {
     return savedArticles.some(savedArticle => {
         return savedArticle.url === url;
     });
-}
-
-const hasFigure = (groups, figureId) => {
-    for (let i = 0; i < groups.length; i++) {
-        const idx = groups[i].figures.indexOf(figureId);
-        if (idx !== -1) {
-            return true;
-        }
-    }
-    return false;
 }
 
 
@@ -67,7 +58,7 @@ router.get('/user/current/fetched', requireUser, async (req, res) => {
                 searchTerms.push(figure.name);
             }
         }
-
+        console.log(searchTerms.join(" OR "));
         const articles = searchTerms.length === 0 ? [] :
             await fetchArticlesFromNewYorkTimes(searchTerms.join(" OR "))
 
@@ -110,11 +101,13 @@ router.get('/group/:groupId/fetched', requireUser, async (req, res) => {
 })
 
 //READ FIGURE'S FETCHED ARTICLES, WORKS
-router.get('/figure/:figureName/fetched', requireUser, async (req, res) => {
+router.get('/figure/:figureId/fetched', requireUser, async (req, res) => {
     try {
-        const figureName = req.params.figureName;
+        const figureId = req.params.figureId;
 
-        const articles = await fetchArticlesFromNewYorkTimes(`"${figureName}"`);
+        const figure = await Figure.findById(figureId);
+
+        const articles = await fetchArticlesFromNewYorkTimes(`"${figure.name}"`);
 
         const articlesObj = {};
         for (let i = 0; i < articles.length; i++) {
@@ -138,15 +131,10 @@ router.post('/', requireUser, async (req, res) => {
         const source = req.body.source;
         const publishedDate = req.body.publishedDate;
         const url = req.body.url;
-        const figureId = req.body.figureId;
-
-        const groups = await Group.find({ user: req.user._id });
 
         let user = await req.user.populate("savedArticles");
 
-        let article = await Article.findOne({
-            url
-        });
+        let article = await Article.findOne({url});
         if (!article) {
             article = new Article({
                 headline,

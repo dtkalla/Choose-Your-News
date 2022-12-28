@@ -5,6 +5,7 @@ import Dropdown from './Dropdown'
 
 function NavBar () {
 
+
   return (
     <nav className="nav-bar-container">
       <div className="nav-bar">

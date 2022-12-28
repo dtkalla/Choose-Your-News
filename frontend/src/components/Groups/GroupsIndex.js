@@ -1,70 +1,65 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchCurrentUserFetchedArticles, fetchCurrentUserFetchedArticlesByGroup } from '../../store/articles';
-import folder from './folder.png'
-import GroupCreate from './GroupCreate'
-import './Groups.css'
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCurrentUserGroups } from "../../store/groups";
+import { fetchCurrentUserFetchedArticles, 
+    fetchCurrentUserFetchedArticlesByGroup } from "../../store/articles";
+import folder from "./images/folder.png";
+import "./css/GroupsIndex.css";
 
-function GroupsIndex({ setSelectedGroupId }) {
-    const groupsObj = useSelector(state => state.groups);
-
-    const groups = groupsObj ? Object.values(groupsObj) : [];
-
+function GroupsIndex({ selectedGroupId, setSelectedGroupId }) {
     const dispatch = useDispatch();
 
-    const handleClick = (groupId = undefined) => (e) => {
-      e.preventDefault();
-      if(groupId){
+    useEffect(() => {
+        dispatch(fetchCurrentUserGroups());
+    }, [dispatch]);
+    
+    const handleSelectGroup = (groupId) => (e) => {
+        e.preventDefault();
+        groupId = groupId === "" ? null : groupId;
         setSelectedGroupId(groupId);
-        dispatch(fetchCurrentUserFetchedArticlesByGroup(groupId));
-      }
-      else {
-        setSelectedGroupId(undefined);
-        dispatch(fetchCurrentUserFetchedArticles());
-      }
-    }
-
-    const groupItems = [];
-    for(let i = 0; i < groups.length; i++) {
-        const group = groups[i];
-        if(group.name !== "No group") {
-            const groupItem = (
-                <div 
-                    key={group._id} 
-                    className="groups-index-items-container"
-                    onClick={handleClick(group._id)}
-                >
-                    
-                    <img 
-                        className="groups-index-items-icon" 
-                        src={folder}
-                    />
-
-                    <div className="groups-index-items-details">
-                        <h1 className="groups-index-items-name">
-                            {group.name}
-                        </h1>
-                    </div>
-                </div>
-            )
-            groupItems.push(groupItem);
+        if(groupId){
+            dispatch(fetchCurrentUserFetchedArticlesByGroup(groupId));
+        }
+        else {
+            dispatch(fetchCurrentUserFetchedArticles());
         }
     }
 
-    return (
-        // <div className="groups-index-container">
-            <div className="groups-index-container">
-                <div onClick={handleClick()}>
-                    <div className='groups-index-items-container'> 
-                        <img className="groups-index-items-icon" src={folder}></img>
-                        <div className='all-figure'><h1>All</h1></div>
-                    </div>
+    const groups = useSelector(state => state.groups);
+    const groupsArray = groups ? Object.values(groups) : [];
+    const groupItems = [];
+    for (let i = 0; i < groupsArray.length; i++) {
+        const group = groupsArray[i];
+        const groupId = group.name === "No group" ? "" : group._id;
+        const groupName = group.name === "No group" ? "all" : group.name;
+        const groupStyle = ((selectedGroupId && selectedGroupId === groupId) ||
+            (!selectedGroupId && group.name === "No group")) ?
+            { backgroundColor: "lightblue" } : { backgroundColor: "transparent"};
+        const groupItem = (
+            <div 
+                className="groups-index-items-container"
+                key={groupId}
+                onClick={handleSelectGroup(groupId)}
+                style={groupStyle}
+            >
+                <img 
+                    className="groups-index-items-icon" 
+                    src={folder}
+                    alt={group.name}
+                />
+                <div className="groups-index-items-details">
+                    <h1 className="groups-index-items-name">
+                        {groupName}
+                    </h1>
                 </div>
-                {groupItems}
-                <GroupCreate />
             </div>
-        // </div>
+        )
+        groupItems.push(groupItem);
+    }
+
+    return (
+        <>{groupItems}</>
     );
 }
-
 
 export default GroupsIndex;

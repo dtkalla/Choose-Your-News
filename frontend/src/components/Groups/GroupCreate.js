@@ -1,77 +1,81 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { createGroup } from "../../store/groups";
+import { LargeModal } from "../../context/Modal";
+import createIcon from "./images/create.png";
+import "./css/GroupsIndex.css";
+import "./css/GroupCreate.css";
 
-import { createGroup } from '../../store/groups';
-
-import { LargeModal } from '../../context/Modal';
-import './Groups.css'
-import add from './add.png'
-
-function GroupsCreate() {
+function GroupCreate() {
     const currentUser = useSelector(state => state.session.user);
+
+    const [groupName, setGroupName] = useState(null);
 
     const dispatch = useDispatch();
 
-    const [groupName, setGroupName] = useState(undefined);
-
     const [showGroupCreateModal, setShowGroupCreateModal] = useState(false);
+
+    const handleCreateGroup = (e) => {
+        e.preventDefault();
+        const newGroup = {
+            user: currentUser._id,
+            name: groupName,
+            figures: []
+        };
+        dispatch(createGroup(newGroup));
+        setGroupName(null);
+        setShowGroupCreateModal(false);
+    }
 
     const openModal = (e) => {
         e.preventDefault();
+        setGroupName(null);
         setShowGroupCreateModal(true);
     }
 
     const closeModal = (e) => {
         e.preventDefault();
+        setGroupName(null);
         setShowGroupCreateModal(false);
     }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        const newGroup = {
-            user: currentUser._id, 
-            name: groupName, 
-            figures: []
-        };
-
-        dispatch(createGroup(newGroup));
-        setGroupName(undefined);
-        setShowGroupCreateModal(false);
-    }
-
 
     return (
         <>
-            <div className="groups-index-items-container" onClick={openModal}>
+            <div
+                className="groups-index-items-container"
+                onClick={openModal}
+            >
                 <div className="add">
-                <img 
-                    className="groups-index-items-icon" 
-                    src={add} 
-                />
+                    <img 
+                        className="groups-index-items-icon" 
+                        src={createIcon}
+                        alt="create-group-icon"
+                    />
                 </div>
                 <div className="groups-index-items-details">
                     <h1 className="groups-index-items-name">
-                        {/* Create a Group */}
+                        create group
                     </h1>
                 </div>
             </div>
 
             {showGroupCreateModal && (
             <LargeModal onClose={closeModal}>
-                <form className="figure-form" onSubmit={handleSubmit}>
+                <form className="figure-form" onSubmit={handleCreateGroup}>
                     <div className='modal-words'>
-                        Enter a name to create a group
+                        enter a name to create a group
                     </div>
-                    <span>Name:</span>
+                    <span>
+                        name:
+                    </span>
                     <input
                         type="text" 
-                        value={groupName}
+                        value={groupName ? groupName : ""}
                         onChange={(e) => setGroupName(e.target.value)} 
                     />
                     <br />
                     <button className="form-button" type="submit">
-                        Create
+                        create group
                     </button>
                 </form>
             </LargeModal>
@@ -80,5 +84,4 @@ function GroupsCreate() {
     );
 }
 
-
-export default GroupsCreate;
+export default GroupCreate;
