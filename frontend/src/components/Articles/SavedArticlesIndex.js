@@ -31,9 +31,10 @@ function SavedArticlesIndex() {
                 >
                     <div className="saved-articles-index-items-headline">
                         {savedArticle.headline}
-                        <div className="saved-articles-index-items-summary">
-                            {savedArticle.summary}
-                        </div>
+                    </div>
+                    
+                    <div className="saved-articles-index-items-summary">
+                        {savedArticle.summary}
                     </div>
                 
                     <div className="saved-articles-index-items-date">
@@ -59,6 +60,7 @@ function SavedArticlesIndex() {
             <div className="saved-articles-container-title">
                 Saved Articles
             </div>
+            <hr className="saved-articles-title-divider"></hr>
             <div className="saved-articles-index-container">
                 {savedArticleItems}
             </div>

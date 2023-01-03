@@ -5,10 +5,8 @@ a {
 .sidebar {
     border: 1px solid black;
     width: 30%;
-    /* padding: 12px; */
     border-radius: 25px;
     border-width: 3px;
-
     background-color: #f2efec;
 }
 
@@ -17,28 +15,16 @@ a {
     flex-direction: column;
     align-items: center;
     font-size: 22px;
-    padding: 28px;
-    /* border: 1px solid black; */
-    /* font-family: "Trirong", serif; */
+    padding: 28px 28px 14px 28px;
 }
 
 .sidebar-body {
-    max-height: 690px;
+    /* max-height: 690px; */
     overflow: auto;
     padding: 12px;
+    height: 56vh;
 }
 
 .sidebar-body::-webkit-scrollbar {
     display: none;
-}
-
-.sidebar-body-items {
-    cursor: pointer;
-
-    padding: 14px 24px;
-    border-radius: 8px;
-    /* width: 50%; */
-    margin: 20px 20px;
-    display: flex;
-    justify-content: center;
 }

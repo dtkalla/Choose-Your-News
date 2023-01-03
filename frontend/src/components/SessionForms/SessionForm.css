@@ -128,6 +128,22 @@ input[type="text" i]:focus, input[type="password" i]:focus {
   text-decoration: underline
 }
 
+.login-link {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  font-family: Roboto, sans-serif;
+}
+
+.login-link-button {
+  color: #0066cc;
+}
+
+.login-link-button:hover {
+  color: #FFD247;
+  text-decoration: underline
+}
+
 /* .line-tail{
   position: absolute;
   width: 0px;

@@ -42,19 +42,19 @@ function GroupCreate() {
     return (
         <>
             <div
-                className="groups-index-items-container"
+                className="create-group-container"
                 onClick={openModal}
             >
-                <div className="add">
+                <div className="create-group-icon-container">
                     <img 
-                        className="groups-index-items-icon" 
+                        className="create-group-icon" 
                         src={createIcon}
                         alt="create-group-icon"
                     />
                 </div>
-                <div className="groups-index-items-details">
-                    <h1 className="groups-index-items-name">
-                        create group
+                <div className="create-group-details">
+                    <h1 className="create-group-name">
+                        Create Group
                     </h1>
                 </div>
             </div>
@@ -63,10 +63,10 @@ function GroupCreate() {
             <LargeModal onClose={closeModal}>
                 <form className="figure-form" onSubmit={handleCreateGroup}>
                     <div className='modal-words'>
-                        enter a name to create a group
+                        Enter a name to create a group
                     </div>
                     <span>
-                        name:
+                        Name:
                     </span>
                     <input
                         type="text" 
@@ -75,7 +75,7 @@ function GroupCreate() {
                     />
                     <br />
                     <button className="form-button" type="submit">
-                        create group
+                        Create Group
                     </button>
                 </form>
             </LargeModal>

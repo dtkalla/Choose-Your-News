@@ -1,39 +1,14 @@
 .top-bar-container {
-    height: 80px;
+    height: 100px;
     margin: 0 8%;
+    overflow-y: hidden;
+}
+
+.top-bar-container::-webkit-scrollbar  {
+    display: none;
 }
 
 .body-container {
     display: flex;
-    margin: 0 8%;
-    /* margin-top: 20px; */
+    margin: 5px 8% 10px 8%;
 }
-
-/* IndexSidebar */
-/* .index-sidebar-footer {
-    display: flex;
-    justify-content: center;
-    color: #757575;
-    font-size: 20px;
-    font-family: "Trirong", serif;
-    margin-top: 7%;
-}
-
-.index-sidebar-footer:hover{
-    color: rgb(146, 143, 138);
-}
-
-#group-icon{
-   font-size: larger;
-   color: #54b3d6;
-   padding-left: 3%;    
-}
-
-#group-icon:hover{
-    color: #FFD247;   
-}
-
-.save {
-    display: flex;
-    justify-content: center;
-} */

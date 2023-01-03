@@ -1,5 +1,36 @@
-.add {
-    padding-top: 10px;
+.create-group-container {
+    width: 90px;
+    margin: 12px 64px 0 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.create-group-icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    width: 60px;
+}
+
+.create-group-icon {
+    height: 45px;
+    width: 45px;
+}
+
+.create-group-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 30px;
+}
+
+.create-group-name {
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
 }
 
 .figure-form {
