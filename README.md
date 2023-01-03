@@ -4,7 +4,7 @@
 With so much news going on in the world all the time, it's impossible to keep up with all of it.  [Choose your news](https://choose-your-news.onrender.com/) is a news filtering service that lets you get news about specific figures you choose to follow. You can organize these figures into different groups based on topic, as well as save specific news articles and share your groups with other users.
 
 
-<!-- ![](images/WaterBnb_splash.png) -->
+<!-- ![](images/index_page.png) -->
 
 
 
@@ -29,16 +29,19 @@ const newyorktimesUrl = 'https://api.nytimes.com/svc/search/v2/articlesearch.jso
     const response = await axios.get(url);
 ```
 
-<!-- ![](images/listings_show_page.png) -->
+<!-- ![](images/news_index.png) -->
 
 - #### Follow specific figures and get news about them
+
+<!-- ![](images/bezos_news.png) -->
+
 
 Users can choose which figures to follow, and their news feed is made up of news about these figures.  Users can filter to see only news about a specific figure they follow.
 
 
 - #### Organize figures they follow into groups
 
-<!-- ![](images/reservation_form.png) -->
+<!-- ![](images/business_news.png) -->
 
 Users can create groups to hold different figures they follow.  In addition to helping with organization, this lets users filter news to see only news about people in a given group.  (Altogether, there are three ways to view the news index: one for all figures they follow (on the home/index page), one for each group the follow, and one for each individual figure.)  Users can move figures into and out of groups.
 
@@ -46,7 +49,7 @@ Users can create groups to hold different figures they follow.  In addition to h
 
 - #### Save articles from their news feed
 
-<!-- ![](images/Google_map.png) -->
+<!-- ![](images/saved_articles.png) -->
 
 Users can bookmark interesting articles to their profiles, which will save these articles and allow the user to go back to them in the future.
 
