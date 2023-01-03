@@ -10,7 +10,6 @@
 .groups-index-items-icon {
     height: 60px;
     width: 60px;
-    /* padding-left: 17px; */
 }
 
 .groups-index-items-details {
@@ -21,5 +20,9 @@
 
 .groups-index-items-name {
     font-size: 15px;
+    max-width: 90px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     font-weight: 600;
 }

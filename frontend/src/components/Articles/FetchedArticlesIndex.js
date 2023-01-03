@@ -40,19 +40,17 @@ function FetchedArticlesIndex() {
 
   const fetchedArticlesItems = fetchedArticles.map(fetchedArticle => {
     return (
-      <div key={fetchedArticle.url}>
+      <div className="fetched-articles" key={fetchedArticle.url}>
         <a href={fetchedArticle.url}>
-          <div className="fetched-articles">
             <div className="title-one">
               {fetchedArticle.headline}
-              <div className="summary-one"> 
-                {fetchedArticle.summary}
-              </div>
+            </div>
+            <div className="summary-one"> 
+              {fetchedArticle.summary}
             </div>
             <div className="date-one">
               {fetchedArticle.publishedDate.slice(0, 10)} {fetchedArticle.publishedDate.slice(11,19)} 
             </div>
-          </div>
         </a>
         {(saved(fetchedArticle.url, savedArticles) ? 
         (<div className="save-button">
@@ -74,7 +72,7 @@ function FetchedArticlesIndex() {
     <div className="fetched-articles-index-container">
       <div className="fetched-articles-index-title-container">
         <h1 className="fetched-articles-index-title">
-          Your news
+          Your News
           <hr></hr>
         </h1>
       </div>

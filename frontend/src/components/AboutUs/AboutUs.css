@@ -10,8 +10,8 @@
 .about-us-person {
     display: flex;
     flex-direction: row;
-    margin-bottom: 50px;
     margin: 30px;
+    margin-left: 15%
 }
 
 #about-person-list {

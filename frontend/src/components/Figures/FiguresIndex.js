@@ -57,7 +57,7 @@ const FiguresIndex = ({ selectedGroupId }) => {
                     <button className="delete-button"
                         onClick={handleDeleteFigure(selectedGroupId, figure._id)}
                     >
-                        {selectedGroupId ? "remove from group" : "delete"}
+                        {selectedGroupId ? "Remove from group" : "Delete"}
                     </button>
                 </div>
             </div>
@@ -67,7 +67,11 @@ const FiguresIndex = ({ selectedGroupId }) => {
 
     return (
         <>
-            {figureItems}
+            {figureItems.length > 0 ? figureItems : 
+            <div className="sidebar-empty">
+                No figures added yet
+            </div>
+            }
         </>
     );
 }

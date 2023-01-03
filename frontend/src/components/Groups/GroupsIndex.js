@@ -31,7 +31,7 @@ function GroupsIndex({ selectedGroupId, setSelectedGroupId }) {
     for (let i = 0; i < groupsArray.length; i++) {
         const group = groupsArray[i];
         const groupId = group.name === "No group" ? "" : group._id;
-        const groupName = group.name === "No group" ? "all" : group.name;
+        const groupName = group.name === "No group" ? "All" : group.name;
         const groupStyle = ((selectedGroupId && selectedGroupId === groupId) ||
             (!selectedGroupId && group.name === "No group")) ?
             { backgroundColor: "lightblue" } : { backgroundColor: "transparent"};

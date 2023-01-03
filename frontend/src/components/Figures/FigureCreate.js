@@ -40,7 +40,7 @@ function FigureCreate({ selectedGroupId }) {
 
     if (selectedGroupId) {
         const defaultOption = (
-            <option key={"null"} value={""} default>select figure</option>
+            <option key={"null"} value={""} default>Select Figure</option>
         );
 
         const figureOptions = [defaultOption];
@@ -79,26 +79,26 @@ function FigureCreate({ selectedGroupId }) {
     return (
         <>
             <h1>
-                {selectedGroupId ? `${groups[selectedGroupId].name}` : "all"} figures
+                {selectedGroupId ? `${groups[selectedGroupId].name}` : "All"} figures
             </h1>
             <div className="title-add">
                 <button className="add-button" onClick={openModal}>
-                    {selectedGroupId ? "add figure" : "create figure"}
+                    {selectedGroupId ? "Add" : "Create"} Figure
                 </button>
 
                 {showFigureCreateModal &&
                 <LargeModal onClose={closeModal}>
                     <form className="figure-form" onSubmit={handleCreateFigure}>
                         <div className='modal-words'>
-                            enter a name to { selectedGroupId ? "add" : "create" } a figure
+                            Enter a name to { selectedGroupId ? "add" : "create" } a figure
                         </div>
                         <span>
-                            name:
+                            Name:
                         </span>
                         {inputField}
                         <br />
                         <button className="form-button" type="submit">
-                            {selectedGroupId ? "add" : "create"} figure
+                            {selectedGroupId ? "Add" : "Create"} Figure
                         </button>
                     </form>
                 </LargeModal>

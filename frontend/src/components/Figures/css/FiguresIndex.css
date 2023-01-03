@@ -1,3 +1,15 @@
+.sidebar-body-items {
+    display: flex;
+    justify-content: center;
+    padding: 14px 24px;
+    margin: 20px 20px 10px 20px;
+    cursor: pointer;
+}
+
+.sidebar-body-items:hover {
+    font-weight: bolder;
+}
+
 #delete-button-div {
     display: flex;
 }
@@ -9,22 +21,24 @@
 .delete-button {
     display: flex;
     justify-content: center;
-    min-width: 30px;
+    min-width: 35px;
     color: white;
     background-color: #448de0;
-    /* font-family: sans-serif; */
     font-size: 16px;
-    padding-left: 8px;
-    padding-right: 12px;
-    padding-top: 3px;
+    padding: 3px 12px;
     font-weight: bolder;
     border-radius: 25px;
     border: 1px solid black;
-    /* margin-left: 80%; */
     margin-right: 5%;
 }
 
 .delete-button:hover {
     background-color: #FFD247;
     cursor: pointer
+}
+
+.sidebar-empty {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
 }

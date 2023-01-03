@@ -34,7 +34,8 @@ function App() {
           exact path="/savedArticles" component={SavedArticlesIndex} />
         <ProtectedRoute exact path="/about" component={AboutUs} />
       </Switch>
-      <Footer />
+      {loggedIn && <Footer />}
+      {/* <Footer /> */}
     </>
   );
 }

@@ -22,7 +22,7 @@ const GroupDelete = ({ selectedGroupId, setSelectedGroupId }) => {
             >
                 <div className='delete-position'>
                     <div class-name='delete-header'>
-                        <p>delete group</p>
+                        <p>Delete Group</p>
                     </div>
                     <img 
                         className='delete-icon' 

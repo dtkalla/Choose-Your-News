@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { logout } from '../../store/session';
 
 import './NavBar.css';
-import profile from '../../assets/profile.png'
+import profile from './images/profile.png'
 
 function Dropdown () {
   const dispatch = useDispatch();
