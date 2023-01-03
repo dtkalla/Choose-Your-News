@@ -12,7 +12,22 @@ With so much news going on in the world all the time, it's impossible to keep up
 
 - #### See news pulled from the NY Times Articles API
 
-News about followed figures is pulled live using the NYTimes API based on headlines and shown in a stream, similar to a social media newsfeed.  Pages show the most recent ten relevant articles, organized from most to least recent.
+News about followed figures is pulled live using the NYTimes API based on headlines and shown in a stream, similar to a social media newsfeed.  Pages show the most recent ten relevant articles that match *any* figure from the user's saved figures, organized from most to least recent.
+
+```
+const newyorktimesUrl = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?';
+
+    let filterQueryString = "";
+    for (const key in filterQueryObj) {
+        if (filterQueryObj.hasOwnProperty(key)) {
+            filterQueryString += `fq=${key}:(${filterQueryObj[key]})&`
+        }
+    }
+   
+    const url = `${newyorktimesUrl}${filterQueryString}&sort=relevance&api-key=${newyorktimesApiKey}`;
+
+    const response = await axios.get(url);
+```
 
 <!-- ![](images/listings_show_page.png) -->
 
@@ -33,7 +48,18 @@ Users can create groups to hold different figures they follow.  In addition to h
 
 <!-- ![](images/Google_map.png) -->
 
-Users can bookmark interesting articles to their profiles, which will save these articles and allow the user to go back to them in the future.  Articles are organized by the figure they're associated with.
+Users can bookmark interesting articles to their profiles, which will save these articles and allow the user to go back to them in the future.
+
+```
+    const savedArticles = useSelector(state => 
+        state.articles.saved ? Object.values(state.articles.saved) : []);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchCurrentUserSavedArticles());
+    }, [dispatch])
+```
 
 
 <!-- ![](images/Google_map) -->
