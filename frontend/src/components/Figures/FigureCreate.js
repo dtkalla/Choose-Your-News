@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createFigure } from "../../store/groups";
-import { LargeModal } from "../../context/Modal";
+import { Modal } from "../../context/Modal";
 import "./css/FigureCreate.css";
 
 function FigureCreate({ selectedGroupId }) {
@@ -87,7 +87,7 @@ function FigureCreate({ selectedGroupId }) {
                 </button>
 
                 {showFigureCreateModal &&
-                <LargeModal onClose={closeModal}>
+                <Modal onClose={closeModal}>
                     <form className="figure-form" onSubmit={handleCreateFigure}>
                         <div className='modal-words'>
                             Enter a name to { selectedGroupId ? "add" : "create" } a figure
@@ -101,7 +101,7 @@ function FigureCreate({ selectedGroupId }) {
                             {selectedGroupId ? "Add" : "Create"} Figure
                         </button>
                     </form>
-                </LargeModal>
+                </Modal>
                 }
             </div>
         </>

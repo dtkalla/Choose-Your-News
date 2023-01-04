@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import './NavBar.css';
 import Dropdown from './Dropdown'
+import Info from './Info'
 
 
 function NavBar () {
@@ -13,6 +14,7 @@ function NavBar () {
           <Link className="logo" to="/">Choose Your News</Link>
         </div>
         <div className="right-nav">
+          <Info />
           <Dropdown />
         </div>
       </div>
