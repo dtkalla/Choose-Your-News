@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { LargeModal } from "../../context/Modal";
+import info from "./images/info.png"
 
 import profile from './images/profile.png'
 
@@ -18,7 +19,7 @@ function Info() {
 
     return (
         <>
-            <img className='info-button' onClick={openModal} src="https://cdn-icons-png.flaticon.com/512/32/32175.png" />
+            <img className='info-button' onClick={openModal} src={info} />
 
             {showGroupCreateModal && (
             <LargeModal onClose={closeModal}>
