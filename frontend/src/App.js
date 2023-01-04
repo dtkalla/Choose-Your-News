@@ -35,7 +35,6 @@ function App() {
         <ProtectedRoute exact path="/about" component={AboutUs} />
       </Switch>
       {loggedIn && <Footer />}
-      {/* <Footer /> */}
     </>
   );
 }

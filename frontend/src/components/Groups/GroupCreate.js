@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createGroup } from "../../store/groups";
-import { LargeModal } from "../../context/Modal";
+import { Modal } from "../../context/Modal";
 import createIcon from "./images/create.png";
 import "./css/GroupsIndex.css";
 import "./css/GroupCreate.css";
@@ -60,7 +60,7 @@ function GroupCreate() {
             </div>
 
             {showGroupCreateModal && (
-            <LargeModal onClose={closeModal}>
+            <Modal onClose={closeModal}>
                 <form className="figure-form" onSubmit={handleCreateGroup}>
                     <div className='modal-words'>
                         Enter a name to create a group
@@ -78,7 +78,7 @@ function GroupCreate() {
                         Create Group
                     </button>
                 </form>
-            </LargeModal>
+            </Modal>
             )}
         </>
     );

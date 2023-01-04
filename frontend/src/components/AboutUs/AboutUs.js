@@ -56,7 +56,7 @@ function AboutUs() {
                         {/* <p>I'm Daniel, etc.</p> */}
                         <div className="Job-Links">
                             <a href='https://github.com/dtkalla'><img className="Github" src={Github} /></a>
-                            <a href='https://www.linkedin.com/in/daniel-kalla-496aa7234/'><img className="LinkedIn" src={LinkedIn} /></a>
+                            <a href='www.linkedin.com/in/daniel-kalla'><img className="LinkedIn" src={LinkedIn} /></a>
                         </div>
                             <div id='project-links'>
                                 <p>Other projects:</p>
