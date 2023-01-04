@@ -31,7 +31,7 @@ function Info() {
                     </p>
                     <h1 className="instructions-title">Figures</h1>
                     <p className="instructions-details">
-                        When you create a figure, it starts as just part of the all group. By clicking on a figure on the sidebar, you can fetch articles related only to that figure. You can add ungrouped figures from your default All group into your custom groups.
+                        When you create a figure, it starts as just part of the All group. By clicking on a figure on the sidebar, you can fetch articles related only to that figure. You can add ungrouped figures from your default All group into your custom groups.
                     </p>
                 </div>
             </LargeModal>
