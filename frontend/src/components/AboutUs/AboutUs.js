@@ -22,7 +22,7 @@ function AboutUs() {
                         <div className="Job-Links">
                             <a href='https://github.com/jeffreych6' target="_blank"><img className="Github" src={Github} /></a>
                             <a href='https://www.linkedin.com/in/jeffrey-cheng-38338290/' target="_blank"><img className="LinkedIn" src={LinkedIn} /></a>
-                            <a href="https://angel.co/u/daniel-thomas-kalla" target="_blank"><img class="icons" src={AngelList}/></a>
+                            <a href="https://angel.co/u/jeffrey-cheng-15" target="_blank"><img class="icons" src={AngelList}/></a>
                         </div>
                         <div id='project-links'>
                             <p>Other projects:</p>
@@ -41,7 +41,7 @@ function AboutUs() {
                         <div className="Job-Links">
                             <a href='https://github.com/IshsGit/' target="_blank"><img className="Github" src={Github} /></a>
                             <a href='https://www.linkedin.com/in/iahmed93/' target="_blank"><img className="LinkedIn" src={LinkedIn} /></a>
-                            <a href="https://angel.co/u/daniel-thomas-kalla" target="_blank"><img class="icons" src={AngelList}/></a>
+                            <a href="https://angel.co/u/ishtahad-ahmed" target="_blank"><img class="icons" src={AngelList}/></a>
                         </div>
                             <div id='project-links'>
                                 <p>Other projects:</p>
@@ -79,7 +79,7 @@ function AboutUs() {
                         <div className="Job-Links">
                             <a href='https://github.com/qyhAppAcademy' target="_blank"><img className="Github" src={Github} /></a>
                             <a href='https://www.linkedin.com/in/qiao-yang-han-367590257/' target="_blank"><img className="LinkedIn" src={LinkedIn} /></a>
-                            <a href="https://angel.co/u/daniel-thomas-kalla" target="_blank"><img class="icons" src={AngelList}/></a>
+                            <a href="https://angel.co/u/qiaoyanghan" target="_blank"><img class="icons" src={AngelList}/></a>
                         </div>
                             <div id='project-links'>
                                 <p>Other projects:</p>
