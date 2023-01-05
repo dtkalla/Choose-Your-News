@@ -4,6 +4,7 @@ import Daniel from './Daniel.png'
 import Qiao from './Qiao.png'
 import Github from './github.png'
 import LinkedIn from './LinkedIn.png'
+import AngelList from './AngelList.png'
 import './AboutUs.css'
 
 function AboutUs() {
@@ -19,13 +20,14 @@ function AboutUs() {
                         <p className='about-us-name'>Jeffrey Cheng</p>
                         <p className='about-us-title'>Team Lead</p>
                         <div className="Job-Links">
-                            <a href='https://github.com/jeffreych6'><img className="Github" src={Github} /></a>
-                            <a href='https://github.com/jeffreych6'><img className="LinkedIn" src={LinkedIn} /></a>
+                            <a href='https://github.com/jeffreych6' target="_blank"><img className="Github" src={Github} /></a>
+                            <a href='https://www.linkedin.com/in/jeffrey-cheng-38338290/' target="_blank"><img className="LinkedIn" src={LinkedIn} /></a>
+                            <a href="https://angel.co/u/jeffrey-cheng-15" target="_blank"><img class="icons" src={AngelList}/></a>
                         </div>
                         <div id='project-links'>
                             <p>Other projects:</p>
-                            <a href='https://jeffreych6.github.io/income_tax_by_state/'>Income Tax by State</a>
-                            <a href='https://rarebnb.onrender.com/'>RareBnb</a>
+                            <a href='https://jeffreych6.github.io/income_tax_by_state/' target="_blank">Income Tax by State</a>
+                            <a href='https://rarebnb.onrender.com/' target="_blank">RareBnb</a>
                         </div>
                     </div>
                     
@@ -37,13 +39,14 @@ function AboutUs() {
                         <p className='about-us-title'>Frontend Lead</p>
                         {/* <p>I'm Ishtahad, etc.</p> */}
                         <div className="Job-Links">
-                            <a href='https://github.com/IshsGit/'><img className="Github" src={Github} /></a>
-                            <a href='https://www.linkedin.com/'><img className="LinkedIn" src={LinkedIn} /></a>
+                            <a href='https://github.com/IshsGit/' target="_blank"><img className="Github" src={Github} /></a>
+                            <a href='https://www.linkedin.com/in/iahmed93/' target="_blank"><img className="LinkedIn" src={LinkedIn} /></a>
+                            <a href="https://angel.co/u/ishtahad-ahmed" target="_blank"><img class="icons" src={AngelList}/></a>
                         </div>
                             <div id='project-links'>
                                 <p>Other projects:</p>
-                                <a href='https://ishsgit.github.io/FindYourKetoRedux/'>Find Your Keto</a>
-                                <a href='https://amazon-clone-uls3.onrender.com/'>Amazish</a>
+                                <a href='https://ishsgit.github.io/FindYourKetoRedux/' target="_blank">Find Your Keto</a>
+                                <a href='https://amazon-clone-uls3.onrender.com/' target="_blank">Amazish</a>
                             </div>
                     </div>
                     
@@ -55,13 +58,14 @@ function AboutUs() {
                         <p className='about-us-title'>Backend Lead</p>
                         {/* <p>I'm Daniel, etc.</p> */}
                         <div className="Job-Links">
-                            <a href='https://github.com/dtkalla'><img className="Github" src={Github} /></a>
-                            <a href='www.linkedin.com/in/daniel-kalla'><img className="LinkedIn" src={LinkedIn} /></a>
+                            <a href='https://github.com/dtkalla' target="_blank"><img className="Github" src={Github} /></a>
+                            <a href='https://www.linkedin.com/in/daniel-kalla' target="_blank"><img className="LinkedIn" src={LinkedIn} /></a>
+                            <a href="https://angel.co/u/daniel-thomas-kalla" target="_blank"><img class="icons" src={AngelList}/></a>
                         </div>
                             <div id='project-links'>
                                 <p>Other projects:</p>
-                                <a href='https://dtkalla.github.io/JavaScript-Project-Disease-Tracker/'>Disease Tracker</a>
-                                <a href='https://waterbnb.onrender.com/'>WaterBnb</a>
+                                <a href='https://dtkalla.github.io/JavaScript-Project-Disease-Tracker/' target="_blank">Disease Tracker</a>
+                                <a href='https://waterbnb.onrender.com/' target="_blank">WaterBnb</a>
                             </div>
                     </div>
                     
@@ -73,13 +77,14 @@ function AboutUs() {
                         <p className='about-us-title'>Flex</p>
                         {/* <p>I'm Qiao, etc.</p> */}
                         <div className="Job-Links">
-                            <a href='https://github.com/qyhAppAcademy'><img className="Github" src={Github} /></a>
-                            <a href='https://www.linkedin.com/in/qiao-yang-han-367590257/'><img className="LinkedIn" src={LinkedIn} /></a>
+                            <a href='https://github.com/qyhAppAcademy' target="_blank"><img className="Github" src={Github} /></a>
+                            <a href='https://www.linkedin.com/in/qiao-yang-han-367590257/' target="_blank"><img className="LinkedIn" src={LinkedIn} /></a>
+                            <a href="https://angel.co/u/qiaoyanghan" target="_blank"><img class="icons" src={AngelList}/></a>
                         </div>
                             <div id='project-links'>
                                 <p>Other projects:</p>
-                                <a href='https://qyhappacademy.github.io/portugal_trade_data_visualization/'>Portugal Trade Data Visualization</a>
-                                <a href='https://qelp.onrender.com/'>Qelp</a>
+                                <a href='https://qyhappacademy.github.io/portugal_trade_data_visualization/' target="_blank">Portugal Trade Data Visualization</a>
+                                <a href='https://qelp.onrender.com/' target="_blank">Qelp</a>
                             </div>
                     </div>
                     
