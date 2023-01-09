@@ -19,7 +19,8 @@ const figureNames = [
   "Michael Jordan",
 
   "Joe Biden",
-  "Donald Trump"
+  "Donald Trump",
+  "Kanye West"
 ];
 
 const figures = [];
@@ -33,17 +34,36 @@ figureNames.forEach(name => {
 
 //Create articles
 const articles = []
-for(let i = 0; i < 12; i++){
-  articles.push(
-    new Article({
-      headline: i < 6 ? `Elon Musk Disables Twitter Spaces After Clash With Journalists` : `Turmoil at Twitter as Elon Musk Shakes Things Up`,
-      summary: `Twitter Inc.'s live audio service, Twitter Spaces, is down after a number of journalists that had just been suspended from the social network found they could still participate in it.`,
-      source: `nairaland`,
-      publishedDate: "2022-12-16 15:00:59",
-      url: `http://www.nairaland.com/7483666/elon-musk-disables-twitter-spaces`
-    })
-  )
-}
+articles.push(
+  new Article({
+    headline: "How to Destroy a Brand, Musk Style",
+    summary: "Does Elon know who buys his stuff?",
+    source: "The New York Times",
+    publishedDate: "2022-12-30 20:09:49",
+    url: "https://www.nytimes.com/2022/12/30/opinion/elon-musk-tesla-democrats.html"
+  })
+)
+
+articles.push(
+  new Article({
+    headline: "Jeff Bezos Says He Will Give Away Most of His Fortune",
+    summary: "The Amazon founder, estimated to be worth $124 billion, suggested in an interview on CNN that he would donate most of his money to charity in his lifetime, the first time he had made such a pledge.",
+    source: "The New York Times",
+    publishedDate: "2022-11-14 13:25:27",
+    url: "https://www.nytimes.com/2022/11/14/business/jeff-bezos-charity.html"
+  })
+)
+
+
+articles.push(
+  new Article({
+    headline: "Elon Musk's Succession Plan Comes with Strings Attached",
+    summary: "The Twitter owner has said he will resign as chief executive, but it's far from certain whether he would actually step down as the boss.",
+    source: "The New York Times",
+    publishedDate: "2022-12-21 12:40:02",
+    url: "https://www.nytimes.com/2022/12/21/business/dealbook/elon-musk-twitter-ceo.html"
+  })
+)
 
 // Create users
 const users = [];
@@ -60,42 +80,15 @@ users.push(
 )
 groups.push(new Group({
   user: users[0]._id,
-  figures: [],
+  figures: [figures[6]._id],
   name: "No group"
 }))
 
-for (let i = 1; i < NUM_SEED_USERS; i++) {
-  const firstName = faker.name.firstName();
-  const lastName = faker.name.lastName();
-  users.push(
-    new User ({
-      username: faker.internet.userName(firstName, lastName),
-      email: faker.internet.email(firstName, lastName),
-      hashedPassword: bcrypt.hashSync(faker.internet.password(), 10),
-      savedArticles: [articles[3]._id]
-    })
-  )
-  groups.push(new Group({
-    user: users[users.length - 1]._id,
-    figures: [],
-    name: "No group"
-  }))
-}
-
-users.push(
-  new User ({
-    username: 'dkalla',
-    email: 'dkalla@marlboro.edu',
-    hashedPassword: bcrypt.hashSync('dragon', 10),
-    savedArticles: [articles[0]._id, articles[7]._id]
-  })
-)
-
-const groupNames = ["business", "sports", "politcs"];
+const groupNames = ["business", "sports", "politics"];
 for (let i = 0; i < groupNames.length; i++) {
   groups.push(
     new Group({
-      user: users[i]._id,
+      user: users[0]._id,
       name: groupNames[i],
       figures: [figures[i * 2]._id, figures[i * 2 + 1]._id]
     })
@@ -103,15 +96,6 @@ for (let i = 0; i < groupNames.length; i++) {
 }
 
 
-for (let i = 0; i < groupNames.length; i++) {
-  groups.push(
-    new Group({
-      user: users[6]._id,
-      name: groupNames[i],
-      figures: [figures[i * 2]._id, figures[i * 2 + 1]._id]
-    })
-  )
-}
 
 
 // Connect to database
