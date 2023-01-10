@@ -64,7 +64,7 @@ function AboutUs() {
                         </div>
                             <div id='project-links'>
                                 <p>Other projects:</p>
-                                <a href='https://dtkalla.github.io/JavaScript-Project-Disease-Tracker/' target="_blank">Disease Tracker</a>
+                                <a href='https://dtkalla.github.io/Disease-Tracker/' target="_blank">Disease Tracker</a>
                                 <a href='https://waterbnb.onrender.com/' target="_blank">WaterBnb</a>
                             </div>
                     </div>
