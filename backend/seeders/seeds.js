@@ -15,8 +15,8 @@ const figureNames = [
   "Elon Musk", 
   "Jeff Bezos", 
 
-  "Lionel Messi", 
-  "Michael Jordan",
+  // "Lionel Messi", 
+  // "Michael Jordan",
 
   "Joe Biden",
   "Donald Trump",
@@ -80,11 +80,13 @@ users.push(
 )
 groups.push(new Group({
   user: users[0]._id,
-  figures: [figures[6]._id],
+  figures: [figures[4]._id],
   name: "No group"
 }))
 
-const groupNames = ["business", "sports", "politics"];
+// const groupNames = ["business", "sports", "politics"];
+const groupNames = ["business", "politics"];
+
 for (let i = 0; i < groupNames.length; i++) {
   groups.push(
     new Group({
