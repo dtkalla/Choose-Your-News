@@ -11,31 +11,19 @@ const receiveCurrentUserFetchedArticles = (fetchedArticles) => ({
 export const fetchCurrentUserFetchedArticles = () => async dispatch => {
   const res = await jwtFetch(`/api/articles/user/current/fetched`);
   const fetchedArticles = await res.json();
-  if (Object.keys(fetchedArticles).length > 0) {
-    dispatch(receiveCurrentUserFetchedArticles(fetchedArticles));
-  } else {
-    alert("You're fetching too quickly! Please wait a few seconds before making another request due to API limitations.")
-  }
+  dispatch(receiveCurrentUserFetchedArticles(fetchedArticles));
 };
 
 export const fetchCurrentUserFetchedArticlesByGroup = (groupId) => async dispatch => {
   const res = await jwtFetch(`/api/articles/group/${groupId}/fetched`);
   const fetchedArticles = await res.json();
-  if (Object.keys(fetchedArticles).length > 0) {
-    dispatch(receiveCurrentUserFetchedArticles(fetchedArticles));
-  } else {
-    alert("You're fetching too quickly! Please wait a few seconds before making another request due to API limitations.")
-  }
+  dispatch(receiveCurrentUserFetchedArticles(fetchedArticles));
 };
 
 export const fetchCurrentUserFetchedArticlesByFigure = (figureId) => async dispatch => {
   const res = await jwtFetch(`/api/articles/figure/${figureId}/fetched`);
   const fetchedArticles = await res.json();
-  if (Object.keys(fetchedArticles).length > 0) {
-    dispatch(receiveCurrentUserFetchedArticles(fetchedArticles));
-  } else {
-    alert("You're fetching too quickly! Please wait a few seconds before making another request due to API limitations.")
-  }
+  dispatch(receiveCurrentUserFetchedArticles(fetchedArticles));
 };
 
 
