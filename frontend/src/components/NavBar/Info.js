@@ -34,6 +34,10 @@ function Info() {
                     <p className="instructions-details">
                         When you create a figure, it starts as just part of the All group. By clicking on a figure on the sidebar, you can fetch articles related only to that figure. You can add ungrouped figures from your default All group into your custom groups.
                     </p>
+                    <h1 className="instructions-title">Articles</h1>
+                    <p className="instructions-details">
+                        Articles are taken from the NY Times Articles Search API.  This API has a limits of 10 requests per minute; if you request new sets of articles more frequently than that, it will stop working temporarily.  Wait a minute and it should work again. 
+                    </p>
                 </div>
             </LargeModal>
             )}

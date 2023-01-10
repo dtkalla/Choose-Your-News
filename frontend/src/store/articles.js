@@ -11,19 +11,25 @@ const receiveCurrentUserFetchedArticles = (fetchedArticles) => ({
 export const fetchCurrentUserFetchedArticles = () => async dispatch => {
   const res = await jwtFetch(`/api/articles/user/current/fetched`);
   const fetchedArticles = await res.json();
-  dispatch(receiveCurrentUserFetchedArticles(fetchedArticles));
+  if (Object.keys(fetchedArticles).length > 0) {
+    dispatch(receiveCurrentUserFetchedArticles(fetchedArticles));
+  }
 };
 
 export const fetchCurrentUserFetchedArticlesByGroup = (groupId) => async dispatch => {
   const res = await jwtFetch(`/api/articles/group/${groupId}/fetched`);
   const fetchedArticles = await res.json();
-  dispatch(receiveCurrentUserFetchedArticles(fetchedArticles));
+  if (Object.keys(fetchedArticles).length > 0) {
+    dispatch(receiveCurrentUserFetchedArticles(fetchedArticles));
+  }
 };
 
 export const fetchCurrentUserFetchedArticlesByFigure = (figureId) => async dispatch => {
   const res = await jwtFetch(`/api/articles/figure/${figureId}/fetched`);
   const fetchedArticles = await res.json();
-  dispatch(receiveCurrentUserFetchedArticles(fetchedArticles));
+  if (Object.keys(fetchedArticles).length > 0) {
+    dispatch(receiveCurrentUserFetchedArticles(fetchedArticles));
+  }
 };
 
 
