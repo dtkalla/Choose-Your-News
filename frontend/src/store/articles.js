@@ -14,7 +14,7 @@ export const fetchCurrentUserFetchedArticles = () => async dispatch => {
   if (Object.keys(fetchedArticles).length > 0) {
     dispatch(receiveCurrentUserFetchedArticles(fetchedArticles));
   } else {
-    alert("Only 10 requests allowed per minute.  Please wait a minute (literally!) and try again.")
+    alert("You're fetching too quickly! Please wait a few seconds before making another request due to API limitations.")
   }
 };
 
@@ -24,7 +24,7 @@ export const fetchCurrentUserFetchedArticlesByGroup = (groupId) => async dispatc
   if (Object.keys(fetchedArticles).length > 0) {
     dispatch(receiveCurrentUserFetchedArticles(fetchedArticles));
   } else {
-    alert("Only 10 requests allowed per minute.  Please wait a minute (literally!) and try again.")
+    alert("You're fetching too quickly! Please wait a few seconds before making another request due to API limitations.")
   }
 };
 
@@ -34,7 +34,7 @@ export const fetchCurrentUserFetchedArticlesByFigure = (figureId) => async dispa
   if (Object.keys(fetchedArticles).length > 0) {
     dispatch(receiveCurrentUserFetchedArticles(fetchedArticles));
   } else {
-    alert("Only 10 requests allowed per minute.  Please wait a minute (literally!) and try again.")
+    alert("You're fetching too quickly! Please wait a few seconds before making another request due to API limitations.")
   }
 };
 
