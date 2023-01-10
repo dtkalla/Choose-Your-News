@@ -13,6 +13,8 @@ export const fetchCurrentUserFetchedArticles = () => async dispatch => {
   const fetchedArticles = await res.json();
   if (Object.keys(fetchedArticles).length > 0) {
     dispatch(receiveCurrentUserFetchedArticles(fetchedArticles));
+  } else {
+    alert("Only 10 requests allowed per minute.  Please wait a minute (literally!) and try again.")
   }
 };
 
@@ -21,6 +23,8 @@ export const fetchCurrentUserFetchedArticlesByGroup = (groupId) => async dispatc
   const fetchedArticles = await res.json();
   if (Object.keys(fetchedArticles).length > 0) {
     dispatch(receiveCurrentUserFetchedArticles(fetchedArticles));
+  } else {
+    alert("Only 10 requests allowed per minute.  Please wait a minute (literally!) and try again.")
   }
 };
 
@@ -29,6 +33,8 @@ export const fetchCurrentUserFetchedArticlesByFigure = (figureId) => async dispa
   const fetchedArticles = await res.json();
   if (Object.keys(fetchedArticles).length > 0) {
     dispatch(receiveCurrentUserFetchedArticles(fetchedArticles));
+  } else {
+    alert("Only 10 requests allowed per minute.  Please wait a minute (literally!) and try again.")
   }
 };
 
