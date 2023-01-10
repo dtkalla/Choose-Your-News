@@ -113,3 +113,12 @@
     background-color: #FFD247;
     cursor: pointer
 }
+
+
+.API-error-message {
+    font-weight: 600;
+    font-size: 16px;
+    color: rgb(248, 56, 56);
+    margin-left: 5%;
+    margin-right: 5%;
+}

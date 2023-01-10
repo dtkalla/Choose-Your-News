@@ -38,7 +38,7 @@ function FetchedArticlesIndex() {
       }));
   }
 
-  const fetchedArticlesItems = fetchedArticles.map(fetchedArticle => {
+  const fetchedArticlesItems = Object.keys(fetchedArticles).length > 0 ?fetchedArticles.map(fetchedArticle => {
     return (
       <div className="fetched-articles" key={fetchedArticle.url}>
         <a href={fetchedArticle.url}>
@@ -66,7 +66,10 @@ function FetchedArticlesIndex() {
         )}
       </div>
     );
-  });
+  }) : 
+        <div className="API-error-message">
+          You're fetching too quickly! Only 10 requests allowed per minute.  Please try again in a minute.
+        </div>;
 
   return (
     <div className="fetched-articles-index-container">
