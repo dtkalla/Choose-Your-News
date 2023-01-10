@@ -66,7 +66,10 @@ function FetchedArticlesIndex() {
         )}
       </div>
     );
-  }) : <p>You're fetching too fast!</p>;
+  }) : 
+        <div className="API-error-message">
+          You're fetching too quickly! Only 10 requests allowed per minute.  Please try again in a minute.
+        </div>;
 
   return (
     <div className="fetched-articles-index-container">
