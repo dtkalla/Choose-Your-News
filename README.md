@@ -8,6 +8,15 @@ With so much news going on in the world all the time, it's impossible to keep up
 
 
 
+## Technologies and libraries used:
+- JavaScript
+- MongoDB
+- Express.js
+- React/Redux
+- Node.js
+- NYT Articles API
+
+
 ## With Choose Your News, users can:
 
 - #### See news pulled from the NY Times Articles API
@@ -71,21 +80,6 @@ Users can bookmark interesting articles to their profiles, which will save these
 
 
 
-
-
-
-
-<!-- ### This project also includes:
-- Seed data
-- A production README -->
-
-## Technologies and libraries used:
-- MongoDB
-- Express.js
-- React/Redux
-- Node.js
-- JavaScript
-- NYT Articles API
 
 
 
