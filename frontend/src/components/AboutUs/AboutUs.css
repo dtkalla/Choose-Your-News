@@ -6,6 +6,12 @@
     width: 45px;
 }
 
+@media (max-width: 600px){
+    .about-us-person .Job-Links img {
+        width: 30px;
+    }
+}
+
 
 .about-us-person {
     display: flex;
@@ -38,13 +44,14 @@
 
 @media (max-width: 600px){
     #profile-pic-about-us {
-        width: 200px;
-        height: 200px;
+        width: 175px;
+        height: 175px;
         margin-right: 20px;
         margin-top: 10px;
         /* margin-left: 30px; */
     }
 }
+
 
 
 .about-us-name {
@@ -62,6 +69,7 @@
 }
 
 
+
 .Job-Links {
     display: flex;
     flex-direction: row;
@@ -72,6 +80,15 @@
 .Job-Links img {
     margin: 10px;
 }
+
+@media (max-width: 600px){
+    .Job-Links img {
+        margin: 5px;
+        margin-bottom: -10px;
+        margin-top: -5px;
+    }
+}
+
 
 #project-links {
     display: flex;
@@ -85,6 +102,20 @@
     margin-left: 10px;
     margin-bottom: 5px;
     font-size: 16px;
+}
+
+@media (max-width: 600px){
+    .about-us-name {
+        font-size: 17px;
+    }
+
+    .about-us-title, #project-links {
+        font-size: 15px;
+    }
+
+    #project-links a {
+        font-size: 13px;
+    }
 }
 
 
