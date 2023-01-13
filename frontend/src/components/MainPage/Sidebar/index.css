@@ -18,6 +18,12 @@ a {
     padding: 28px 28px 14px 28px;
 }
 
+@media (max-width: 600px) {
+    .sidebar-header {
+        font-size: 18px;
+    }
+}
+
 .sidebar-body {
     /* max-height: 690px; */
     overflow: auto;

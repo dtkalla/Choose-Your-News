@@ -21,12 +21,29 @@
     column-gap: 30px;
 }
 
+@media (max-width: 600px){
+    #about-person-list {
+        grid-template-columns: auto;
+    }
+}
+
+
 
 #profile-pic-about-us {
     width: 250px;
     height: 250px;
     margin-right: 30px;
     /* margin-left: 30px; */
+}
+
+@media (max-width: 600px){
+    #profile-pic-about-us {
+        width: 200px;
+        height: 200px;
+        margin-right: 20px;
+        margin-top: 10px;
+        /* margin-left: 30px; */
+    }
 }
 
 
