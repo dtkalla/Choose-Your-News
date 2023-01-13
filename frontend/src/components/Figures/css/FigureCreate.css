@@ -15,6 +15,12 @@
     border: 1px solid black;
 }
 
+@media (max-width: 600px) {
+    .add-button {
+        font-size: 13px;
+    }
+}
+
 .add-button:hover {
     background-color: #FFD247;
     cursor: pointer
@@ -33,6 +39,12 @@
 .form-button {
     font-size: 14px;
     border-radius: 8px;
+}
+
+@media (max-width: 600px) {
+    .form-button {
+        font-size: 12px;
+    }
 }
 
 .form-button:hover {

@@ -16,6 +16,12 @@
     padding: 28px 28px 0 28px;
 }
 
+@media (max-width: 600px) {
+    .fetched-articles-index-title {
+        font-size: 16px;
+    }
+}
+
 .fetched-articles-container {
     border-radius: 25px;
     padding: 12px;
@@ -70,6 +76,12 @@
     text-decoration: none;
 }
 
+@media (max-width: 600px) {
+    .fetched-articles {
+        font-size: 16px;
+    }
+}
+
 .title-one {
     display: -webkit-box;
     -webkit-line-clamp: 1;
@@ -121,4 +133,12 @@
     color: rgb(248, 56, 56);
     margin-left: 5%;
     margin-right: 5%;
+}
+
+
+
+@media (max-width: 600px) {
+    .summary-one, .date-one, .save-button, .API-error-message {
+        font-size: 13px;
+    }
 }

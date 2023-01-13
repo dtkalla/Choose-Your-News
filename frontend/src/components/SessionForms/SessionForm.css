@@ -104,6 +104,18 @@ input[type="text" i]:focus, input[type="password" i]:focus {
   background: transparent;
 }
 
+@media (max-width: 800px) {
+  .title {
+    position: static;
+    font-size: 40px;
+    flex-direction: row;
+    padding-left: 5%;
+  }
+  .title h1 {
+    margin-right: 30px;
+  }
+}
+
 .title > h1 {
   padding: 10px 0;
 }

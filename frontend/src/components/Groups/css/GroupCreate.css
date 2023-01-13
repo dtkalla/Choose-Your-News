@@ -33,6 +33,8 @@
     font-weight: 600;
 }
 
+
+
 .figure-form {
     display: flex;
     flex-direction: column;
@@ -47,6 +49,7 @@
     font-size: 14px;
     border-radius: 8px;
 }
+
 
 .form-button:hover {
     cursor: pointer

@@ -81,6 +81,12 @@
     margin: 5%
 }
 
+@media (max-width: 600px) {
+    .instructions-container {
+        font-size: 14px;
+    }
+}
+
 .instructions-header {
     font-size: 18px;
     font-weight: bold;

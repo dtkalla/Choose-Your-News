@@ -32,6 +32,12 @@
     margin-right: 5%;
 }
 
+@media (max-width: 600px) {
+    .delete-button {
+        font-size: 13px;
+    }
+}
+
 .delete-button:hover {
     background-color: #FFD247;
     cursor: pointer
