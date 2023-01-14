@@ -47,6 +47,12 @@
     }
 }
 
+@media (max-width: 600px) {
+    .sidebar-title {
+        font-size: 16px;
+    }
+}
+
 .form-button:hover {
     cursor: pointer;
 }
