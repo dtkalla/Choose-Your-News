@@ -22,7 +22,7 @@ exports.fetchArticlesFromNewYorkTimes = async (query) => {
 
     const data = response.data.response.docs;
     
-    const articles = data.map(datum => {
+    let articles = data.map(datum => {
         return {
             headline: datum.headline.main,
             summary: datum.abstract,
@@ -31,6 +31,17 @@ exports.fetchArticlesFromNewYorkTimes = async (query) => {
             url: datum.web_url
         }
     })
+
+    if (articles.length == 0) {
+        articles.push(new Article({
+            headline: 'None',
+            summary: 'None',
+            source: 'None',
+            publishedDate: "2022-12-21 12:40:02",
+            url: 'None'
+        }
+        ))
+    }
 
     return articles.sort((a, b) => (a.publishedDate < b.publishedDate) ? 1 : -1);
 }
