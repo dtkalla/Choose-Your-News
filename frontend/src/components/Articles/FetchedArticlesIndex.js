@@ -38,10 +38,12 @@ function FetchedArticlesIndex() {
       }));
   }
 
-  // console.log(fetchedArticles)
-  const fetchedArticlesItems = (Object.keys(fetchedArticles).length === 1 && fetchedArticles[0].source === 'None327') ? 
+  const fetchedArticlesItems = Object.keys(fetchedArticles).length === 0 ? 
   <div className="API-error-message">
-    Your search returned no articles.  It could be because you're fetching articles too quickly (the API has a limit of 10 searches per minute) or because no articles match your search.  Try again in a minute, or try looking at a different figure if the problem persists.
+    Your search returned no articles.  It could be because you're fetching articles too quickly (the API has a limit of 10 searches per minute) or because no articles match your search.
+    <br/>
+    <br/>
+    Try again in a minute, or try looking at a different figure if the problem persists.
   </div> :
 fetchedArticles.map(fetchedArticle => {
     return (
