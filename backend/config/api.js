@@ -32,5 +32,6 @@ exports.fetchArticlesFromNewYorkTimes = async (query) => {
         }
     })
 
+
     return articles.sort((a, b) => (a.publishedDate < b.publishedDate) ? 1 : -1);
 }

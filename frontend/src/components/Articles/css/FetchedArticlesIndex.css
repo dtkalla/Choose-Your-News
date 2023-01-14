@@ -54,6 +54,12 @@
     box-shadow: inset 10000px 0 0 0 #32C0D8;
 }
 
+@media (max-width: 600px) {
+    .fetched-articles .title-one {
+        -webkit-line-clamp: 100;
+    }
+}
+
 .fetched-articles:hover .title-one{
     -webkit-line-clamp: 100;
     color: white;
@@ -78,7 +84,7 @@
 
 @media (max-width: 600px) {
     .fetched-articles {
-        font-size: 16px;
+        font-size: 15px;
     }
 }
 
