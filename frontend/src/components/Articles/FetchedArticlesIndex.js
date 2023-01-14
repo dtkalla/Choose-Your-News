@@ -68,7 +68,7 @@ function FetchedArticlesIndex() {
     );
   }) : 
         <div className="API-error-message">
-          You're fetching too quickly! Only 10 requests allowed per minute.  Please try again in a minute.
+          Your search returned no articles.  It could be because you're fetching articles too quickly (the API has a limit of 10 searches per minute) or because no articles match your search.  Try again in a minute, or try looking at a different figure if the problem persists.
         </div>;
 
   return (
