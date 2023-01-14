@@ -1,5 +1,7 @@
 const axios = require("axios").default;
 const { newyorktimesApiKey } = require('./keys');
+const Article = require("../models/Article.js");
+
 
 exports.fetchArticlesFromNewYorkTimes = async (query) => {
     const newyorktimesUrl = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?';
@@ -32,16 +34,18 @@ exports.fetchArticlesFromNewYorkTimes = async (query) => {
         }
     })
 
-    if (articles.length == 0) {
-        articles.push(new Article({
+    if (!articles.length) {
+        articles = [{
             headline: 'None',
             summary: 'None',
-            source: 'None',
+            source: 'None327',
             publishedDate: "2022-12-21 12:40:02",
             url: 'None'
         }
-        ))
+        ]
     }
+
+    console.log(articles.length)
 
     return articles.sort((a, b) => (a.publishedDate < b.publishedDate) ? 1 : -1);
 }
