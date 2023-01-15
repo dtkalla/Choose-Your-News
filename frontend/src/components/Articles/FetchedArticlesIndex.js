@@ -84,15 +84,9 @@ fetchedArticles.map(fetchedArticle => {
         )}
       </div>
     );
-<<<<<<< HEAD
-  }) : 
-        <div className="API-error-message">
-          Your search returned no articles.  It could be because you're fetching articles too quickly (the API has a limit of 10 searches per minute) or because no articles match your search.  Try again in a minute, or try looking at a different figure if the problem persists.
-        </div>;
-=======
+
   });
         
->>>>>>> c82010e66ae6a048a56ae3d955cec58b8a45ab1d
 
   return (
     <div className="fetched-articles-index-container">
