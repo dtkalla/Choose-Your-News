@@ -78,7 +78,7 @@ function FigureCreate({ selectedGroupId }) {
 
     return (
         <>
-            <h1>
+            <h1 className="sidebar-title">
                 {selectedGroupId ? `${groups[selectedGroupId].name}` : "All"} figures
             </h1>
             <div className="title-add">
