@@ -57,10 +57,7 @@
 @media (max-width: 600px) {
     .fetched-articles .title-one {
         -webkit-line-clamp: 100;
-<<<<<<< HEAD
 
-=======
->>>>>>> c82010e66ae6a048a56ae3d955cec58b8a45ab1d
     }
 }
 
