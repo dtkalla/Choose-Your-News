@@ -84,6 +84,7 @@ Users can bookmark interesting articles to their profiles, which will save these
 
 
 ## Future Features:
+- ~~Modify site to work on mobile also~~
 - Search saved articles by figure
 - Create new figures inside of group
 - Pull articles from multiple APIs
