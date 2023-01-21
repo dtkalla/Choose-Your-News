@@ -1,6 +1,6 @@
 import Jeffrey from './Jeffrey.png'
 import Ishtahad from './Ishtahad.jpg'
-import Daniel from './Daniel.png'
+import Daniel from './Daniel.jpg'
 import Qiao from './Qiao.png'
 import Github from './github.png'
 import LinkedIn from './LinkedIn.png'
